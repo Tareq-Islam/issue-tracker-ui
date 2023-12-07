@@ -1,0 +1,40 @@
+<!-- <div class="flex justify-start flex-col" *ngFor="let item of uiMenus; let i=index">
+  <ng-container *ngIf="item.isDropdown; else dropDownMenu">
+    <div id="relative_id_{{i}}"
+      class="text-sm font-medium flex justify-between items-center w-full p-[6px] pl-2 cursor-default hover:bg-gray-100 hover:rounded"
+      (click)="item.isDropdown ? onMenuExpand('relative_id_' + i) : ''">
+      <a class="text-sm font-medium flex items-center gap-2">
+        <span class="{{item.icon}} leading-5"></span>
+        <span *ngIf="!sidebarClose" class="capitalize">{{item.label}}</span>
+      </a>
+      <span
+        class="{{!sidebarClose && item.isDropdown ? 'block' : 'hidden'}} pi pi-angle-{{ item.routerLink === 'active' ? 'down' : 'right'}}"></span>
+    </div>
+    <span class="{{ item.routerLink === 'active' ? 'block' : 'hidden'}}">
+      <div *ngIf="!sidebarClose && item.isDropdown" class="flex flex-col pl-5">
+        <div *ngFor="let sub of item.dropdownMenus">
+          <a *ngIf="sub.isEnable" [routerLink]="[sub.routerLink]"
+            routerLinkActive="bg-gray-100 rounded text-default-800"
+            [routerLinkActiveOptions]="{exact: sub.routerLinkActiveOptions !== undefined ? item.routerLinkActiveOptions : true  }"
+            class="text-sm font-medium flex items-center gap-2 p-[6px] pl-2 hover:bg-gray-100 hover:rounded">
+            <span class="{{sub.icon}} leading-5"></span>
+            <span class="capitalize">{{sub.label}}</span>
+          </a>
+        </div>
+      </div>
+    </span>
+  </ng-container>
+  <ng-template #dropDownMenu>
+    <div id="relative_id_{{i}}" [routerLink]="item.routerLink ? [item.routerLink] : ''"
+      routerLinkActive="bg-gray-100 rounded text-default-800"
+      [routerLinkActiveOptions]="{exact: item.routerLinkActiveOptions !== undefined ? item.routerLinkActiveOptions : true }"
+      class="text-sm font-medium flex justify-between items-center w-full cursor-pointer p-[6px] pl-2 hover:bg-gray-100 hover:rounded">
+      <a class="text-sm font-medium flex items-center gap-2"
+        [routerLinkActiveOptions]="{exact: item.routerLinkActiveOptions !== undefined ? item.routerLinkActiveOptions : true   }"
+        routerLinkActive="text-default-800">
+        <span class="{{item.icon}} leading-5"></span>
+        <span *ngIf="!sidebarClose" class="capitalize">{{item.label}}</span>
+      </a>
+    </div>
+  </ng-template>
+</div> -->

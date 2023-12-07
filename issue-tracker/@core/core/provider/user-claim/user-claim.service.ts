@@ -6,7 +6,7 @@ import { StorageService } from '@core/storage/storage.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginUserClaimService {
+export class UserClaimService {
   // private _defaultPayload: AuthPayload = this._setPayload();
   private _accessToken!: string;
   private _userName!: string;
