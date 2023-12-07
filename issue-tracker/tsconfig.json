@@ -21,7 +21,26 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      // "@shared/*": ["src/app/shared/*"],
+      // "@config/*": ["src/app/service/*"],
+      // "@forms/*": ["src/app/common/eye-forms/*"],
+      // "@menu/*": ["src/app/common/eye-menu/*"],
+      // "@list-item/*": ["src/app/common/list-items/*"],
+      // "@nav-menu/*": ["src/app/common/nav-menu/*"],
+      // "@paginator/*": ["src/app/common/paginator/*"],
+      // "@popover/*": ["src/app/common/popover/*"],
+      // "@scroll-layout/*": ["src/app/common/scroll-layout/*"],
+      // "@advanced-modal/*": ["src/app/common/advanced-modal/*"],
+      // "@reports/*": ["src/app/common/eye-reports/*"],
+      // "@user-manual/*": ["src/app/common/user-manual/*"],
+      // "@schema-config/*": ["src/app/common/schema-config/*"],
+      // "@assets/*": ["src/assets/*"],
+      // "@page-layout/*": ["src/app/page-layout/*"],
+      // "@user-info/*": ["src/app/common/user-item/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
