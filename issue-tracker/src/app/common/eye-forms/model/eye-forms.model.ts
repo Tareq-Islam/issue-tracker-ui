@@ -1,0 +1,16 @@
+export enum EyeFormFieldsType {
+  DROPDOWN = 'dropdown',
+  CALENDAR = 'calendar',
+  AUTOCOMPLETE = 'autocomplete',
+  SWITCH = 'switch',
+  FILE = 'file',
+  TEXTAREA = 'textarea',
+  REPEAT = 'repeat',
+  INPUT_SEP = 'input-sep',
+  BUTTON = 'button',
+  MULTI_FILE_UPLOADER = 'multiFileUploader',
+  EDITOR = 'editor',
+  MULTI_SELECT = 'multiSelect',
+  INPUT_PASSWORD = 'inputPassword',
+  INPUT = 'input',
+}

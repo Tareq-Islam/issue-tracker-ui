@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Key Transfer",
+    "rights" : [261001, 2201],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key transfer",
+    "url": "assets/file/documentation/key-transfer/key-transfer-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Transfer Details",
+    "rights" : [261001, 2201],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View key transfer details",
+    "url": "assets/file/documentation/key-transfer/key-transfer-details.md"
+  },
+  {
+    "id": 3,
+    "name": "Create Key transfer",
+    "rights" : [261002, 2202],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Creat key transfer",
+    "url": "assets/file/documentation/key-transfer/create-key-transfer.md"
+  },
+  {
+    "id": 4,
+    "name": "Cancel Key transfer",
+    "rights" : [261003, 2203],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Cancel key transfer",
+    "url": "assets/file/documentation/key-transfer/cancel-key-transfer.md"
+  }
+]

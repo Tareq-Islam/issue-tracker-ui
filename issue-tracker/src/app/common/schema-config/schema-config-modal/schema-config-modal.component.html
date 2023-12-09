@@ -1,0 +1,9 @@
+<div class="w-[670px]">
+  <eye-scroll-layout [height]="'calc(100vh - 154px)'">
+    <div container eye-schema-config [allDisabled]="isUpdateEnable ? false: true" [schema]="schemaConfigurationAttribute" class="p-5 pt-0"></div>
+  </eye-scroll-layout>
+  <div *ngIf="isUpdateEnable" class="flex justify-end items-center gap-5 py-2 px-6 border-t border-gray-100">
+    <button pRipple pButton type="button" class="bg-green-500 py-2 px-3 rounded text-white border-0 text-xs" label="Update" (click)="close()"></button>
+  </div>
+
+</div>

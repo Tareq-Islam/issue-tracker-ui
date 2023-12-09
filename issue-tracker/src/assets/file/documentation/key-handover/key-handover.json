@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Key Handover",
+    "rights" : [262001, 2221],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key handover",
+    "url": "assets/file/documentation/key-handover/handover-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Handover",
+    "rights" : [262002, 2222],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create a key handover",
+    "url": "assets/file/documentation/key-handover/create-handover.md"
+  },
+  {
+    "id": 3,
+    "name": "View Handover Keys",
+    "rights" : [262001, 2221],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View all keys of a handover",
+    "url": "assets/file/documentation/key-handover/view-handover-keys.md"
+  },
+  {
+    "id": 4,
+    "name": "Handover Return",
+    "rights" : [262002, 2222],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Handover key return",
+    "url": "assets/file/documentation/key-handover/handover-return.md"
+  },
+  {
+    "id": 5,
+    "name": "Export Handover Report",
+    "rights" : [262003, 2223],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Download key handover report",
+    "url": "assets/file/documentation/key-handover/export-handover.md"
+  }
+]

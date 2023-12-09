@@ -1,0 +1,36 @@
+@import "../../../../assets/scss/mixins";
+.eye-search-wrapper {
+  @apply flex h-[40px] items-center;
+
+  .dropdown {
+    flex: none;
+
+    button {
+      @apply rounded-tr-none rounded-br-none;
+    }
+  }
+
+  .search-input {
+    @include screen-mobile {
+      width: 100%;
+    }
+    @apply flex h-[28px] border border-gray-200 rounded-tr rounded-br bg-white;
+
+    input {
+      @apply rounded-none shadow-none bg-transparent text-sm;
+      text-indent: 5px;
+      font-family: "Roboto";
+      @include screen-mobile {
+        width: 100%;
+      }
+    }
+
+    .search-icon {
+      @apply flex items-center h-full border-l border-gray-200 px-2;
+
+      .pi {
+        @apply text-sm;
+      }
+    }
+  }
+}

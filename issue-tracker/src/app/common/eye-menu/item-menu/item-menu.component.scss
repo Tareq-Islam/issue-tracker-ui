@@ -1,0 +1,6 @@
+:host ::ng-deep p-menu {
+    .p-menu.p-menu-overlay {
+        box-shadow: 0 2px 7px #0005 !important;
+        z-index: 9999;
+    }
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request Extend Approval",
+    "rights" : [258001, 2141],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key request extend approval",
+    "url": "assets/file/documentation/key-extend-approval/extend-approval-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Approve Extend Request",
+    "rights" : [258002, 2142],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Approve a key request extend",
+    "url": "assets/file/documentation/key-extend-approval/approve-extend.md"
+  },
+  {
+    "id": 3,
+    "name": "Reject Extend Request",
+    "rights" : [258003, 2143],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Reject a key request extend",
+    "url": "assets/file/documentation/key-extend-approval/reject-extend.md"
+  }
+]

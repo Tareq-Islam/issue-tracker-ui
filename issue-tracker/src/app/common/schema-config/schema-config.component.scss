@@ -1,0 +1,55 @@
+:host ::ng-deep p-inputswitch {
+  .p-inputswitch {
+      width: 2.7rem;
+      height: 1.5rem;
+  }
+
+  .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+      background: var(--eye-primary-800);
+  }
+
+  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+      background: var(--eye-primary-800);
+  }
+
+  .p-inputswitch.p-focus .p-inputswitch-slider {
+      box-shadow: none !important;
+  }
+
+  .p-inputswitch-slider {
+      &::before {
+          width: 1rem;
+          height: 1rem;
+          left: 0.2rem;
+          top: 58%;
+      }
+  }
+}
+
+:host ::ng-deep p-dropdown {
+  .p-dropdown {
+      width: 100%;
+      border-radius: 0.2rem !important;
+    .p-dropdown-trigger {
+      width: 2rem !important;
+    }
+    .pi {
+      font-size: 0.8rem !important;
+    }
+  }
+
+  .p-dropdown:not(.p-disabled).p-focus {
+      border-color: var(--eye-primary-800);
+      box-shadow: 0 0 0 1px var(--eye-primary-800);
+  }
+
+  .p-inputtext {
+      padding: 2px 17px !important;
+      font-size: 12px !important;
+      text-align: left;
+      &:enabled:focus {
+          border-color: var(--eye-primary-800);
+          box-shadow: 0 0 0 1px var(--eye-primary-800);
+      }
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Site",
+    "rights" : [264001, 2261],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of site",
+    "url": "assets/file/documentation/site/site-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Site History",
+    "rights" : [264002, 2262],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View site history",
+    "url": "assets/file/documentation/site/site-history.md"
+  },
+  {
+    "id": 3,
+    "name": "Deploy Lock",
+    "rights" : [264003, 2263],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Deploy lock on a site",
+    "url": "assets/file/documentation/site/deploy-lock.md"
+  },
+  {
+    "id": 4,
+    "name": "Uninstall Lock",
+    "rights" : [264003, 2263],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Uninstall lock from site",
+    "url": "assets/file/documentation/site/uninstall-lock.md"
+  },
+  {
+    "id": 5,
+    "name": "Keys of Lock",
+    "rights" : [264003, 2263],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View all keys of a lock",
+    "url": "assets/file/documentation/site/keys.md"
+  },
+  {
+    "id": 6,
+    "name": "Fault Lock",
+    "rights" : [264003, 2263],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create fault lock",
+    "url": "assets/file/documentation/site/fault-lock.md"
+  },
+  {
+    "id": 7,
+    "name": "Rectify Lock",
+    "rights" : [264003, 2263],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Rectify a fault lock",
+    "url": "assets/file/documentation/site/rectify-lock.md"
+  },
+  {
+    "id": 8,
+    "name": "My Keys",
+    "rights" : [264004, 2264],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View custodian keys of a site",
+    "url": "assets/file/documentation/site/my-keys.md"
+  }
+]

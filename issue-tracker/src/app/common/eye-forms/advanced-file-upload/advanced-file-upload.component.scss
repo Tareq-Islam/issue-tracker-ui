@@ -1,0 +1,84 @@
+:host ::ng-deep p-fileUpload {
+    .p-fileupload-buttonbar {
+        background-color: #f9f9f9;
+        border-color: #ddd;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0.5rem;
+        border-top-right-radius: 0.2rem;
+        border-top-left-radius: 0.2rem;
+
+        .p-button {
+            font-size: 12px;
+            margin-right: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            padding: 2px 5px;
+            border: 0;
+            background: #2c3e50;
+            border-radius: 5px;
+
+            &:enabled:focus,
+            &:focus {
+                border: none;
+                box-shadow: none;
+            }
+
+            .p-button-icon-left {
+                position: static;
+                margin: 0;
+                top: auto;
+                height: auto;
+                font-size: 0.7rem;
+            }
+
+            .p-button-label {
+                padding: 0;
+            }
+        }
+    }
+
+    .p-fileupload-content {
+        border-bottom-right-radius: 0.2rem;
+        border-bottom-left-radius: 0.2rem;
+
+        .p-fileupload-files>div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .uploaded-media {
+            position: relative;
+
+            span {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background: #fff;
+                border-radius: 50%;
+                box-shadow: 0 0 5px #0007;
+                cursor: pointer;
+                font-size: 0.8rem;
+                padding: 5px;
+            }
+
+            .upload-image {
+                width: 100px;
+                height: 75px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}

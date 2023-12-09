@@ -1,0 +1,11 @@
+.nav-menu {
+  border: none !important;
+  height: 45px;
+}
+
+:host ::ng-deep p-menu {
+  a.p-menuitem-link-active {
+    background: #e9ecef;
+    border-radius: 3px;
+  }
+}

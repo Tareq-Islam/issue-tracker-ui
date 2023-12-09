@@ -1,0 +1,11 @@
+<p class="text-xs text-gray-400 leading-3 m-0">
+  <ng-content select="[item-header]"></ng-content>
+  <ng-content select="[item-content]"></ng-content>
+</p>
+
+<p-overlayPanel #op [dismissable]="true" [showCloseIcon]="false" [style]="{'box-shadow': '0 1px 8px #ccc'}">
+  <ng-template pTemplate>
+    <eye-info *ngIf="userId" [userId]="userId" (mouseleave)="op.hide()"></eye-info>
+  </ng-template>
+</p-overlayPanel>
+

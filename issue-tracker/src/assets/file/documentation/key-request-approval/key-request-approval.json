@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request Approval",
+    "rights" : [256001, 2101],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key request approval",
+    "url": "assets/file/documentation/key-request-approval/request-approval-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Approve Key Request",
+    "rights" : [256002, 2102],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Approve key request",
+    "url": "assets/file/documentation/key-request-approval/approve-request.md"
+  },
+  {
+    "id": 3,
+    "name": "Reject Key Request",
+    "rights" : [256003, 2103],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Reject key request",
+    "url": "assets/file/documentation/key-request-approval/reject-request.md"
+  }
+]

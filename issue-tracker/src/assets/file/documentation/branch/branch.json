@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Branch Permission",
+    "rights" : [252001, 2021],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of branch permission",
+    "url": "assets/file/documentation/branch/branch-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Branch",
+    "rights" : [252002, 2022],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create child branch",
+    "url": "assets/file/documentation/branch/create-branch.md"
+  },
+  {
+    "id": 3,
+    "name": "Edit Branch",
+    "rights" : [252003, 2023],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Edit child branch",
+    "url": "assets/file/documentation/branch/edit-branch.md"
+  },
+  {
+    "id": 4,
+    "name": "Assign Custodian",
+    "rights" : [252004, 2024],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Assign custodian in branch",
+    "url": "assets/file/documentation/branch/assign-custodian.md"
+  },
+  {
+    "id": 5,
+    "name": "Remove Custodian",
+    "rights" : [252005, 2025],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Remove custodian from branch",
+    "url": "assets/file/documentation/branch/remove-custodian.md"
+  },
+  {
+    "id": 6,
+    "name": "Assign Asset",
+    "rights" : [252006, 2026],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Assign asset in branch",
+    "url": "assets/file/documentation/branch/assign-asset.md"
+  },
+  {
+    "id": 7,
+    "name": "Remove Asset",
+    "rights" : [252007, 2027],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Remove asset from branch",
+    "url": "assets/file/documentation/branch/remove-asset.md"
+  }
+
+]

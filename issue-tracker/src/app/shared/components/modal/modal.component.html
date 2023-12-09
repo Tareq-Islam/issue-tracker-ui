@@ -1,0 +1,13 @@
+<p-dialog [(visible)]="isModalOpen" [modal]="true" [closeOnEscape]="closeOnEscape" [draggable]="false"
+  [resizable]="false" [position]="modalPosition" [breakpoints]="breakpoints" [style]="style"
+  (onHide)="modalClose.emit(isModalOpen = false)" contentStyleClass="p-0 rounded-b-md rounded-br-md">
+  <ng-template pTemplate="header">
+    <ng-content select="[modal-header]"></ng-content>
+  </ng-template>
+  <div class="w-full">
+    <ng-content select="[modal-body]"></ng-content>
+  </div>
+  <ng-template *ngIf="isModalFooter" pTemplate="footer">
+    <ng-content select="[modal-footer]"></ng-content>
+  </ng-template>
+</p-dialog>

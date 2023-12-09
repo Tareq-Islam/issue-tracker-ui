@@ -1,0 +1,9 @@
+:host ::ng-deep p-password {
+    input {
+        @apply w-full;
+    }
+
+    .p-inputtext:enabled:focus {
+        @apply w-full border-default-800 shadow #{!important};
+    }
+}

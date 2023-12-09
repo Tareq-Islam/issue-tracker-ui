@@ -1,0 +1,24 @@
+::-webkit-file-upload-button {
+    border: 1px dotted var(--eye-primary-800);
+}
+
+:host ::ng-deep formly-validation-message {
+    @apply text-red-500 text-xs;
+}
+
+
+:host ::ng-deep formly-wrapper-primeng-form-field {
+    label {
+        font-size: 14px !important;
+    }
+
+}
+
+.p-inputtext:enabled:focus {
+    border-color: var(--eye-primary-800);
+    box-shadow: 0 0 0 1px var(--eye-primary-800);
+}
+
+input {
+    padding: 8px !important;
+}

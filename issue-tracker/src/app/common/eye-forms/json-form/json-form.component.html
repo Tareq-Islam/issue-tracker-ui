@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+  <eye-scroll-layout [height]="bodyHeight" styleClass="{{styleClass}}">
+    <div container>
+      <formly-form [form]="form" [fields]="fields" [options]="options" [model]="model"></formly-form>
+      <ng-content select="[custom-field]"></ng-content>
+    </div>
+  </eye-scroll-layout>
+  <div *ngIf="footer?.isFooter" class="flex justify-end items-center gap-5 py-2 px-6 border-t border-gray-100">
+    <button pRipple pButton type="submit" [loading]="footer?.isSubmitLoading || false"
+      [disabled]="footer?.isSubmitDisabled" [iconPos]="footer?.iconPos || 'right'"
+      class="bg-green-500 py-2 px-3 rounded text-white border-0 text-xs"
+      label="{{footer?.submitLabel || 'Submit'}}"></button>
+    <button *ngIf="footer?.isReset" pRipple pButton type="button"
+      class="bg-red-500 py-2 px-3 rounded text-white border-0 text-xs" (click)="onResetForm();">{{footer?.resetLabel ||
+      'Reset'}}</button>
+  </div>
+</form>

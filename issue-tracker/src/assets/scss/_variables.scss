@@ -1,0 +1,75 @@
+@function hexToRGB($hex) {
+  @return red($hex),
+  green($hex),
+  blue($hex);
+}
+
+$eye-primary-900: #326081;
+$eye-primary-800: #2980b9;
+$eye-primary-700: #2980b9cc;
+$eye-primary-600: #2980b9b8;
+$eye-primary-500: #2980b99e;
+$eye-primary-400: #2980b987;
+$eye-primary-300: #2980b96b;
+$eye-primary-200: #2980b959;
+$eye-primary-100: #2980b940;
+$eye-primary-50: #2980b917;
+
+
+
+$eye-primary-text-900: #333;
+$eye-primary-text-800: #666;
+
+$eye-secondary-900: #262626;
+$eye-secondary-800: #374151;
+$eye-secondary-700: #374151e3;
+$eye-secondary-600: #374151c4;
+$eye-secondary-500: #374151c7;
+$eye-secondary-400: #374151b3;
+$eye-secondary-300: #37415194;
+$eye-secondary-200: #37415166;
+$eye-secondary-100: #37415133;
+$eye-secondary-50: #37415117;
+
+
+//===============================
+//      root variable
+//===============================
+:root {
+  /* Colors */
+  // primary
+  --eye-primary-900: #{$eye-primary-900};
+  --eye-primary-800: #{$eye-primary-800};
+  --eye-primary-700: #{$eye-primary-700};
+  --eye-primary-600: #{$eye-primary-600};
+  --eye-primary-500: #{$eye-primary-500};
+  --eye-primary-400: #{$eye-primary-400};
+  --eye-primary-300: #{$eye-primary-300};
+  --eye-primary-200: #{$eye-primary-200};
+  --eye-primary-100: #{$eye-primary-100};
+  --eye-primary-50: #{$eye-primary-50};
+
+  // primary text
+  --eye-primary-text-900: #{$eye-primary-text-900};
+  --eye-primary-text-800: #{$eye-primary-text-800};
+
+  // secondary
+  --eye-secondary-900: #{$eye-secondary-900};
+  --eye-secondary-800: #{$eye-secondary-800};
+  --eye-secondary-700: #{$eye-secondary-700};
+  --eye-secondary-600: #{$eye-secondary-600};
+  --eye-secondary-500: #{$eye-secondary-500};
+  --eye-secondary-400: #{$eye-secondary-400};
+  --eye-secondary-300: #{$eye-secondary-300};
+  --eye-secondary-200: #{$eye-secondary-200};
+  --eye-secondary-100: #{$eye-secondary-100};
+  --eye-secondary-50: #{$eye-secondary-50};
+}
+
+//==================================
+// 	Fonts
+//==================================
+
+$font-primary: Roboto, sans-serif;
+
+$font-digit: Quantico, sans-serif;

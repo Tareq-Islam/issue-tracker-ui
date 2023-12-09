@@ -1,0 +1,22 @@
+:host ::ng-deep p-editor {
+
+    .p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke {
+        stroke: #000;
+    }
+
+    .ql-snow .ql-picker-options {
+        width: 267px !important;
+    }
+
+    .p-editor-container .p-editor-content {
+        border-bottom-right-radius: 0.2rem !important;
+        border-bottom-left-radius: 0.2rem !important;
+    }
+
+    .p-editor-container .p-editor-toolbar {
+        border-top-right-radius: 0.2rem !important;
+        border-top-left-radius: 0.2rem !important;
+    }
+}

@@ -1,0 +1,10 @@
+<div class="eye-option-selector">
+  <div class="drowdown-btn">
+    <button type="button" class="btn cursor-default" pButton [label]="btnLabel | titlecase">
+    </button>
+  </div>
+  <div class="dropdown-menu">
+    <p-dropdown [options]="items" [appendTo]="appendTo" [scrollHeight]="scrollHeight" [readonly]="readonly" [disabled]="disabled" optionLabel="name" (onChange)="onSelected($event)">
+    </p-dropdown>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div [id]="scrollLayoutUniqId" class="eye-scroll-layout" [scrollWindow]="false" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+  [infiniteScrollThrottle]="throttle" (scrolled)="onScroll()" (scroll)="defaultScroll.emit($event)" [style]="style" [style.maxHeight]="height"
+  [style.width]="width">
+  <div class="{{styleClass}}">
+    <ng-content select="[container]"></ng-content>
+  </div>
+</div>

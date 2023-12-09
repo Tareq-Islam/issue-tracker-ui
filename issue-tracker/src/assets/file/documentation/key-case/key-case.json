@@ -1,0 +1,47 @@
+  [
+  {
+    "id": 1,
+    "name": "Key Case Management",
+    "rights" : [253001, 2041],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of Key Case",
+    "url": "assets/file/documentation/key-case/key-case-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Key Case",
+    "rights" : [253002, 2042],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create a new key case",
+    "url": "assets/file/documentation/key-case/create-key-case.md"
+  },
+  {
+    "id": 3,
+    "name": "Move Keys",
+    "rights" : [253003, 2043],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Move keys to another key case",
+    "url": "assets/file/documentation/key-case/move-keys.md"
+  },
+  {
+    "id": 4,
+    "name": "Edit Key Case",
+    "rights" : [253004, 2044],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Edit key case",
+    "url": "assets/file/documentation/key-case/edit-key-case.md"
+  },
+  {
+    "id": 5,
+    "name": "Delete Key Case",
+    "rights" : [253005, 2045],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete key case",
+    "url": "assets/file/documentation/key-case/delete-key-case.md"
+  }
+]

@@ -1,0 +1,112 @@
+// tailwindcss
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer utilities {
+  .margin-block-start {
+    margin-block-start: 1em;
+  }
+
+  .margin-block-end {
+    margin-block-end: 1em;
+  }
+
+  .margin-inline-start {
+    margin-inline-start: 0px;
+  }
+
+  .margin-inline-end {
+    margin-inline-end: 0px;
+  }
+
+  .padding-inline-start {
+    padding-inline-start: 40px;
+  }
+
+  .md-code-font{
+    font-family: monospace;
+  }
+}
+
+
+//----------------------------
+:host ::ng-deep markdown {
+  ul {
+    @apply block list-disc margin-block-start margin-block-end margin-inline-start margin-inline-end padding-inline-start;
+
+    li {
+      // @apply list-item leading-[1.6] text-[14px];
+      // font-family: 'Roboto, sans-serif';
+    }
+  }
+
+  ol {
+    @apply block list-decimal margin-block-start margin-block-end margin-inline-start margin-inline-end padding-inline-start;
+
+    li {
+      // @apply list-item leading-[1.6] text-[14px];
+      // font-family: 'Roboto, sans-serif';
+    }
+  }
+
+  a {
+    @apply underline text-[#ddd];
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  code {
+    @apply bg-[#e5e5e5] md-code-font;
+    padding: 1px 4px;
+    border-radius: 4px;
+  }
+/*img css*/
+    img{
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    p:has(img) {
+      @apply p-[20px];
+    }
+
+    li > img {
+      @apply my-[10px];
+    }
+
+    li > p > img {
+      @apply my-[10px];
+    }
+/****************/
+
+  hr{
+    height: 4px;
+    margin: 32px 0;
+    background-color: #e5e5e5;
+    border: 0 none;
+  }
+
+  span{
+    @apply text-red-600;
+  }
+
+  .img-center{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    color: black;
+  }
+
+  .img-center > img {
+    @apply mb-[10px];
+  }
+}

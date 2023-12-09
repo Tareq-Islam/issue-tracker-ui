@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request Permission",
+    "rights" : [266001, 2301],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key request user permission management.",
+    "url": "assets/file/documentation/key-request-permission/permission-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Assign Key Request User",
+    "rights" : [266002, 2302],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Assign user to key request user permission",
+    "url": "assets/file/documentation/key-request-permission/assign-user.md"
+  },
+  {
+    "id": 3,
+    "name": "Remove Key Request User",
+    "rights" : [266003, 2303],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Remove user from key request user permission",
+    "url": "assets/file/documentation/key-request-permission/remove-user.md"
+  }
+]

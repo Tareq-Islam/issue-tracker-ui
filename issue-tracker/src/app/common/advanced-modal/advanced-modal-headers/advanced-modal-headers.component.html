@@ -1,0 +1,20 @@
+<div class="{{headerWrapperClass}}">
+  <div class="{{items.length === 0 ? '' : 'border-b-[2.5px] border-gray-300'}} w-full pb-[0.1rem] pl-5 h-[32px] leading-[1] flex items-center">
+    <span *ngIf="_headerTitle" class="{{titleStyleClass || 'text-sm font-medium text-black leading-[1]'}}">{{_headerTitle}} <span *ngIf="_headerSubTitle" class="{{subTitleStyleClass || 'text-black font-extrabold leading-[1]'}} ">{{_headerSubTitle}}</span> </span>
+  </div>
+  <div class="flex justify-center items-center {{items.length === 0 ? '' : 'border-b-[2.5px] border-gray-300'}} w-full pb-[0.1rem] h-[32px]">
+    <span *ngFor="let item of items">
+      <ng-container *ngIf="!item.disable; else disableTemp">
+        <a class="font-bold cursor-pointer  text-sm py-2 pb-[0.45rem] px-6 {{selectedNav &&  selectedNav.label === item.label ? 'border-b-[2.5px] border-default-800 text-default-800' : 'hover:border-b-[2.5px] hover:border-gray-500 hover:text-gray-600'}}" (click)="onNavSelect(item)">{{item.label}}</a>
+      </ng-container>
+      <ng-template #disableTemp>
+        <a class="font-bold cursor-default text-gray-400 text-sm py-2 pb-[0.45rem] px-6">{{item.label}}</a>
+      </ng-template>
+    </span>
+  </div>
+  <div class="flex justify-center items-center {{items.length === 0 ? '' : 'border-b-[2.5px] border-gray-300'}}  w-full pb-[0.1rem] h-[32px]">
+    <button pRipple (click)="closeBtn.emit()" class="hover:bg-gray-100 hover:text-sm w-[32px] h-[32px] rounded-full flex items-center justify-center">
+      <span class="pi pi-times"></span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+.swal-modal-title-error {
+  color: #c0392b !important;
+}
+
+.swal2-container {
+  z-index: 10000 !important;
+  .swal2-icon.swal2-warning {
+    border-color: #facea8ba;
+    color: #f8bb86ab;
+  }
+  .swal2-icon {
+    width: 3.5em !important;
+    height: 3.5em !important;
+    .swal2-icon-content {
+      font-size: 3em !important;
+    }
+  }
+  .swal2-styled.swal2-confirm {
+    background-color: var(--eye-primary-50);
+    border: 1px solid var(--eye-primary-100);
+    color: var(--eye-primary-800);
+  }
+
+  .swal2-actions {
+    gap: 20px;
+    button.swal2-confirm {
+      padding: 3px 10px !important;
+      border: 0px;
+      @apply bg-transparent bg-green-50  text-green-500;
+      .pi {
+        font-size: 0.9rem !important;
+      }
+    }
+    button.swal2-cancel {
+      padding: 3px 10px !important;
+      border: 0px;
+      @apply bg-transparent bg-red-50 text-red-500;
+      .pi {
+        font-size: 0.9rem !important;
+      }
+    }
+  }
+
+  .swal2-error-mark {
+    display: block;
+    position: absolute;
+    top: 1.6em;
+    width: 3em;
+    height: 0.3125em;
+    border-radius: 0.125em;
+    background-color: #f27474;
+  }
+
+  .swal2-error {
+    .swal2-x-mark {
+      .swal2-x-mark-line-left {
+        left: 0.2em !important;
+        @extend .swal2-error-mark;
+      }
+      .swal2-x-mark-line-right {
+        right: 0.2em !important;
+        @extend .swal2-error-mark;
+      }
+    }
+  }
+}

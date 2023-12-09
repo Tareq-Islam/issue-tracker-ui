@@ -1,0 +1,39 @@
+p-toastitem .p-toast-message.p-toast-message-error {
+  background: #ffe7e6 !important;
+  color: #ff5757 !important;
+  border: none;
+
+  .p-toast-message-content {
+      border-color: #ff5757 !important;
+  }
+}
+
+p-toastitem .p-toast-message.p-toast-message-success {
+  background: #e4f8f0 !important;
+  color: #1ea97c !important;
+  border: none;
+
+  .p-toast-message-content {
+      border-color: #1ea97c !important;
+  }
+}
+
+p-toastitem .p-toast-message.p-toast-message-warn {
+  background: #fff2e2 !important;
+  color: #cc8925 !important;
+  border: none;
+
+  .p-toast-message-content {
+      border-color: #cc8925 !important;
+  }
+}
+
+p-toastitem .p-toast-message.p-toast-message-info {
+  background: #e9e9ff !important;
+  color: #696cff !important;
+  border: none;
+
+  .p-toast-message-content {
+      border-color: #696cff !important;
+  }
+}

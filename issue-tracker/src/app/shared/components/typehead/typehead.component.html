@@ -1,0 +1,31 @@
+<div class="eye-typehead-wrapper {{wrapperStyleClass}}">
+  <div class="drowdown">
+    <ng-container *ngIf="items.length < 2; else itemValid">
+      <button type="button" class="btn cursor-default" pButton [label]="btnLabel || 'Search'">
+      </button>
+    </ng-container>
+    <ng-template #itemValid>
+      <button type="button" class="btn" pButton pRipple [label]="btnLabel || 'Search'" [icon]="'pi pi-chevron-down'"
+        iconPos="right" (click)="toggle(menu, $event)">
+      </button>
+    </ng-template>
+
+    <p-menu #menu [appendTo]="dropdownMenuAppendTo" [popup]="true" [model]="items" [style]="menuStyle"
+      [styleClass]="menuStyleClass"></p-menu>
+  </div>
+  <div class="search-input">
+    <p-autoComplete [(ngModel)]="_search" [disabled]="typeheadDisabled" [appendTo]="appendTo" [inputStyle]="inputStyle"
+      [scrollHeight]="scrollHeight" [panelStyle]="panelStyle" [panelStyleClass]="panelStyleClass"
+      [placeholder]="inputPlaceholder" [showEmptyMessage]="showEmptyMessage" [suggestions]="results"
+      (completeMethod)="onChange($event)" field="name" (onClear)="onClear()" (onSelect)="onSelect($event)">
+      <ng-template *ngIf="isCustomTemplate" let-item let-index pTemplate="item">
+        <ng-container [ngTemplateOutlet]="optionTemplate" [ngTemplateOutletContext]="{ $implicit: item, index: index }">
+        </ng-container>
+      </ng-template>
+    </p-autoComplete>
+    <div class="search-icon">
+      <i *ngIf="!_isLoading" class="pi pi-search"></i>
+      <i *ngIf="_isLoading" class="pi pi-spin pi-spinner"></i>
+    </div>
+  </div>
+</div>

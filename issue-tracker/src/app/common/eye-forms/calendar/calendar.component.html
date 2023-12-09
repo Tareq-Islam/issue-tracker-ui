@@ -1,0 +1,31 @@
+<p-calendar [appendTo]="to.appendTo" [(ngModel)]="dateValue" [view]="to.view || 'date'"
+  [showIcon]="to.showIcon || false" [icon]="to.icon || 'pi pi-calendar'" [style]="to.style" [minDate]="to.minDate"
+  [maxDate]="to.maxDate" [required]="to.required || false" [dateFormat]="to.dateFormat || 'mm/dd/yy'"
+  [yearNavigator]="to.yearNavigator || false" [monthNavigator]="to.monthNavigator || false" [styleClass]="to.styleClass"
+  [inputStyle]="to.inputStyle" [todayButtonStyleClass]="to.todayButtonStyleClass || 'p-secondary-button'"
+  [clearButtonStyleClass]="to.clearButtonStyleClass || 'p-secondary-button'" [inputStyleClass]="to.inputStyleClass"
+  [panelStyleClass]="to.panelStyleClass" [panelStyle]="to.panelStyle" [name]="to.name"
+  [placeholder]="to.placeholder || ''" [selectionMode]="to.selectionMode || 'single'"
+  [selectOtherMonths]="to.selectOtherMonths || false" [disabled]="to.disabled || false" [inline]="to.inline || false"
+  [showOtherMonths]="to.showOtherMonths || true" [showOnFocus]="to.showOnFocus || true"
+  [showWeek]="to.showWeek || false" [shortYearCutoff]="to.shortYearCutoff || '+10'" [readonlyInput]="to.readonlyInput"
+  [defaultDate]="to.defaultDate" [disabledDates]="to.disabledDates" [disabledDays]="to.disabledDays"
+  [showTime]="to.showTime || false" [hourFormat]="to.hourFormat || '24'" [timeOnly]="to.timeOnly || false"
+  [focusTrap]="to.focusTrap || true" [tabindex]="to.tabindex || 0" [maxDateCount]="to.maxDateCount"
+  [baseZIndex]="to.baseZIndex || 0" [autoZIndex]="to.autoZIndex || true" [keepInvalid]="to.keepInvalid || false"
+  [timeSeparator]="to.timeSeparator || ':'" [dataType]="to.dataType || 'date'" [numberOfMonths]="to.numberOfMonths || 1"
+  [multipleSeparator]="to.multipleSeparator || ','" [rangeSeparator]="to.rangeSeparator || '-'"
+  [stepHour]="to.stepHour || 1" [stepMinute]="to.stepMinute || 1" [firstDayOfWeek]="to.firstDayOfWeek || 0"
+  [stepSecond]="to.stepSecond || 1" [yearRange]="to.yearRange" [locale]="to.locale"
+  [hideOnDateTimeSelect]="to.hideOnDateTimeSelect || true" [showButtonBar]="to.showButtonBar"
+  [showSeconds]="to.showSeconds || false" (onSelect)="to.onSelect" (onBlur)="to.onBlur" (onFocus)="to.onFocus"
+  (onClose)="to.onClose" (onShow)="to.onShow" (onClickOutside)="to.onClickOutside" (onInput)="to.onInput"
+  (onTodayClick)="to.onTodayClick" (onClearClick)="to.onClearClick" (onMonthChange)="to.onMonthChange"
+  (onYearChange)="to.onYearChange">
+  <ng-template *ngIf="to.headerTemplate" pTemplate="header">
+    <span [innerHTML]="contentSecurity(to.headerTemplate)"></span>
+  </ng-template>
+  <ng-template *ngIf="to.footerTemplate" pTemplate="footer">
+    <span [innerHTML]="contentSecurity(to.footerTemplate)"></span>
+  </ng-template>
+</p-calendar>

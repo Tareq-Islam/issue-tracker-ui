@@ -1,0 +1,34 @@
+.eye-option-selector {
+    @apply flex h-[29px] items-center;
+
+    .drowdown-btn {
+        button {
+            @apply rounded-tr-none rounded-br-none;
+        }
+    }
+
+}
+
+:host ::ng-deep p-dropdown {
+    .p-dropdown {
+        height: 29px;
+        @apply border border-gray-200 rounded-none rounded-tr rounded-br bg-white
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+        @apply border-gray-200 shadow-none;
+    }
+
+    .p-dropdown .p-dropdown-trigger {
+        width: 1.5rem;
+        .p-dropdown-trigger-icon {
+          font-size: 0.8rem;
+        }
+    }
+
+    .p-inputtext {
+        padding: 5px;
+        font-size: 15px;
+        line-height: 1;
+    }
+}

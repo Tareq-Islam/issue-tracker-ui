@@ -1,0 +1,14 @@
+<div class="eye-item-card mb-3 {{styleClass}}">
+  <div id="uniq_{{uniqueId}}" class="eye-grid-item  gap-1 px-4 {{firstRowStyle || 'grid grid-cols-[3%,auto]'}}">
+    <span (click)="onAccordin('uniq_' + uniqueId)" pRipple class="pi pi-plus-circle cursor-pointer text-lg"></span>
+    <div>
+      <ng-content select="[firstRow]"></ng-content>
+    </div>
+  </div>
+  <div class="eye-grid-item  gap-1 second-row px-4 hidden {{secondRowStyle || 'grid-cols-[3%,auto]'}}">
+    <span></span>
+    <div>
+      <ng-content select="[secondRow]"></ng-content>
+    </div>
+  </div>
+</div>

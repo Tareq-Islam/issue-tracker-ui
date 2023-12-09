@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "name": "Dashboard",
+    "rights" : [267001, 2321],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of dashboard",
+    "url": "assets/file/documentation/dashboard/dashboard-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "View Key Request",
+    "rights" : [255001, 25600, 2081, 2101],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View key request details",
+    "url": "assets/file/documentation/dashboard/view-key-request.md"
+  },
+  {
+    "id": 3,
+    "name": "Request Return Pending",
+    "rights" : [255001, 2081],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View request return pending",
+    "url": "assets/file/documentation/dashboard/view-request-return-pending.md"
+  },
+  {
+    "id": 4,
+    "name": "Key Return Pending",
+    "rights" : [255001, 2081],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View key return pending",
+    "url": "assets/file/documentation/dashboard/view-key-return-pending.md"
+  },
+  {
+    "id": 5,
+    "name": "Handover Return Pending",
+    "rights" : [262001, 2221],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View handover return pending",
+    "url": "assets/file/documentation/dashboard/view-handover-return-pending.md"
+  },
+  {
+    "id": 6,
+    "name": "Transfer Approval Pending",
+    "rights" : [261004, 2204],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View transfer approval pending",
+    "url": "assets/file/documentation/dashboard/view-transfer-approval-pending.md"
+  },
+  {
+    "id": 7,
+    "name": "Request Approval Pending",
+    "rights" : [256001, 2101],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View request approval pending",
+    "url": "assets/file/documentation/dashboard/view-request-approval-pending.md"
+  },
+  {
+    "id": 8,
+    "name": "Return Approval Pending",
+    "rights" : [260001, 2181],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View return approval pending",
+    "url": "assets/file/documentation/dashboard/view-return-approval-pending.md"
+  },
+  {
+    "id": 9,
+    "name": "Extend Approval Pending",
+    "rights" : [258001, 2141],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View extend approval pending",
+    "url": "assets/file/documentation/dashboard/view-extend-approval-pending.md"
+  }
+]

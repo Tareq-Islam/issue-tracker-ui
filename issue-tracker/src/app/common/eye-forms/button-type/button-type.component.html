@@ -1,0 +1,8 @@
+<div class="{{to.styleClass}}">
+    <button pButton pRipple [type]="to.type || 'button'" class="{{to.buttonStyleClass}}" (click)="onClick($event)">
+        {{ to.text }}
+    </button>
+    <div *ngIf="to.description">
+        <span class="{{to.descriptionStyleClass}}">{{to.description}}</span>
+    </div>
+</div>

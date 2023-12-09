@@ -1,0 +1,28 @@
+<div class="eye-search-wrapper">
+  <div class="dropdown">
+    <ng-container *ngIf="items.length < 2; else itemValid">
+      <button type="button" class="btn cursor-default" pButton [label]="btnLabel || 'Search'">
+      </button>
+    </ng-container>
+    <ng-template #itemValid>
+      <button type="button" class="btn" pButton pRipple [label]="btnLabel || 'Search'" [icon]="'pi pi-chevron-down'"
+        iconPos="right" (click)="toggle(menu, $event)">
+      </button>
+    </ng-template>
+
+    <p-menu #menu [popup]="true" [appendTo]="appendTo" [model]="items" [style]="menuStyle" [styleClass]="menuStyleClass"></p-menu>
+  </div>
+  <div class="search-input">
+    <ng-container *ngIf="keyFilter !== undefined; else keyFilterValidation">
+      <input type="search" pInputText [placeholder]="inputPlaceholder" [(ngModel)]="_search" [pKeyFilter]="keyFilter"
+        [pValidateOnly]="pValidateOnly" (ngModelChange)="onChange($event)" />
+    </ng-container>
+    <ng-template #keyFilterValidation>
+      <input type="search" pInputText [placeholder]="inputPlaceholder" [(ngModel)]="_search"
+        (ngModelChange)="onChange($event)" />
+    </ng-template>
+
+    <div class="search-icon"><i *ngIf="!_isLoading" class="pi pi-search"></i><i *ngIf="_isLoading"
+        class="pi pi-spin pi-spinner"></i></div>
+  </div>
+</div>

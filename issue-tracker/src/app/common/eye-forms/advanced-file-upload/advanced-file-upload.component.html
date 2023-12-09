@@ -1,0 +1,12 @@
+<p-fileUpload name="upload-file" #imageUpload [showUploadButton]="false" [multiple]="true" accept="image/*"
+  chooseLabel="Attach files" [maxFileSize]="3000000" [customUpload]="true" (onClear)="clearFile($event, imageUpload)"
+  (onSelect)="selectedFile($event, imageUpload)">
+  <ng-template let-file pTemplate="file">
+    <div class="uploaded-media">
+      <div class="upload-image">
+        <img [src]="file.objectURL">
+      </div>
+      <span class="pi pi-times" (click)="removeFile($event, file, imageUpload)"></span>
+    </div>
+  </ng-template>
+</p-fileUpload>

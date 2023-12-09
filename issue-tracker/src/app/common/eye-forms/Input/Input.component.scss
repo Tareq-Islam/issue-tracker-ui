@@ -1,0 +1,11 @@
+.p-inputtext {
+    padding: 8px !important;
+    border-radius: 0.2rem !important;
+    width: 100%;
+    font-size: 14px !important;
+
+    &:enabled:focus {
+        border-color: var(--eye-primary-800);
+        box-shadow: 0 0 0 1px var(--eye-primary-800);
+    }
+}

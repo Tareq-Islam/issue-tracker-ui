@@ -1,0 +1,199 @@
+@import "./components/swal";
+.p-component {
+  font-size: 14px;
+}
+
+.btn {
+  @apply border-0 rounded p-[0.4rem] text-sm leading-4 text-white font-normal;
+  background-color: var(--eye-primary-800) !important;
+
+  &:enabled:active,
+  &:focus,
+  &:hover,
+  &:enabled:hover {
+    @apply border-0 shadow-none;
+    background-color: var(--eye-primary-800) !important;
+  }
+
+  span.pi {
+    @apply text-xs mr-1;
+  }
+
+  span.p-button-label {
+    @apply font-normal;
+  }
+}
+
+.btn-report {
+  @extend .btn;
+  background-color: var(--eye-secondary-50) !important;
+  color: var(--eye-secondary-800);
+  &:enabled:active,
+  &:focus,
+  &:hover,
+  &:enabled:hover {
+    @apply border-0 shadow-none;
+    background-color: var(--eye-primary-800) !important;
+    color: white;
+  }
+  &:disabled,
+  &:enabled:disabled {
+    background-color: var(--eye-secondary-50) !important;
+    color: var(--eye-secondary-800);
+  }
+  padding: 0.3rem 0.4rem;
+  font-size: 0.82rem;
+}
+
+.btn-report.active {
+  background-color: var(--eye-primary-800) !important;
+  color: white;
+}
+
+.btn-action {
+  background: var(--eye-primary-50);
+  padding: 3px 10px;
+  border-radius: 5px;
+  color: var(--eye-primary-800);
+
+  &:hover {
+    background: var(--eye-primary-50);
+  }
+
+  .pi {
+    font-size: 0.8rem;
+  }
+}
+
+.btn-group {
+  .active {
+    background-color: var(--eye-primary-800) !important;
+
+    .badge {
+      @apply text-white rounded font-normal text-xs px-1;
+      background-color: var(--eye-secondary-800) !important;
+    }
+
+    &:enabled:active,
+    &:focus,
+    &:hover,
+    &:enabled:hover {
+      background-color: var(--eye-primary-800) !important;
+    }
+  }
+
+  button {
+    margin-right: 1px !important;
+    background-color: var(--eye-secondary-800) !important;
+    @apply h-[29px];
+
+    .badge {
+      @apply text-white rounded font-normal text-xs px-1;
+      background-color: var(--eye-primary-800) !important;
+    }
+
+    &:last-child {
+      margin-right: 0 !important;
+    }
+
+    &:enabled:active,
+    &:focus,
+    &:hover,
+    &:enabled:hover {
+      background-color: var(--eye-secondary-800) !important;
+    }
+  }
+
+  .p-ink {
+    @apply hidden;
+  }
+}
+
+.eye-item-card {
+  @apply w-full rounded-lg border border-gray-200;
+}
+
+.text-content {
+  @apply text-gray-900 block text-sm leading-4 break-words font-medium;
+}
+
+.p-dropdown-items-wrapper {
+  .p-dropdown-item {
+    padding: 5px;
+    color: #666;
+
+    span {
+      font-size: 14px;
+    }
+  }
+}
+
+.issue-badge {
+  line-height: 1.375;
+  margin: 0;
+  border-radius: 0.3rem;
+  background-color: var(--eye-primary-800);
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.visibility-private {
+  @extend .issue-badge;
+  @apply bg-red-500;
+}
+
+.visibility-public {
+  @extend .issue-badge;
+  @apply bg-sky-500;
+}
+
+.priority-low {
+  @extend .issue-badge;
+  @apply bg-green-500;
+}
+
+.priority-medium {
+  @extend .issue-badge;
+  background: #f39c12;
+}
+
+.priority-high {
+  @extend .issue-badge;
+  @apply bg-red-500;
+}
+
+.status-blue {
+  @extend .issue-badge;
+  @apply bg-blue-500;
+}
+
+.status-success {
+  @extend .issue-badge;
+  @apply bg-green-500;
+}
+
+.status-purple {
+  @extend .issue-badge;
+  background: #8e44ad;
+  color: #fff;
+}
+
+.status-danger {
+  @extend .issue-badge;
+  @apply bg-red-500;
+}
+
+.status-dark-yellow {
+  @extend .issue-badge;
+  background: #f39c12;
+}
+
+.status-blue-gray {
+  @extend .issue-badge;
+  @apply bg-blueGray-500;
+}

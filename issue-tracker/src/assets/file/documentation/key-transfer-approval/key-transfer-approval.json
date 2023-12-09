@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Key Transfer Approval",
+    "rights" : [261004, 2204],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key transfer approval",
+    "url": "assets/file/documentation/key-transfer-approval/key-transfer-approval-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Transfer Details",
+    "rights" : [261004, 2204],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View key transfer details",
+    "url": "assets/file/documentation/key-transfer-approval/key-transfer-details.md"
+  },
+  {
+    "id": 3,
+    "name": "Approve Key transfer",
+    "rights" : [261005, 2205],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Approve key transfer",
+    "url": "assets/file/documentation/key-transfer-approval/approve-key-transfer.md"
+  },
+  {
+    "id": 4,
+    "name": "Reject Key transfer",
+    "rights" : [261006, 2206],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Reject key transfer",
+    "url": "assets/file/documentation/key-transfer-approval/reject-key-transfer.md"
+  }
+]

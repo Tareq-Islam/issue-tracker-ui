@@ -1,0 +1,32 @@
+<div>
+  <div class="{{to.parentWrapperClass || 'flex w-full h-full'}}">
+    <ng-container *ngIf="!to.pKeyFilter; else elseTemplate">
+      <input type="text" [ngClass]="{'ng-dirty ng-invalid': showError}" pInputText [(ngModel)]="value"
+        [placeholder]="to.placeholder" [style]="to.style" [autofocus]="to.autofocus" [class]="to.styleClass"
+        [formlyAttributes]="field" />
+    </ng-container>
+    <ng-template #elseTemplate>
+      <input type="text" pInputText [ngClass]="{'ng-dirty ng-invalid': showError}" [(ngModel)]="value"
+        [pKeyFilter]="to.pKeyFilter" [pValidateOnly]="to.pValidateOnly" [placeholder]="to.placeholder"
+        [style]="to.style" [class]="to.styleClass" [autofocus]="to.autofocus" [formlyAttributes]="field" />
+    </ng-template>
+    <div class="{{to.addonStyleClass}}" *ngIf="to.rightAddon">
+      <div>
+        <span class="{{to.rightAddon.styleClass}}" (click)="onAddonClick($event)"
+          (mouseenter)="onAddonHover($event)">{{to.rightAddon.text}}</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="onUserProfileToggle(op, to.errorMessage)" class="{{to.errorWrapperClass || 'text-xs mt-[0.2rem]'}}">
+    <span *ngIf="to.errorMessage" class="{{to.errorMessageClass || 'text-red-500'}}">{{to.errorMessage}}</span>
+    <span *ngIf="to.description" class="{{to.descriptionClass || 'underline text-red-700 cursor-pointer'}}"
+      (mouseenter)="to.userId ? op.show($event) : ''" (click)="onClick($event)">{{to.description}}</span>
+  </div>
+
+  <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="false" [style]="{'box-shadow': '0 1px 8px #ccc'}">
+    <ng-template pTemplate>
+      <!-- <eye-user-details-chip [userId]="to.userId"></eye-user-details-chip> -->
+    </ng-template>
+  </p-overlayPanel>
+
+</div>

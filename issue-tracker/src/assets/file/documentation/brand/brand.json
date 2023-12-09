@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Brand Management",
+    "rights" : [264001, 2261],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of brand",
+    "url": "assets/file/documentation/brand/brand-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Brand",
+    "rights" : [264002, 2262],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create a new brand",
+    "url": "assets/file/documentation/brand/create-brand.md"
+  },
+  {
+    "id": 3,
+    "name": "Edit Brand",
+    "rights" : [264003, 2263],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Edit brand",
+    "url": "assets/file/documentation/brand/edit-brand.md"
+  },
+  {
+    "id": 4,
+    "name": "Delete Brand",
+    "rights" : [264004, 2264],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/brand/delete-brand.md"
+  }
+]

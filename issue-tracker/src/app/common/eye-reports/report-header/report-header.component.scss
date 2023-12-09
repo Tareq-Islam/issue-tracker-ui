@@ -1,0 +1,78 @@
+:host ::ng-deep p-calendar {
+  .p-button.p-button-icon-only {
+    padding: 0 !important;
+    background: #fff !important;
+    color: #666;
+    border-color: var(--eye-primary-100);
+    &:hover,
+    &:enabled:hover,
+    &:active,
+    &:enabled:active {
+      background: #fff !important;
+      color: #666;
+      border-color: var(--eye-primary-100);
+    }
+  }
+  input.p-inputtext {
+    padding: 4px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-color: var(--eye-primary-100);
+  }
+}
+
+
+.btn-report {
+  background-color: #fff !important;
+  color: #666;
+  border: 1px solid var(--eye-primary-100);
+  padding: 0.4rem 0.45rem;
+  &:hover, &:active, &:enabled:active, &:enabled:hover, .active {
+    background-color: var(--eye-primary-50) !important;
+    color: var(--eye-primary-800);
+    border: 1px solid var(--eye-primary-100);
+    padding: 0.4rem 0.45rem;
+  }
+  &:disabled:hover {
+    background-color: #fff !important;
+    color: #666;
+    border: 1px solid var(--eye-primary-100);
+    padding: 0.4rem 0.45rem;
+  }
+}
+
+
+:host ::ng-deep eye-typehead {
+  .eye-typehead-wrapper {
+    height: 30px  !important;
+  }
+  button {
+    background-color: var(--eye-primary-50) !important;
+    color: var(--eye-primary-800);
+    border: 1px solid var(--eye-primary-100);
+    &:hover, &:active, &:enabled:active, &:enabled:hover, &:focus {
+      background-color: var(--eye-primary-50) !important;
+      color: var(--eye-primary-800);
+      border: 1px solid var(--eye-primary-100);
+    }
+    .p-button-label {
+      width: 53px;
+    }
+  }
+  input {
+    width: auto !important;
+    padding: 0.4rem 0.45rem !important;
+    line-height: 1 !important;
+    text-indent: 0px !important;
+    padding-left: 4px !important;
+  };
+  .search-input {
+    height: 31px !important;
+    border-color: var(--eye-primary-100) !important;
+
+  }
+  .search-icon {
+    border-color: var(--eye-primary-100) !important;
+    color: #666 !important;
+  }
+}

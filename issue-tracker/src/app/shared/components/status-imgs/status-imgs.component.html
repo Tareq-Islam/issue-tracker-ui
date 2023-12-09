@@ -1,0 +1,11 @@
+<div class="{{wrapperClass || 'flex justify-start items-center gap-3'}}">
+  <div *ngFor="let item of _items" class="{{contentClass || 'h-[18px]'}} {{item.styleClass}}">
+    <ng-container *ngIf="item?.tooltip; else tooltipTemplate">
+      <img [src]="item?.imgUrl" class="h-full w-full" pTooltip="{{item?.tooltip}}"
+        tooltipPosition="{{item?.tooltipPosition}}">
+    </ng-container>
+    <ng-template #tooltipTemplate>
+      <img [src]="item.imgUrl" class="h-full w-full">
+    </ng-template>
+  </div>
+</div>

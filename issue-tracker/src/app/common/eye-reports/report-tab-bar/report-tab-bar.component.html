@@ -1,0 +1,6 @@
+<div class="px-4 py-1 border-b border-t border-gray-300 h-[38px] flex items-center justify-center">
+  <div class="flex justify-center items-center gap-2">
+    <button *ngFor="let item of tabs" pRipple pButton class="btn-report {{tab.label === item.label && !item.disabled ? 'active' : ''}}"
+      [disabled]="item.disabled" type="button" label="{{item.label}}" (click)="onChangeTab(item)"></button>
+  </div>
+</div>

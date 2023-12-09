@@ -1,0 +1,35 @@
+:host ::ng-deep p-calendar {
+  .p-calendar {
+    width: 100%;
+  }
+
+  .p-inputtext {
+    padding: 8px !important;
+    border-radius: 0.2rem 0 0 0.2rem !important;
+    width: 100%;
+    font-size: 14px !important;
+
+    &:enabled:focus {
+      border-color: var(--eye-primary-800);
+      box-shadow: 0 0 0 1px var(--eye-primary-800);
+    }
+  }
+
+  button {
+    padding: 8px !important;
+    background: none !important;
+    border-color: #d4d4d8;
+    border-left: 0 !important;
+    color: #71717a;
+
+    &:hover,
+    &:focus,
+    &:enabled:hover {
+      background: none !important;
+      border-color: #d4d4d8;
+      border-left: 0 !important;
+      color: #71717a;
+      box-shadow: none !important;
+    }
+  }
+}

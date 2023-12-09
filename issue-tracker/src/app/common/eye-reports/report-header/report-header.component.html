@@ -1,0 +1,33 @@
+<div class="bg-gray-50">
+  <div class="flex justify-end items-center px-4 py-2 gap-5">
+    <ng-container *ngFor="let search of config?.search">
+      <eye-typehead *ngIf="search.isSearch" [menus]="search.menus || []" [search]="search.defaultValue" [typeheadDisabled]="search.isDisabled || false"
+        [dropdownMenuAppendTo]="search.appendTo" [isLoading]="search.isLoading || false"
+        [showEmptyMessage]="search.isShowEmptyMessage || false" [isCustomTemplate]="search.isCustomTemplate || false"
+        [suggestionItems]="search.result || []" (menuChange)="onMenuChange($event, search)">
+        <ng-template *ngIf="search.isCustomTemplate" let-item let-index #eTemplate>
+          <ng-container [ngTemplateOutlet]="typeTemplate" [ngTemplateOutletContext]="{ $implicit: item, index: index}">
+          </ng-container>
+        </ng-template>
+      </eye-typehead>
+    </ng-container>
+    <div class="{{config?.calendar?.wrapperClass || 'flex items-center gap-5'}}">
+      <ng-container *ngFor="let item of config?.calendar?.date">
+        <div *ngIf="item?.isEnable || false" class="{{item.styleClass || 'grid grid-flow-col items-center'}}">
+          <label for="{{item?.options?.inputId}}"
+            class="{{item?.labelStyleClass || 'bg-default-50 text-default-800 rounded-l py-[0.4rem] px-[0.45rem] text-xs border border-default-100 border-r-0'}}">{{item?.label}}</label>
+          <eye-calendar [(dateValue)]="item.defaultDate" [calenderOptions]="item?.options || {}"
+            (onSelect)="onSelect($event, item)" (onInput)="onInputChange($event, item)"></eye-calendar>
+        </div>
+      </ng-container>
+    </div>
+    <div class="{{config?.button?.wrapperClass || 'flex items-center gap-2'}}">
+      <ng-container *ngFor="let item of config?.button?.buttons">
+        <button *ngIf="item?.isEnable || false" pRipple pButton class="btn-report active"
+          label="{{item?.label || 'Search'}}" [disabled]="item?.disabled || false"
+          icon="{{item?.icon || 'pi pi-search'}}" [iconPos]="item?.iconPos || 'left'"
+          [loading]="item?.isLoading || false" (click)="onSearch($event, item)"></button>
+      </ng-container>
+    </div>
+  </div>
+</div>

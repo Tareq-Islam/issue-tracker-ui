@@ -1,0 +1,14 @@
+<div>
+  <eye-advanced-modal-headers [headerName]="header?.title || ''" [headerSubTitle]="header?.subTitle || ''"
+    [menus]="header?.menus || []"
+    [headerWrapperClass]="header?.wrapperClass || 'grid grid-cols-[10%,auto,5%] items-center pt-2'"
+    [titleStyleClass]="header?.titleStyleClass || ''" [subTitleStyleClass]="header?.subTitleStyleClass || ''"
+    [menuSelected]="header?.selectedMenu || null" (closeBtn)="clickClose.emit($event)"></eye-advanced-modal-headers>
+  <eye-scroll-layout [height]="content?.scrollHeight || ''"
+    [style]="content?.scrollStyle || 'height: calc(100vh - 117px)'"
+    [styleClass]="content?.wrapperClass || 'p-0 mt-[1px]'">
+    <div container>
+      <ng-content></ng-content>
+    </div>
+  </eye-scroll-layout>
+</div>

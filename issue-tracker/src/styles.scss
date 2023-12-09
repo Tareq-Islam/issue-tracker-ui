@@ -5,3 +5,10 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
+// custome css
+@import "./assets/scss/mixins"; // Mixins
+@import "./assets/scss/variables"; // Variables
+@import "./assets/scss/general"; // general
+@import "./assets/scss/components"; // components
+@import "./assets/scss/grid"; // grid
+@import "./assets/scss/primeng"; // primeng components

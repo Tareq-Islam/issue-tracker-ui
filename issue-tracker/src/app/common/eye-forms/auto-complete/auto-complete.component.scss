@@ -1,0 +1,43 @@
+:host ::ng-deep p-autocomplete {
+  .p-autocomplete {
+    .p-inputtext {
+      padding: 8px !important;
+      border-radius: 0.2rem 0 0 0.2rem !important;
+      width: 100%;
+      font-size: 14px !important;
+
+      &:enabled:focus {
+        border-color: var(--eye-primary-800);
+        box-shadow: 0 0 0 1px var(--eye-primary-800);
+      }
+    }
+
+    .p-autocomplete-dropdown {
+      padding: 0 !important;
+      background: none !important;
+      border-color: #d4d4d8;
+      border-left: 0 !important;
+      color: #71717a;
+    }
+    .p-autocomplete-multiple-container {
+      .p-autocomplete-input-token {
+        padding: 0 !important;
+        input {
+          border-radius: 0.2rem 0 0 0.2rem !important;
+          width: 100%;
+          font-size: 14px !important;
+        }
+      }
+    }
+    .p-autocomplete-multiple-container {
+      &:not(.p-disabled).p-focus {
+        border-color: var(--eye-primary-800);
+        box-shadow: 0 0 0 1px var(--eye-primary-800);
+      }
+      .p-autocomplete-token {
+        color: var(--eye-primary-800);
+        background: var(--eye-primary-50);
+      }
+    }
+  }
+}

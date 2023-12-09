@@ -1,0 +1,13 @@
+<fieldset class="relative fieldset-field">
+  <span class="absolute top-[-26px] right-[15px] bg-white rounded border border-gray-300 px-2 cursor-pointer" (click)="add()">{{to.addText}}</span>
+  <legend class="legend-title">{{to.title}}</legend>
+  <eye-scroll-layout height="calc(100vh - 380px)" class="min-scrollbar" styleClass="px-2">
+    <div container *ngFor="let field of field.fieldGroup; let i = index;" class="w-full relative">
+      <formly-field [field]="field" class="ml-4 mr-6"></formly-field>
+      <span *ngIf="i > 0" class="text-red-500 cursor-pointer absolute top-8 right-0" (click)="remove(i)"> <span class="pi pi-times"></span></span>
+    </div>
+  </eye-scroll-layout>
+</fieldset>
+
+
+

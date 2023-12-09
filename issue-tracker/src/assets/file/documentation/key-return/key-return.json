@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request Return",
+    "rights" : [259001, 2161],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key request return",
+    "url": "assets/file/documentation/key-return/return-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Key Request Return",
+    "rights" : [259002, 2162],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create a key request return",
+    "url": "assets/file/documentation/key-return/create-return.md"
+  }
+]

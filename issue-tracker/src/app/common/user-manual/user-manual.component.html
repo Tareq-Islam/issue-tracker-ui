@@ -1,0 +1,32 @@
+<div class="flex flex-col md:grid {{userManual.length === 0 ? '' : 'md:grid-cols-[350px,auto]'}}">
+  <eye-not-found *ngIf="userManual.length === 0" [message]="'User Manual Not Found!!'"></eye-not-found>
+  <div *ngIf="userManual.length > 0" class="border-r border-[#ddd]">
+    <eye-scroll-layout class="min-scrollbar" [height]="'calc(100vh - 125px)'" styleClass="flex md:block h-full w-full">
+      <div container *ngFor="let item of userManual"
+        class="flex gap-1 px-1 items-center bg-gray-{{item.id === selected?.id ? '100' : '0'}} rounded mx-2 mt-1 mb-0 last:mb-2  cursor-pointer"
+        (click)="selected = item">
+        <p class="p-2 px-3 font-medium leading-4 text-sm md:text-base">
+          {{item.name}}
+          <span class="hidden md:block text-[13px] text-gray-500 font-normal leading-4">
+            {{item.description}}
+          </span>
+        </p>
+      </div>
+    </eye-scroll-layout>
+  </div>
+  <div *ngIf="userManual.length > 0">
+    <div class="border-b border-[#ddd] flex items-center">
+      <div class="px-2 py-1">
+        <span class="font-bold text-lg">{{selected?.name | titlecase}}</span>
+      </div>
+
+    </div>
+    <eye-scroll-layout class="min-scrollbar" [height]="'calc(100vh - 175px)'" styleClass="h-full w-full">
+      <div container class="p-2 user-manual-markdown">
+        <markdown *ngIf="selected?.url" [src]="selected?.url">
+
+        </markdown>
+      </div>
+    </eye-scroll-layout>
+  </div>
+</div>

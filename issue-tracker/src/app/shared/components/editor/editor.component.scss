@@ -1,0 +1,34 @@
+.eye-editor-wrapper {
+    ::ng-deep p-editor {
+        .ui-editor-toolbar {
+            border-color: #ddd;
+            background-color: #f9f9f9;
+        }
+
+        .ui-editor-content {
+            border-color: #ddd;
+        }
+
+        .ql-picker-label {
+            border: none;
+        }
+
+        .ql-editor {
+            min-height: 200px;
+        }
+    }
+}
+
+
+:host ::ng-deep p-editor {
+
+    .p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke {
+        stroke: #000;
+    }
+
+    .ql-snow .ql-picker-options {
+        width: 267px !important;
+    }
+}

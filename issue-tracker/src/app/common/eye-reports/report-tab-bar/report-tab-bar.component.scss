@@ -1,0 +1,17 @@
+.btn-report.active {
+  background-color: var(--eye-primary-100) !important;
+  color: var(--eye-primary-800) !important;
+}
+
+.btn-report {
+  background-color: var(--eye-secondary-50) !important;
+  color: var(--eye-secondary-800) !important;
+  &:hover {
+    background-color: var(--eye-secondary-50) !important;
+    color: var(--eye-secondary-800) !important;
+  }
+  &:enabled:hover {
+    background-color: var(--eye-primary-100) !important;
+    color: var(--eye-primary-800) !important;
+  }
+}

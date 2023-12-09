@@ -1,0 +1,188 @@
+/*----------------------------
+--------- 1. General ---------
+----------------------------*/
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Quantico:400,700&display=swap");
+
+html,
+html a,
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: $font-primary;
+  font-size: 14px;
+  background-color: #fff;
+  color: var(--eye-primary-text-800);
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  overflow-x: hidden;
+}
+
+strong {
+  font-family: $font-primary;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--eye-primary-text-900);
+  font-family: $font-primary;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+  line-height: 1.5;
+
+  a {
+    font-family: $font-primary;
+  }
+
+  small {
+    font-weight: 300;
+    color: lighten($eye-primary-text-900, 5%);
+  }
+}
+
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 12px;
+}
+
+p {
+  font-family: $font-primary;
+  color: var(--eye-primary-text-800);
+  line-height: 1.9;
+}
+
+ul {
+  margin-bottom: 0px;
+}
+
+a {
+  color: var(--eye-primary-text-800);
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: darken($eye-primary-text-800, 10%);
+  }
+
+  &:focus {
+    outline: none;
+    color: var(--eye-primary-text-800);
+  }
+
+  &.text-gray {
+    &:hover,
+    &:focus,
+    &.active {
+      color: var($eye-primary-text-900) !important;
+    }
+  }
+}
+
+:focus {
+  outline: none;
+}
+
+hr {
+  border-top: 1px solid var(--eye-primary-text-800);
+}
+
+blockquote {
+  border-left: 0px;
+  padding-left: 30px;
+  position: relative;
+
+  &:before {
+    font-family: "themify";
+    content: "\e67f";
+    position: absolute;
+    left: 0px;
+    color: var(--eye-primary-text-900);
+  }
+}
+
+button {
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+iframe {
+  border: 0;
+
+  @include screen-mobile {
+    min-height: 175px !important;
+    height: auto;
+  }
+}
+
+@include print {
+  body {
+    font-size: 10px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 18px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f8f8f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00000014;
+  border-radius: 8px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+
+  &:hover {
+    background-color: #0003;
+  }
+}
+
+._moz_scrollbar {
+  scrollbar-color: #ddd #eee !important;
+  scrollbar-width: thin !important;
+}
+
+._moz_scrollbar_dashboard {
+  scrollbar-color: #fff transparent !important;
+  scrollbar-width: thin !important;
+}
+
+.min-scrollbar {
+  ::-webkit-scrollbar {
+    width: 14px !important;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: none !important;
+  }
+}

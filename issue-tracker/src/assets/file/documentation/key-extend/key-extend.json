@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request Extend",
+    "rights" : [257001, 2121],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key request extend",
+    "url": "assets/file/documentation/key-extend/extend-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Extend Request",
+    "rights" : [257002, 2122],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create a extend request",
+    "url": "assets/file/documentation/key-extend/create-extend-request.md"
+  }
+]

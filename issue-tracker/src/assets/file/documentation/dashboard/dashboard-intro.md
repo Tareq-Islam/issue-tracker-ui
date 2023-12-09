@@ -1,0 +1,1 @@
+The ```Dashboard``` section is used to view summary of important actions.

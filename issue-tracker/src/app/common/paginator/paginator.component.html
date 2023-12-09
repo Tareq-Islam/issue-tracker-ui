@@ -1,0 +1,11 @@
+<div
+  class="{{_paginatorOptions.styleClass || 'flex justify-center md:justify-between items-center w-full h-full px-9 py-1 flex-wrap md:flex-nowrap gap-1 md:gap-0'}}">
+  <span>
+    <i class="text-xs">Showing {{showCount}} to {{totalShowCount}} of {{_paginatorOptions.totalRecords || 0}}
+      entries</i>
+  </span>
+  <p-paginator #paginator [rows]="_paginatorOptions.row || 0" [totalRecords]="_paginatorOptions.totalRecords || 0"
+    [pageLinkSize]="_paginatorOptions.numberOfPageShow || 5"
+    [showFirstLastIcon]="_paginatorOptions.showFirstLastIcon || true" (onPageChange)="paginate($event)">
+  </p-paginator>
+</div>

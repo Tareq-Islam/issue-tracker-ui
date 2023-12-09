@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request Return Approval",
+    "rights" : [260001, 2181],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of Key Request Return Approval",
+    "url": "assets/file/documentation/key-return-approval/return-approval-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Approve Key Request Return",
+    "rights" : [260002, 2182],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Approve a key request return",
+    "url": "assets/file/documentation/key-return-approval/approve-return.md"
+  },
+  {
+    "id": 3,
+    "name": "Reject Key Request Return",
+    "rights" : [260003, 2183],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Reject a key request return",
+    "url": "assets/file/documentation/key-return-approval/reject-return.md"
+  }
+]

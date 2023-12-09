@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "My Keys",
+    "rights" : [253006, 2046],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of Custodian Keys",
+    "url": "assets/file/documentation/my-keys/my-keys-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Key details",
+    "rights" : [253006, 2046],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "View Key Details",
+    "url": "assets/file/documentation/my-keys/key-details.md"
+  },
+  {
+    "id": 3,
+    "name": "Create Key Fault",
+    "rights" : [253010, 2050],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Edit brand",
+    "url": "assets/file/documentation/my-keys/create-key-fault.md"
+  },
+  {
+    "id": 4,
+    "name": "Transfer History",
+    "rights" : [253007, 2047],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/my-keys/transfer-history.md"
+  },
+  {
+    "id": 5,
+    "name": "Handover History",
+    "rights" : [253008, 2048],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/my-keys/handover-history.md"
+  },
+  {
+    "id": 6,
+    "name": "Access Lock",
+    "rights" : [253009, 2049],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/my-keys/access-lock.md"
+  },
+  {
+    "id": 7,
+    "name": "Export Key Report",
+    "rights" : [253011, 2051],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/my-keys/export-key-report.md"
+  }
+]

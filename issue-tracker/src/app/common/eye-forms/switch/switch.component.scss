@@ -1,0 +1,27 @@
+:host ::ng-deep p-inputswitch {
+    .p-inputswitch {
+        width: 2.7rem;
+        height: 1.5rem;
+    }
+
+    .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+        background: var(--eye-primary-800);
+    }
+
+    .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+        background: var(--eye-primary-800);
+    }
+
+    .p-inputswitch.p-focus .p-inputswitch-slider {
+        box-shadow: none !important;
+    }
+
+    .p-inputswitch-slider {
+        &::before {
+            width: 1rem;
+            height: 1rem;
+            left: 0.2rem;
+            top: 58%;
+        }
+    }
+}

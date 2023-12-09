@@ -1,0 +1,14 @@
+<p-editor [(ngModel)]="text" [style]="to.style" [styleClass]="to.styleClass" [placeholder]="to.placeholder || ''"
+  [readonly]="to.readonly || false" [formats]="to.formats" [modules]="to.modules" [bounds]="to.bounds"
+  [scrollingContainer]="to.scrollingContainer || false" (onTextChange)="to.onTextChange"
+  (onSelectionChange)="to.onSelectionChange" (onInit)="to.onInit">
+  <p-header *ngIf="to.headerTemplate || false">
+    <span class="ql-formats">
+      <button class="ql-bold" aria-label="Bold"></button>
+      <button class="ql-italic" aria-label="Italic"></button>
+      <button class="ql-underline" aria-label="Underline"></button>
+      <select class="ql-color"></select>
+    </span>
+  </p-header>
+
+</p-editor>

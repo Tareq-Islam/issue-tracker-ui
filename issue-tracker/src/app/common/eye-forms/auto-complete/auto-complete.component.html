@@ -1,0 +1,14 @@
+<p-autoComplete [field]="to.field || 'label'" appendTo="body" [(ngModel)]="value"
+  [scrollHeight]="to.scrollHeight || '400px'" [forceSelection]="to.forceSelection || false"
+  [disabled]="to.disabled || false" [formlyAttributes]="field" [dropdown]="to.dropdown" [autofocus]="to.autofocus"
+  [suggestions]="to.results" [showEmptyMessage]="to.showEmptyMessage" [style]="{'width':'100%'}"
+  [inputStyle]="{'width':'100%'}" [ngClass]="{'ng-dirty ng-invalid': showError}" [placeholder]="to.placeholder || ''"
+  [multiple]="to.multiple" (completeMethod)="to.searchObject(to, $event, field)"
+  (onSelect)="onSelectedItem($event, field)">
+
+  <ng-template *ngIf="to.optionTemplate" let-item let-index pTemplate="item">
+    <ng-container [ngTemplateOutlet]="to.optionTemplate" [ngTemplateOutletContext]="{ $implicit: item, index: index }">
+    </ng-container>
+  </ng-template>
+
+</p-autoComplete>

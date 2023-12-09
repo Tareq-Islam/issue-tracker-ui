@@ -1,0 +1,94 @@
+:host ::ng-deep formly-field {
+    display: block;
+    margin-bottom: 10px;
+}
+
+:host ::ng-deep formly-field-primeng-input {
+    .p-inputtext {
+        padding: 8px !important;
+        border-radius: 0.2rem !important;
+        width: 100%;
+        font-size: 14px !important;
+
+        &:enabled:focus {
+            border-color: var(--eye-primary-800);
+            box-shadow: 0 0 0 1px var(--eye-primary-800);
+        }
+    }
+}
+
+:host ::ng-deep formly-wrapper-primeng-form-field {
+    label {
+        font-size: 14px !important;
+
+        span {
+            @apply text-red-500;
+        }
+    }
+
+}
+
+:host ::ng-deep p-dropdown {
+    .p-dropdown {
+        width: 100%;
+        border-radius: 0.2rem !important;
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+        border-color: var(--eye-primary-800);
+        box-shadow: 0 0 0 1px var(--eye-primary-800);
+    }
+
+    .p-inputtext {
+        padding: 8px !important;
+        font-size: 14px !important;
+
+        &:enabled:focus {
+            border-color: var(--eye-primary-800);
+            box-shadow: 0 0 0 1px var(--eye-primary-800);
+        }
+    }
+}
+
+:host ::ng-deep textarea {
+    padding: 8px !important;
+    border-radius: 0.2rem !important;
+    width: 100%;
+    font-size: 14px !important;
+
+    &:enabled:focus {
+        border-color: var(--eye-primary-800);
+        box-shadow: 0 0 0 1px var(--eye-primary-800);
+    }
+}
+
+:host ::ng-deep formly-validation-message {
+    @apply text-red-500 text-xs;
+}
+
+:host ::ng-deep p-checkbox {
+    .p-checkbox {
+        .p-checkbox-box {
+            border-radius: 0.2rem;
+        }
+
+        .p-checkbox-box.p-highlight {
+            background: var(--eye-primary-800);
+            border-color: var(--eye-primary-800);
+        }
+    }
+
+
+
+    .p-checkbox:not(.p-checkbox-disabled) {
+        .p-checkbox-box.p-highlight:hover {
+            background: var(--eye-primary-800);
+            border-color: var(--eye-primary-800);
+        }
+
+        .p-checkbox-box.p-focus {
+            border-color: var(--eye-primary-800);
+            box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--eye-primary-800), 0 1px 2px 0 rgb(0 0 0 / 0%);
+        }
+    }
+}

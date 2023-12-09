@@ -1,0 +1,28 @@
+<div class="flex flex-col justify-center items-center w-full h-full p-12 gap-2 overflow-auto">
+  <div class="w-full">
+    <span *ngIf="_isError">
+      <small *ngFor="let item of _errorMessage" class="text-red-500 font-bold block">
+        <span class="pi pi-info-circle text-xs pr-1"></span>
+        {{item}}
+      </small>
+    </span>
+
+  </div>
+  <div class="justify-self-start w-full flex gap-2 flex-col">
+    <div class="user-name">
+      <input type="text"
+        class="h-[38px] px-2 border border-gray-100 w-full focus:shadow focus:border-default-800 {{_isError ? 'border border-red-400' : ''}}"
+        [(ngModel)]="userName" placeholder="Username" pInputText autocomplete="off" />
+    </div>
+    <div class="user-password">
+      <p-password [(ngModel)]="password" styleClass="h-[38px]  w-full"
+        inputStyleClass="{{_isError ? 'border border-red-400' : ''}} px-2 border border-gray-100" placeholder="Password" [feedback]="false"
+        [toggleMask]="true"></p-password>
+    </div>
+    <div class="submit-button">
+      <p-button label="Login" [loading]="_isLoading" [iconPos]="'right'"
+        styleClass="bg-default-800 border-none focus:shadow-none text-white h-[38px] w-full" (onClick)="onSave()">
+      </p-button>
+    </div>
+  </div>
+</div>

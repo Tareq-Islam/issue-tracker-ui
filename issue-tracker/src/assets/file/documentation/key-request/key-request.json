@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request",
+    "isVisible": true,
+    "rights" : [255001, 2081],
+    "isAllRightsMatched" : false,
+    "description": "Introduction of Key Request.",
+    "url": "assets/file/documentation/key-request/key-request-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Key Request",
+    "rights" : [255002, 2082],
+    "isAllRightsMatched" : false,
+    "isVisible": true,
+    "description": "Create Key Request",
+    "url": "assets/file/documentation/key-request/create-key-request.md"
+  }
+]

@@ -1,0 +1,10 @@
+<eye-items *ngFor="let item of _items" [contentClass]="'grid-flow-col gap-1 2xl:gap-3'">
+  <eye-item *ngFor="let item of _cols; let i=index">
+    <span>
+      <p-skeleton [width]="i === 0 ? '30%' : '50%'" [height]="'0.7rem'"></p-skeleton>
+    </span>
+    <span class="text-content mt-1">
+      <p-skeleton [height]="'0.9rem'"></p-skeleton>
+    </span>
+  </eye-item>
+</eye-items>

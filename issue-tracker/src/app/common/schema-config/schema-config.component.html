@@ -1,0 +1,128 @@
+<!-- <div class="border p-2 rounded relative my-4">
+  <div class="absolute -top-3 left-2 font-medium bg-[#eee] text-black px-[6px] rounded border">Location</div>
+  <div class="text-[13px] px-2 my-2 pb-2">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Enable</span>
+      <div class="text-end">
+        <p-inputSwitch [(ngModel)]="schema.location.enable" [disabled]="allDisabled"></p-inputSwitch>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi esse
+        eveniet omnis qui minus alias excepturi.</span>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <div class="border p-2 rounded relative my-4">
+  <div class="absolute -top-3 left-2 font-medium bg-[#eee] text-black px-[6px] rounded border">Image</div>
+  <div class="text-[13px] px-2 my-2 border-b pb-2">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Enable</span>
+      <div class="text-end">
+        <p-inputSwitch [(ngModel)]="schema.image.enable" [disabled]="allDisabled"></p-inputSwitch>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi esse
+        eveniet omnis qui minus alias excepturi.</span>
+    </div>
+  </div>
+  <div class="text-[13px] px-2 my-2  pb-2 border-b">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Insert Option</span>
+      <div class="text-end">
+        <p-dropdown [(ngModel)]="schema.image.insertOption" [options]="insertOptions" [appendTo]="'body'"  [panelStyleClass]="'p-1'" styleClass="p-0" [disabled]="allDisabled">
+          <ng-template let-option pTemplate="item">
+            <span class="text-[12px]">{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi esse
+        eveniet omnis qui minus alias excepturi.</span>
+    </div>
+  </div>
+  <div class="text-[13px] px-2 my-2  pb-2">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Image Option</span>
+      <div class="text-end">
+        <p-dropdown [(ngModel)]="schema.image.imageOption" [options]="imageOptions" [appendTo]="'body'" [panelStyleClass]="'p-1'" styleClass="p-0" [disabled]="allDisabled">
+          <ng-template let-option pTemplate="item">
+            <span class="text-[12px]">{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi esse
+        eveniet omnis qui minus alias excepturi.</span>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="border p-2 rounded relative my-4">
+  <div class="absolute -top-3 left-2 font-medium bg-[#eee] text-black px-[6px] rounded border">Cause Findings</div>
+  <div class="text-[13px] px-2 my-2 pb-2 border-b">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Enable</span>
+      <div class="text-end">
+        <p-inputSwitch [(ngModel)]="schema.causeFindings.enable" [disabled]="allDisabled"></p-inputSwitch>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">Cause findings is an attribute of particular task. If you enable Cause Findings, vendor will find a section where he can write what problems or issues he found at site.
+      </span>
+    </div>
+  </div>
+  <div class="text-[13px] px-2 my-2  pb-2">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Insert Option</span>
+      <div class="text-end">
+        <p-dropdown [(ngModel)]="schema.causeFindings.insertOption" [options]="insertOptions" [appendTo]="'body'"  [panelStyleClass]="'p-1'" styleClass="p-0" [disabled]="allDisabled">
+          <ng-template let-option pTemplate="item">
+            <span class="text-[12px]">{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">If insert option is required, vendor cannot complete the task without fillup this section.</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="border p-2 rounded relative my-4">
+  <div class="absolute -top-3 left-2 font-medium bg-[#eee] text-black px-[6px] rounded border">Solution</div>
+  <div class="text-[13px] px-2 my-2 pb-2 border-b">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Enable</span>
+      <div class="text-end">
+        <p-inputSwitch [(ngModel)]="schema.solution.enable" [disabled]="allDisabled"></p-inputSwitch>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">Solutions is an attribute of particular task. If you enable Solutions, vendor will find a section where he can write what problems or issues he solved or rectify at site.
+      </span>
+    </div>
+  </div>
+  <div class="text-[13px] px-2 my-2  pb-2">
+    <div class="flex justify-between items-center">
+      <span class="font-medium text-[13px]">Insert Option</span>
+      <div class="text-end">
+        <p-dropdown [(ngModel)]="schema.solution.insertOption" [options]="insertOptions" [appendTo]="'body'" [panelStyleClass]="'p-1'" styleClass="p-0" [disabled]="allDisabled">
+          <ng-template let-option pTemplate="item">
+            <span class="text-[12px]">{{option.label}}</span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div>
+      <span class="block text-xs leading-[0.8rem] italic text-[#999] mt-1">If insert option is required, vendor cannot complete the task without fillup this section.</span>
+    </div>
+  </div>
+</div>

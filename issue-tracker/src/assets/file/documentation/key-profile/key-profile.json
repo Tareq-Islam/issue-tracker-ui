@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Key Profile",
+    "rights" : [265001, 2281],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of Key Profile",
+    "url": "assets/file/documentation/key-profile/key-profile-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create New Key Profile",
+    "rights" : [265002, 2282],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create a new key profile",
+    "url": "assets/file/documentation/key-profile/create-key-profile.md"
+  },
+  {
+    "id": 3,
+    "name": "Create Child Key Profile",
+    "rights" : [265002, 2282],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create child key profile",
+    "url": "assets/file/documentation/key-profile/create-child-key-profile.md"
+  },
+  {
+    "id": 4,
+    "name": "Edit Key Profile",
+    "rights" : [265003, 2283],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/key-profile/edit-key-profile.md"
+  },
+  {
+    "id": 5,
+    "name": "Delete Key Profile",
+    "rights" : [265004, 2284],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/key-profile/delete-key-profile.md"
+  },
+  {
+    "id": 6,
+    "name": "Assign Keys",
+    "rights" : [265005, 2285],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/key-profile/assign-keys.md"
+  },
+  {
+    "id": 7,
+    "name": "Remove Key",
+    "rights" : [265006, 2286],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a brand",
+    "url": "assets/file/documentation/key-profile/remove-key.md"
+  }
+]

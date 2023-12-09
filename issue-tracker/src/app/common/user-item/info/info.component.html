@@ -1,0 +1,80 @@
+<div class="rounded flex w-[330px] flex-col items-start gap-1 px-3 py-3">
+  <div class="flex items-start justify-start gap-3">
+    <div class="relative">
+      <p-skeleton *ngIf="isLoading; else avaterTemp" shape="circle"
+        styleClass="text-gray-600 font-bold text-3xl w-[60px] h-[60px] p-[0.9rem] bg-gray-200 rounded-[5rem] flex justify-center items-center">
+      </p-skeleton>
+      <ng-template #avaterTemp>
+        <p-avatar label="{{userShortName | uppercase}}"
+          styleClass="text-gray-600 font-bold text-3xl w-[60px] h-[60px] p-[0.9rem] bg-gray-200 rounded-[5rem] flex justify-center items-center"
+          size="large">
+        </p-avatar>
+        <!-- <div *ngIf="!userInfo?.status"
+          class="absolute bottom-2 right-1 w-[12px] h-[9px] rounded-full flex items-center bg-white">
+          <span class="pi pi-ban font-bold text-red-600 text-xs" pTooltip="User Inactive"></span>
+        </div> -->
+      </ng-template>
+    </div>
+    <div>
+      <span class="font-medium text-base leading-4">
+        <p-skeleton *ngIf="isLoading" width="12rem" height="1rem" borderRadius="5px" styleClass="mb-1"></p-skeleton>
+        {{userInfo?.name}}
+      </span>
+      <span class="block text-xs text-secondary-800">
+        <p-skeleton *ngIf="isLoading" width="6rem" height="0.7rem" borderRadius="5px"></p-skeleton>
+        {{userInfo?.organization}}
+      </span>
+      <div class="mt-3 flex flex-col gap-1">
+        <p-skeleton *ngIf="isLoading" width="8rem" height="0.7rem" borderRadius="5px" styleClass="mb-[2px]">
+        </p-skeleton>
+        <p-skeleton *ngIf="isLoading" width="7rem" height="0.7rem" borderRadius="5px" styleClass="mb-[2px]">
+        </p-skeleton>
+        <p-skeleton *ngIf="isLoading" width="5rem" height="0.7rem" borderRadius="5px"></p-skeleton>
+
+        <div *ngIf="!isLoading && userInfo?.phone" class="flex items-center gap-3 text-xs text-secondary-800">
+          <span class="pi pi-phone text-[0.8rem]"></span>
+          <span>{{userInfo?.phone}}</span>
+        </div>
+        <!-- <div *ngIf="!isLoading && userInfo?.cardNumber" class="flex items-center gap-3 text-xs text-secondary-800"><span
+            class="pi pi-id-card text-[0.8rem]"></span>
+          <span>{{userInfo?.cardNumber}}</span>
+        </div> -->
+        <div *ngIf="!isLoading && userInfo?.email" class="flex items-center gap-3 text-xs text-secondary-800"><span
+            class="pi pi-envelope text-[0.8rem]"></span>
+          <span>{{userInfo?.email}}</span>
+        </div>
+        <!-- <div *ngIf="!isLoading && userInfo?.permission" class="flex items-center gap-3 text-xs text-secondary-800">
+          <span class="pi pi-key text-[0.8rem]"></span>
+          <span>{{userInfo?.permission}}</span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="px-2 py-2 w-full flex justify-between items-center">
+    <!-- <div>
+      <div>
+        <p-skeleton *ngIf="isLoading" width="4rem" height="1rem" borderRadius="5px"></p-skeleton>
+        <span *ngIf="!isLoading"
+          class="rounded text-[0.7rem] px-[0.3rem] py-[0.05rem] font-medium {{userInfo?.loginStatus ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}">{{userInfo?.loginStatus
+          ? 'Login Active' : 'Login Inactive'}}</span>
+      </div>
+      <div>
+
+      </div>
+    </div> -->
+    <div class="justify-self-end">
+      <div *ngIf="isLoading" class="flex gap-1 items-center">
+        <p-skeleton width="2rem" height="1.5rem" borderRadius="5px"></p-skeleton>
+        <p-skeleton width="2rem" height="1.5rem" borderRadius="5px"></p-skeleton>
+        <p-skeleton width="2rem" height="1.5rem" borderRadius="5px"></p-skeleton>
+      </div>
+      <!-- <eye-user-door-strategy [item]="{
+        isCardUnlockActive: userInfo?.doorUnlockStrategy?.isCardUnlockActive || false,
+        isSmsUnlockActive: userInfo?.doorUnlockStrategy?.isSmsUnlockActive || false,
+        isWebUnlockActive: userInfo?.doorUnlockStrategy?.isWebUnlockActive || false,
+        isMobileAppUnlockActive: userInfo?.doorUnlockStrategy?.isMobileAppUnlockActive || false
+      }"></eye-user-door-strategy> -->
+
+    </div>
+  </div>
+</div>

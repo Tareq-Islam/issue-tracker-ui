@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Key Request Purpose",
+    "rights" : [254001, 2061],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Introduction of key request purpose",
+    "url": "assets/file/documentation/key-request-purpose/purpose-intro.md"
+  },
+  {
+    "id": 2,
+    "name": "Create Purpose",
+    "rights" : [254002, 2062],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Create a new purpose",
+    "url": "assets/file/documentation/key-request-purpose/create-purpose.md"
+  },
+  {
+    "id": 3,
+    "name": "Edit Purpose",
+    "rights" : [254003, 2063],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Edit a purpose",
+    "url": "assets/file/documentation/key-request-purpose/edit-purpose.md"
+  },
+  {
+    "id": 4,
+    "name": "Delete Purpose",
+    "rights" : [254004, 2064],
+    "isAllRightsMatched" : false,
+    "isVisible": false,
+    "description": "Delete a purpose",
+    "url": "assets/file/documentation/key-request-purpose/delete-purpose.md"
+  }
+]

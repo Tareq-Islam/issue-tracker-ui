@@ -1,0 +1,30 @@
+.p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight {
+  color: var(--eye-primary-800);
+}
+
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+  color: var(--eye-primary-800);
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+  color: var(--eye-primary-800);
+}
+.p-datepicker table td > span:focus {
+  box-shadow: 0 0 0 1px var(--eye-primary-800);
+}
+
+.p-datepicker table td > span.p-highlight {
+  color: var(--eye-primary-800);
+}
+
+.p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus {
+  box-shadow: 0 0 0 1px var(--eye-primary-800);
+}
+
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
+  box-shadow: 0 0 0 1px var(--eye-primary-800);
+}
+
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
+  box-shadow: 0 0 0 1px var(--eye-primary-800);
+}

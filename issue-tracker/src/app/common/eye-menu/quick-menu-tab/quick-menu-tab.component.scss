@@ -1,0 +1,48 @@
+ul {
+  li.hover {
+    @apply hover:relative hover:after:absolute hover:after:border-b-2 hover:after:left-0 hover:after:border-gray-400 hover:after:bottom-[-5px] hover:after:w-full;
+  }
+
+  li.active {
+      position: relative;
+      &:hover {
+          &::after {
+            border-bottom: 2px solid var(--eye-primary-800) !important;
+          }
+      }
+
+      &::after {
+          content: "";
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          border-bottom: 2px solid var(--eye-primary-800) !important;
+          width: 100%;
+      }
+      a {
+        color: var(--eye-primary-800);
+      }
+  }
+
+  li.disabled {
+
+      a {
+          cursor: default !important;
+         color: rgb(163, 163, 163) !important;;
+
+      }
+
+      &:hover {
+          position: relative;
+
+          &::after {
+              content: "";
+              position: absolute;
+              bottom: -5px;
+              left: 0;
+              border: none;
+              width: 100%;
+          }
+      }
+  }
+}

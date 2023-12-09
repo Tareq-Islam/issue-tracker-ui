@@ -1,0 +1,58 @@
+@import "../../../../assets/scss/mixins";
+.eye-typehead-wrapper {
+  @include screen-mobile {
+    @apply w-full;
+  }
+  @apply flex h-[40px] items-center;
+
+  .drowdown {
+    button {
+      @apply rounded-tr-none rounded-br-none;
+    }
+  }
+
+  .search-input {
+    @include screen-mobile {
+      @apply w-full;
+    }
+    @apply flex h-[28px] border border-gray-200 rounded-tr rounded-br bg-white;
+
+    .search-icon {
+      @apply flex items-center h-full border-l border-gray-200 px-2;
+      .pi {
+        @apply text-sm;
+      }
+    }
+  }
+}
+
+p-autoComplete {
+  @include screen-mobile {
+    @apply w-full;
+  }
+}
+
+:host ::ng-deep p-autocomplete {
+  .p-inputtext {
+    @apply rounded-none shadow-none bg-transparent border-none text-sm p-0 py-1 font-normal;
+    text-indent: 5px;
+    font-family: "Roboto";
+
+    &:enabled:focus,
+    &:enabled:hover {
+      @apply shadow-none border-none;
+    }
+  }
+
+  .p-autocomplete-loader {
+    @apply hidden;
+  }
+}
+
+:host ::ng-deep p-menu {
+  a {
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}

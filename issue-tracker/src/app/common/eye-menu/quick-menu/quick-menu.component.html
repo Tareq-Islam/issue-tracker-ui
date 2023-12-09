@@ -1,0 +1,11 @@
+<ul class="flex justify-start items-center">
+  <li *ngFor="let item of menus" routerLinkActive="{{item.disabled ? '' : 'active'}}"
+    class="{{item.disabled ? 'disabled' : ''}} hover" [routerLinkActiveOptions]="item?.routerLinkActiveOptions">
+    <ng-container *ngIf="item?.disabled; else disabledTemp">
+      <a class="py-1 px-3 text-[13px] font-medium">{{item?.label}}</a>
+    </ng-container>
+    <ng-template #disabledTemp>
+      <a class="py-1 px-3 text-[13px] font-medium" [routerLink]="[item?.routerLink]">{{item?.label}}</a>
+    </ng-template>
+  </li>
+</ul>
