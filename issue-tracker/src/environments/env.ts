@@ -1,7 +1,7 @@
 const base = {
-  ip: 'http://192.168.0.119:5005',
-  local: 'http://localhost:5005',
-  live: 'https://wfmapi.eyeelectronics.net',
+  ip: 'http://192.168.0.119:5000',
+  local: 'http://localhost:5000',
+  live: 'https://issue-tracker.wajeha.xyz',
 };
 export const environment = {
   production: false,
@@ -11,6 +11,6 @@ export const environment = {
     allowTest: true,
     api_key: '154982',
     base_url: base.local,
-    front_end_url: 'http:localhost:4003',
+    front_end_url: 'http:localhost:4200',
   },
 };
