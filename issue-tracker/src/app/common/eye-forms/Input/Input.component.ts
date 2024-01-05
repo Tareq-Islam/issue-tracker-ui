@@ -8,7 +8,7 @@ import { FieldType } from '@ngx-formly/core';
 })
 export class InputComponent extends FieldType {
   property!: string;
-  public set value(v: string) {
+  public set value(v: any) {
     this.property = v;
     this.formControl.setValue(this.property);
   }

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import Utility from '@eye/utilities/utilites.model';
+import Utility from '@core/utils/utils.model';
 import { Subscription, timer } from 'rxjs';
 
 @Component({

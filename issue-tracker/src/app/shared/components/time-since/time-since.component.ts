@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EyeDate } from '@eye/utilities/date/date.model';
+import { EyeDate } from '@core/utils/date/date.model';
 
 @Component({
   selector: 'eye-time-since',

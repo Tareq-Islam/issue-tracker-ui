@@ -10,12 +10,11 @@ import { PanelType } from '@core/core/enum/common/common';
 
 enum NavMenus {
   DASHBOARD = 1,
-  TICKET,
-  TASK,
-  TASK_CATEGORY,
-  CAUSE_FINDINGS,
-  TASK_SOLUTION,
-  Vendor,
+  ISSUE_MANAGEMENT,
+  VENDOR,
+  USER,
+  SITE,
+  ROLE
 }
 
 @Component({
@@ -37,55 +36,46 @@ export class MenusComponent implements OnInit, OnDestroy {
       dropdownMenus: [],
     },
     {
-      id: NavMenus.TICKET,
-      label: 'ticket',
-      icon: PrimeIcons.TICKET,
-      routerLink: '/ticket',
-      isEnable: false,
-      isDropdown: false,
-      dropdownMenus: [],
-    },
-    {
-      id: NavMenus.TASK_CATEGORY,
-      label: 'Ticket Template',
-      icon: PrimeIcons.SHARE_ALT,
-      routerLink: '/ticket/template',
+      id: NavMenus.ISSUE_MANAGEMENT,
+      label: 'issue management',
+      icon: PrimeIcons.INBOX,
+      routerLink: '/issue',
       isEnable: true,
       isDropdown: false,
       dropdownMenus: [],
     },
     {
-      id: NavMenus.TASK,
-      label: 'task',
-      icon: PrimeIcons.FILE,
-      routerLink: '/task',
-      isEnable: true,
-      isDropdown: false,
-      dropdownMenus: [],
-    },
-    {
-      id: NavMenus.CAUSE_FINDINGS,
-      label: 'Cause Findings',
-      icon: PrimeIcons.FILE,
-      routerLink: '/findings',
-      isEnable: true,
-      isDropdown: false,
-      dropdownMenus: [],
-    },
-    {
-      id: NavMenus.TASK_SOLUTION,
-      label: 'Task Solution',
-      icon: PrimeIcons.CLONE,
-      routerLink: '/task/solution',
-      isEnable: true,
-      isDropdown: false,
-      dropdownMenus: [],
-    },
-    {
-      id: NavMenus.Vendor,
-      label: 'Vendor Representative',
-      icon: PrimeIcons.USER,
+      id: NavMenus.VENDOR,
+      label: 'Vendor',
+      icon: PrimeIcons.BRIEFCASE,
       routerLink: '/vendor',
+      isEnable: true,
+      isDropdown: false,
+      dropdownMenus: [],
+    },
+    {
+      id: NavMenus.USER,
+      label: 'User',
+      icon: PrimeIcons.USERS,
+      routerLink: '/user',
+      isEnable: true,
+      isDropdown: false,
+      dropdownMenus: [],
+    },
+    {
+      id: NavMenus.ROLE,
+      label: 'Role',
+      icon: PrimeIcons.SHIELD,
+      routerLink: '/role',
+      isEnable: true,
+      isDropdown: false,
+      dropdownMenus: [],
+    },
+    {
+      id: NavMenus.SITE,
+      label: 'Site',
+      icon: PrimeIcons.ARROWS_ALT,
+      routerLink: '/site',
       isEnable: true,
       isDropdown: false,
       dropdownMenus: [],
@@ -128,25 +118,25 @@ export class MenusComponent implements OnInit, OnDestroy {
 
   onNavMenusRights() {
     this.menus.forEach((x) => {
-      switch (x.id) {
-        case NavMenus.TICKET: x.isEnable = Number(this._claim.payload.panelType) === PanelType.Vendor || Number(this._claim.payload.panelType) === PanelType.Customer;
-        break;
-        case NavMenus.TASK:
-          x.isEnable = this._claim.rights.includes(this.rights.View_Task) && Number(this._claim.payload.panelType) === PanelType.Customer;
-        break;
-        case NavMenus.TASK_CATEGORY:
-          x.isEnable = this._claim.rights.includes(this.rights.View_Ticket_Template) && Number(this._claim.payload.panelType) === PanelType.Customer;
-        break;
-        case NavMenus.CAUSE_FINDINGS:
-          x.isEnable = this._claim.rights.includes(this.rights.View_Cause_Findings) && Number(this._claim.payload.panelType) === PanelType.Customer;
-        break;
-        case NavMenus.TASK_SOLUTION:
-          x.isEnable = this._claim.rights.includes(this.rights.View_Task_Solution) && Number(this._claim.payload.panelType) === PanelType.Customer;
-        break;
-        case NavMenus.Vendor:
-          x.isEnable = this._claim.rights.includes(this.rights.View_Vendor_Representatives) && Number(this._claim.payload.panelType) === PanelType.Customer;
-        break;
-      }
+      // switch (x.id) {
+      //   case NavMenus.TICKET: x.isEnable = Number(this._claim.payload.panelType) === PanelType.Vendor || Number(this._claim.payload.panelType) === PanelType.Customer;
+      //   break;
+      //   case NavMenus.TASK:
+      //     x.isEnable = this._claim.rights.includes(this.rights.View_Task) && Number(this._claim.payload.panelType) === PanelType.Customer;
+      //   break;
+      //   case NavMenus.TASK_CATEGORY:
+      //     x.isEnable = this._claim.rights.includes(this.rights.View_Ticket_Template) && Number(this._claim.payload.panelType) === PanelType.Customer;
+      //   break;
+      //   case NavMenus.CAUSE_FINDINGS:
+      //     x.isEnable = this._claim.rights.includes(this.rights.View_Cause_Findings) && Number(this._claim.payload.panelType) === PanelType.Customer;
+      //   break;
+      //   case NavMenus.TASK_SOLUTION:
+      //     x.isEnable = this._claim.rights.includes(this.rights.View_Task_Solution) && Number(this._claim.payload.panelType) === PanelType.Customer;
+      //   break;
+      //   case NavMenus.Vendor:
+      //     x.isEnable = this._claim.rights.includes(this.rights.View_Vendor_Representatives) && Number(this._claim.payload.panelType) === PanelType.Customer;
+      //   break;
+      // }
     });
   }
 

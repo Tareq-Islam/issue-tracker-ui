@@ -57,7 +57,7 @@ export class TypeheadComponent {
   _placeholder: string = this.selectedItem.placeholder || 'type here...';
   inputPlaceholder = this._placeholder;
 
-  @Input() menuStyle!: string;
+  @Input() menuStyle!: any;
   @Input() menuStyleClass!: string;
 
   @Input() set search(v: any) {
@@ -82,7 +82,7 @@ export class TypeheadComponent {
       this.items = v.map((x) => {
         return {
           ...x,
-          command: ({ item }) => {
+          command: ({ item }: MenuItem) => {
             this._search = {};
             this.selectedItem = item;
             this.onSetSearchFields({
@@ -159,7 +159,7 @@ export class TypeheadComponent {
     }
   }
 
-  onChange(event: {originalEvent: InputEvent, query: string}) {
+  onChange(event: any) {
     if (event) {
       this._nullCount = 0;
       this._originalEvent = event.originalEvent;

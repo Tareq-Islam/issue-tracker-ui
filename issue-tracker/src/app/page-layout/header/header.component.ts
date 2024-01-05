@@ -37,10 +37,9 @@ export class HeaderComponent implements OnInit {
     },
   ];
   user = {
-    avatar: 'E',
-    name: 'Eye Electronics',
-    permissionName: 'Administrative Global',
-    roleName: 'Admin',
+    avatar: 'A',
+    name: 'Administrative',
+    roleName: 'Super Admin',
   };
   isModalOpen = false;
   form = new UntypedFormGroup({});
@@ -59,8 +58,6 @@ export class HeaderComponent implements OnInit {
       this.user.avatar = this._claim.userName[0].toUpperCase();
       this.user.name = this._claim.userName;
     }
-    if (this._claim && this._claim.permissionName)
-      this.user.permissionName = this._claim.permissionName;
 
     if (this._claim && this._claim.roleName)
       this.user.roleName = this._claim.roleName;

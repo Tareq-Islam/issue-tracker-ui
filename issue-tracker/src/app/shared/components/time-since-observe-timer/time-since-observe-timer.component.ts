@@ -1,5 +1,5 @@
 import { Component, OnDestroy, Input } from '@angular/core';
-import {EyeDate} from '@eye/utilities/date/date.model';
+import { EyeDate } from '@core/utils/date/date.model';
 import { Subscription, timer } from 'rxjs';
 @Component({
   selector: 'eye-time-since-observe-timer',

@@ -17,7 +17,7 @@ export interface EyeMenus extends MenuItem {
 })
 export class SearchComponent {
   items: MenuItem[] = [];
-  _search: string = '';
+  _search: any = '';
   selectedItem: EyeMenus = {
     label: 'Search',
     keyFilter: 'alphanum',
@@ -25,7 +25,7 @@ export class SearchComponent {
   };
   filterTextChanged: Subject<string> = new Subject<string>();
   btnLabel = this.selectedItem.label;
-  keyFilter: 'alphanum' | 'num' | 'email' | 'alpha' | 'noSpecial' | undefined =
+  keyFilter: 'alphanum' | 'num' | 'email' | 'alpha' | 'noSpecial' | any =
     this.selectedItem.keyFilter;
   pValidateOnly = this.keyFilter === 'noSpecial';
   _menu: EyeMenus[] = [];
@@ -34,7 +34,7 @@ export class SearchComponent {
   inputPlaceholder = this._placeholder;
 
   @Input() appendTo!: string;
-  @Input() menuStyle!: string;
+  @Input() menuStyle!: any;
   @Input() menuStyleClass!: string;
 
   @Input() set search(v: string) {
@@ -57,7 +57,7 @@ export class SearchComponent {
       this.items = v.map((x) => {
         return {
           ...x,
-          command: ({ item }) => {
+          command: ({ item }: any) => {
             this._search = '';
             this.selectedItem = item;
             this.selectMenuItem.emit();

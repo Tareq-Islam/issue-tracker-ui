@@ -5,10 +5,10 @@ export interface CalenderOptions {
   maxDate?: Date;
   readonlyInput?: boolean;
   defaultDate?: Date;
-  selectionMode?: string;
-  style?: string;
+  selectionMode?: any;
+  style?: any;
   styleClass?: string;
-  inputStyle?: string;
+  inputStyle?: any;
   inputStyleClass?: string;
   inputId?: string;
   name?: string;

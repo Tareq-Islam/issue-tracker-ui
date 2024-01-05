@@ -4,7 +4,6 @@ export interface Profile {
   user: {
     avatar: string;
     name: string;
-    permissionName: string;
     roleName: string;
   };
   menus: MenuItem[];
@@ -13,6 +12,5 @@ export interface Profile {
 export interface User {
   avatar: string;
   name: string;
-  permissionName: string;
   roleName: string;
 }

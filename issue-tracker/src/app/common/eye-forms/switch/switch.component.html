@@ -1,22 +1,22 @@
-<div class="flex justify-between items-center gap-2 w-full {{to.parentStyleClass}}">
-  <div *ngIf="to.icon" class="justify-self-start">
-    <span class="{{to.icon}} {{to.iconStyleClass}}"></span>
+<div class="flex justify-between items-center gap-2 w-full {{to?.['parentStyleClass']}}">
+  <div *ngIf="to?.['icon']" class="justify-self-start">
+    <span class="{{to?.['icon']}} {{to?.['iconStyleClass']}}"></span>
   </div>
-  <div *ngIf="to.info">
-    <p class="leading-4 {{to.infoStyleClass}}">
-      {{to.info}}
-      <span class="block text-xs text-gray-500 font-normal leading-[0.9rem] mt-1 {{to.descriptionStyleClass}}">
+  <div *ngIf="to?.['info']">
+    <p class="leading-4 {{to?.['infoStyleClass']}}">
+      {{to?.['info']}}
+      <span class="block text-xs text-gray-500 font-normal leading-[0.9rem] mt-1 {{to?.['descriptionStyleClass']}}">
         {{to.description}}
       </span>
     </p>
   </div>
   <div class="justify-self-end">
     <ng-container *ngIf="to?.disabled || false; else disabledTemp">
-      <p-inputSwitch [(ngModel)]="checked" [style]="to?.style" [styleClass]="to?.styleClass" [name]="to?.name"
-      [disabled]="to?.disabled || false" [pTooltip]="to?.pTooltip" [tooltipPosition]="to?.tooltipPosition" [readonly]="to?.readonly || false"></p-inputSwitch>
+      <p-inputSwitch [(ngModel)]="checked" [style]="to?.['style']" [styleClass]="to?.['styleClass']" [name]="to?.['name']"
+      [disabled]="to?.disabled || false" [pTooltip]="to?.['pTooltip']" [tooltipPosition]="to?.['tooltipPosition']" [readonly]="to?.readonly || false"></p-inputSwitch>
     </ng-container>
     <ng-template #disabledTemp>
-      <p-inputSwitch [(ngModel)]="checked" [style]="to?.style" [styleClass]="to?.styleClass" [name]="to?.name"
+      <p-inputSwitch [(ngModel)]="checked" [style]="to?.['style']" [styleClass]="to?.['styleClass']" [name]="to?.['name']"
        [readonly]="to?.readonly || false"></p-inputSwitch>
     </ng-template>
   </div>
