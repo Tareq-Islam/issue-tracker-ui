@@ -3,10 +3,6 @@ const STAGING = {
   front_end_url: 'http://192.168.0.240:4005',
 };
 
-// const STAGING = {
-//   base_url: 'https://kmsdevapi.eyeelectronics.net',
-//   front_end_url: 'https://kmsdev.eyeelectronics.net',
-// };
 
 
 export const environment = {

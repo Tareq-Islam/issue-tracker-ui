@@ -10,13 +10,14 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from "src/environments/env";
+import { LoginUserClaimService } from '../provider/user-claim/login-user-claim.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  // constructor(
-  //   private _claim: LoginUserClaimService
-  // ) {}
+  constructor(
+    private _claim: LoginUserClaimService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -24,10 +25,10 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<Object>> {
     let request = req;
     request = this.addCustomHeader(req);
-    // const token = this._claim.accessToken || this._claim.getToken();
-    // if (token != null) {
-    //   request = this.addTokenHeader(request, token);
-    // }
+    const token = this._claim.accessToken || this._claim.getToken();
+    if (token != null) {
+      request = this.addTokenHeader(request, token);
+    }
 
     return next.handle(request).pipe(
       catchError((error) => {

@@ -1,7 +1,7 @@
 const base = {
   ip: 'http://192.168.0.119:5000',
   local: 'http://localhost:5000',
-  live: 'https://issue-tracker.wajeha.xyz',
+  live: 'http://issuetrackerapi.wajeha.xyz',
 };
 export const environment = {
   production: false,

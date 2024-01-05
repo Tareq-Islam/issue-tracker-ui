@@ -7,7 +7,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { Rights } from '@core/core/enum/rights/rights.enum';
-import { UserClaimService } from '@core/core/provider/user-claim/user-claim.service';
+import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class RouterGuardService implements CanActivate {
   constructor(
     private _router: Router,
     private activatedRoute: ActivatedRoute,
-    private _claim: UserClaimService,
+    private _claim: LoginUserClaimService,
     // private _login: AuthApiService
   ) {}
 

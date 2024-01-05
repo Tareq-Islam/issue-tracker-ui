@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouterGuardService } from '@shared/Guards/auth/router-guard.service';
-import { EyeSharedModule } from '@shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { HeaderModule } from './header/header.module';
 import { PageLayoutComponent } from './page-layout.component';
 import { SidebarModule } from './sidebar/sidebar.module';
@@ -68,7 +68,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    EyeSharedModule,
+    SharedModule,
     SidebarModule,
     HeaderModule,
   ],

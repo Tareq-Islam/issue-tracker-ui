@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from './interceptores/auth-api-interceptores.service';
 import { EyeMessageService } from './provider/message/message.service';
 import { MessageService } from 'primeng/api';
+import { NetworkStatusComponent } from './components/network-status/network-status.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { MessageService } from 'primeng/api';
     ToastModule
   ],
   providers: [authInterceptorProviders, EyeMessageService, MessageService],
-  declarations: [CoreComponent]
+  declarations: [CoreComponent, NetworkStatusComponent],
+  exports: [NetworkStatusComponent],
 })
 export class CoreModule { }

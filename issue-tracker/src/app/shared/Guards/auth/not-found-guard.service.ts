@@ -6,7 +6,7 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { UserClaimService } from '@core/core/provider/user-claim/user-claim.service';
+import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,15 +15,14 @@ export class NotFoundGuardService implements CanActivate {
   constructor(
     private _router: Router,
     private activatedRoute: ActivatedRoute,
-    private _claim: UserClaimService
+    private _claim: LoginUserClaimService
   ) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-    // if (this._claim.isloggedIn()) {
-    //   return true;
-    // } else {
-    //   debugger;
-    //   this._router.navigate(['/login']);
-    //   return false;
-    // }
+    if (this._claim.isloggedIn()) {
+      return true;
+    } else {
+      this._router.navigate(['/login']);
+      return false;
+    }
   }
 }

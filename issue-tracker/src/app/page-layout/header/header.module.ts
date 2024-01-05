@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EyeFormsModule } from '@forms/eye-forms.module';
-import { EyeSharedModule } from '@shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { AvatarModule } from 'primeng/avatar';
 import { DropdownModule } from 'primeng/dropdown';
 import { MenuModule } from 'primeng/menu';
@@ -17,7 +17,7 @@ import { HeaderSearchComponent } from './search/search.component';
   imports: [
     CommonModule,
     RippleModule,
-    EyeSharedModule,
+    SharedModule,
     DropdownModule,
     FormsModule,
     EyeFormsModule,

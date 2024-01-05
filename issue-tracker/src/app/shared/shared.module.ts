@@ -86,4 +86,4 @@ import { TimeSinceComponent } from './components/time-since/time-since.component
     TimeSinceComponent,
   ],
 })
-export class EyeSharedModule {}
+export class SharedModule {}

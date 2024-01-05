@@ -2,13 +2,12 @@ import { TooltipModule } from 'primeng/tooltip';
 import { EditorComponent } from './editor/editor.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { EyeSharedModule } from '@shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EyeFormsComponent } from './eye-forms.component';
 import { FormlyModule, FORMLY_CONFIG } from '@ngx-formly/core';
-import { FormValidation } from '@eye/utilities/form/formValidation';
 import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
@@ -35,6 +34,7 @@ import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { PasswordModule } from 'primeng/password';
 import { PasswordComponent } from './password/password.component';
+import { FormValidation } from '@core/utils/form/formValidation';
 @NgModule({
   imports: [
     CommonModule,
@@ -47,7 +47,7 @@ import { PasswordComponent } from './password/password.component';
     RippleModule,
     FormsModule,
     AutoCompleteModule,
-    EyeSharedModule,
+    SharedModule,
     CalendarModule,
     EditorModule,
     InputTextModule,
