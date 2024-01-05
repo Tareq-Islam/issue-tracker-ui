@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class SidebarService {
+export class EyeSidebarService {
   private _isToggleBtnClick = true;
   private _isSidebarClose = false;
 

@@ -1,0 +1,16 @@
+<div class="flex justify-start items-center h-full {{sidebar.isSidebarClose ? 'w-[40px]' : 'w-[70px]'}}">
+  <img class="h-full w-full" src="assets/images/logo/logo.svg" alt="logo">
+</div>
+
+<div *ngIf="!isHandset;else handsetView"
+  class="flex flex-col items-center justify-center text-gray-300 font-semibold text-xs">
+  <span *ngIf="!sidebar.isSidebarClose" class="leading-[1]">Version</span>
+  <span *ngIf="!sidebar.isSidebarClose" class="leading-[1]">{{appCode}}</span>
+</div>
+
+<ng-template #handsetView>
+  <div class="flex flex-col items-center justify-center text-gray-300 font-semibold text-xs">
+    <span class="leading-[1]">Version</span>
+    <span class="leading-[1]">{{appCode}}</span>
+  </div>
+</ng-template>

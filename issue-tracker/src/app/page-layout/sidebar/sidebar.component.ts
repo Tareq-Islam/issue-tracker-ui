@@ -1,16 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SidebarService } from './services/sidebar.service';
+import { EyeSidebarService } from './service/sidebar.service';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'eye-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   _sidebarCloseEventSubscription = new Subscription();
   @Input() isHandset = false;
-  constructor(private _sidebar: SidebarService) {}
+  constructor(private _sidebar: EyeSidebarService) {}
 
   ngOnInit(): void {
     const sidebar = document.getElementById('sidebar');

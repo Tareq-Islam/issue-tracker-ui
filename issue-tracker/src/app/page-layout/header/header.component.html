@@ -1,3 +1,36 @@
-<p>
-  header works!
-</p>
+<div class="w-screen h-[45px] bg-default-800 flex justify-between px-3 md:grid md:grid-cols-3 md:px-8 items-center">
+  <section class="flex justify-start items-center gap-3 md:gap-5">
+    <div class="sidebar-toggle-bar">
+      <button *ngIf="isToggleButton" type="button" pRipple (click)="toggleSidebar()">
+        <span class="{{toggleButtonIcon}} text-white text-2xl"></span>
+      </button>
+    </div>
+    <div>
+      <strong class="text-white text-[19px] leading-6 font-normal text-left capitalize">{{header.headerName}}</strong>
+    </div>
+    <div *ngIf="header.userManual.isEnable" pRipple class="flex items-center rounded-full p-1 cursor-pointer"
+        [title]="'User Manual'" (click)="header.userManual.command(header.userManual)">
+        <span class="pi pi-question-circle text-white text-[1rem]"></span>
+        <span class="text-white ml-1 text-[.9rem]">Help</span>
+      </div>
+  </section>
+  <section class="hidden md:flex justify-center items-center w-full">
+    <eye-header-search style="width: 100%;"></eye-header-search>
+  </section>
+  <section class="grid grid-flow-col gap-2 items-center justify-end">
+    <div>
+      <eye-header-dropdown *ngIf="!isHandset"></eye-header-dropdown>
+    </div>
+    <div eye-profile>
+    </div>
+  </section>
+</div>
+
+<!-- <eye-modal [isModalOpen]="isModalOpen" (modalClose)="isModalOpen = false">
+  <div modal-header>
+    <span>Change Password</span>
+  </div>
+  <div modal-body>
+    <eye-json-form [form]="form" [fields]="fields" [model]="model" (formSubmit)="onSubmit($event)"></eye-json-form>
+  </div>
+</eye-modal> -->

@@ -1,10 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { PrimeIcons } from 'primeng/api/primeicons';
-import { Subscription } from 'rxjs';
-import { SidebarService } from '../services/sidebar.service';
 import { Router } from '@angular/router';
-import { UserClaimService } from '@core/core/provider/user-claim/user-claim.service';
 import * as _ from "lodash";
+import { PrimeIcons } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { EyeSidebarService } from '../service/sidebar.service';
+import { Rights } from '@core/core/enum/rights/rights.enum';
+import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
+import { PanelType } from '@core/core/enum/common/common';
 
 enum NavMenus {
   DASHBOARD = 1,
@@ -17,11 +19,12 @@ enum NavMenus {
 }
 
 @Component({
-  selector: '[sidebar-menus]',
-  templateUrl: './sidebar-menus.component.html',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: '[eye-menus]',
+  templateUrl: './menus.component.html',
 })
-export class SidebarMenusComponent  implements OnInit, OnDestroy {
-  // rights = Rights;
+export class MenusComponent implements OnInit, OnDestroy {
+  rights = Rights;
   isDropdownMenu = false;
   menus = [
     {
@@ -94,9 +97,9 @@ export class SidebarMenusComponent  implements OnInit, OnDestroy {
   sidebarClose = false;
   @Input() isHandset = false;
   constructor(
-    private _sidebar: SidebarService,
+    private _sidebar: EyeSidebarService,
     private _router: Router,
-    private _claim: UserClaimService
+    private _claim: LoginUserClaimService
   ) {}
 
   ngOnInit(): void {
@@ -125,25 +128,25 @@ export class SidebarMenusComponent  implements OnInit, OnDestroy {
 
   onNavMenusRights() {
     this.menus.forEach((x) => {
-      // switch (x.id) {
-      //   case NavMenus.TICKET: x.isEnable = Number(this._claim.payload.panelType) === PanelType.Vendor || Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.TASK:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Task) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.TASK_CATEGORY:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Ticket_Template) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.CAUSE_FINDINGS:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Cause_Findings) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.TASK_SOLUTION:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Task_Solution) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.Vendor:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Vendor_Representatives) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      // }
+      switch (x.id) {
+        case NavMenus.TICKET: x.isEnable = Number(this._claim.payload.panelType) === PanelType.Vendor || Number(this._claim.payload.panelType) === PanelType.Customer;
+        break;
+        case NavMenus.TASK:
+          x.isEnable = this._claim.rights.includes(this.rights.View_Task) && Number(this._claim.payload.panelType) === PanelType.Customer;
+        break;
+        case NavMenus.TASK_CATEGORY:
+          x.isEnable = this._claim.rights.includes(this.rights.View_Ticket_Template) && Number(this._claim.payload.panelType) === PanelType.Customer;
+        break;
+        case NavMenus.CAUSE_FINDINGS:
+          x.isEnable = this._claim.rights.includes(this.rights.View_Cause_Findings) && Number(this._claim.payload.panelType) === PanelType.Customer;
+        break;
+        case NavMenus.TASK_SOLUTION:
+          x.isEnable = this._claim.rights.includes(this.rights.View_Task_Solution) && Number(this._claim.payload.panelType) === PanelType.Customer;
+        break;
+        case NavMenus.Vendor:
+          x.isEnable = this._claim.rights.includes(this.rights.View_Vendor_Representatives) && Number(this._claim.payload.panelType) === PanelType.Customer;
+        break;
+      }
     });
   }
 

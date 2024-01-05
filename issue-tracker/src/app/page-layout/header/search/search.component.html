@@ -1,0 +1,16 @@
+<eye-search *ngIf="header.search.isSearchEnable && !header.search.isAutoComplete" [menuStyleClass]="'top-[45px]'"
+  [menus]="header.search.searchMenus" [appendTo]="header.search.dropdownMenuAppendTo"
+  [isLoading]="header.search.isLoading" style="width: 100%;">
+</eye-search>
+
+<eye-typehead *ngIf="header.search.isSearchEnable && header.search.isAutoComplete" [menus]="header.search.searchMenus"
+  [isLoading]="header.search.isLoading" style="width: 100%;" [appendTo]="header.search.appendTo"
+  [dropdownMenuAppendTo]="header.search.dropdownMenuAppendTo"
+  [isCustomTemplate]="header.search.isCustomTemplate || false" [suggestionItems]="header.search.result"
+  (menuChange)="onTypeheadMenuChange($event, header.search)">
+  <ng-template *ngIf="header.search.isCustomTemplate" let-item let-index #eTemplate>
+    <ng-container [ngTemplateOutlet]="header.search.typeTemplate || null"
+      [ngTemplateOutletContext]="{ $implicit: item, index: index}">
+    </ng-container>
+  </ng-template>
+</eye-typehead>

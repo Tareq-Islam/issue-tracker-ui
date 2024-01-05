@@ -1,0 +1,18 @@
+@import "../../../assets/scss/_mixins";
+
+:host ::ng-deep [eye-profile] {
+  .user-details {
+    h2 {
+      @include screen-laptop-only {
+        max-width: 102px;
+      }
+
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      flex: 1 1 auto;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+  }
+}

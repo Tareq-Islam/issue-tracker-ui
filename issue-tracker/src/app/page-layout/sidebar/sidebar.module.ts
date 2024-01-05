@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar.component';
-import { CoreModule } from '@core/core/core.module';
 import { RouterModule } from '@angular/router';
+import { ScrollLayoutModule } from '@scroll-layout/scroll-layout.module';
+import { EyeSharedModule } from '@shared/shared.module';
+import { FooterComponent } from './footer/footer.component';
+import { MenusComponent } from './menus/menus.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    RouterModule
-  ],
-  declarations: [SidebarComponent]
+  imports: [CommonModule, RouterModule, EyeSharedModule, ScrollLayoutModule],
+  declarations: [SidebarComponent, FooterComponent, MenusComponent],
+  exports: [SidebarComponent],
 })
-export class SidebarModule { }
+export class SidebarModule {}

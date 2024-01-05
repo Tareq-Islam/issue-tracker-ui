@@ -1,0 +1,90 @@
+@import "../../../../assets/scss/_mixins";
+
+:host ::ng-deep eye-search,
+:host ::ng-deep eye-typehead {
+  button {
+    background-color: #216693 !important;
+    height: 30px;
+
+    &:enabled:active,
+    &:focus,
+    &:hover,
+    &:enabled:hover {
+      background-color: #216693 !important;
+    }
+  }
+
+  .search-input {
+    width: 100%;
+    height: 30px !important;
+    @include screen-mobile-above {
+      background-color: #216693 !important;
+      border: none;
+      border-left: 2px solid #2980b9 !important;
+    }
+
+    input {
+      @include screen-mobile-above {
+        color: #fff;
+      }
+
+      width: 100%;
+
+      &::placeholder {
+        @include screen-mobile-above {
+          color: #eee8 !important;
+        }
+      }
+
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: inherit;
+        height: 0.7em;
+        width: 0.7em;
+        border-radius: 50em;
+        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/light/times.svg)
+          no-repeat 50% 50%;
+        background-size: contain;
+        background-color: #fff;
+        cursor: pointer;
+      }
+    }
+
+    .search-icon {
+      @include screen-mobile-above {
+        border-left-width: 2px !important;
+        border-color: #2980b9 !important;
+        color: #fff;
+      }
+    }
+  }
+
+  .p-menuitem-link {
+    padding: 0.5rem 0.5rem !important;
+
+    .p-menuitem-text {
+      font-size: 14px !important;
+    }
+  }
+}
+
+:host ::ng-deep eye-typehead {
+  .drowdown {
+    flex: none;
+  }
+  p-autocomplete {
+    width: 100%;
+  }
+  .p-autocomplete {
+    width: 100%;
+  }
+  input {
+    width: 100% !important;
+  }
+
+  .p-autocomplete .p-autocomplete-panel {
+    left: 0 !important;
+    right: 0 !important;
+    top: 37px !important;
+    max-height: 300px !important;
+  }
+}

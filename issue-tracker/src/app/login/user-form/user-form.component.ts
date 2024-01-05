@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AuthApiService } from '@core/core/api/auth/login/auth-api.service';
-import { UserClaimService } from '@core/core/provider/user-claim/user-claim.service';
+import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -16,7 +16,7 @@ export class UserFormComponent {
 
   constructor(
     private _authApi: AuthApiService,
-    private _claim: UserClaimService
+    private _claim: LoginUserClaimService
   ) {}
 
   onLogin(user: { userName: string; password: string }) {
@@ -27,7 +27,7 @@ export class UserFormComponent {
         (res) => {
           if (res) {
             this.isLoading = false;
-            // this._claim.onLoginProccess({ LoginRes: res });
+            this._claim.onLoginProccess({ LoginRes: res });
           }
         },
         (err) => {

@@ -1,0 +1,52 @@
+@import "../../../../assets/scss/_mixins";
+:host ::ng-deep p-dropdown {
+  .p-dropdown {
+    border-radius: 3px;
+    height: 31px;
+    align-items: center;
+    padding: 0 2px;
+    @include screen-mobile-above {
+      border: none;
+      background-color: #216693;
+    }
+
+    @include screen-mobile {
+      width: 100%;
+      border: 1px solid var(--eye-primary-800);
+    }
+    &:not(.p-disabled).p-focus {
+      outline: none;
+      outline-offset: 0;
+      box-shadow: 0 0 0 1px var(--eye-primary-800);
+      border-color: var(--eye-primary-800);
+    }
+  }
+
+  .p-inputtext {
+    @include screen-mobile-above {
+      color: #ffff;
+    }
+    font-size: 0.875rem;
+    padding: 5px;
+  }
+
+  .p-dropdown .p-dropdown-trigger {
+    width: 1.5rem;
+    @include screen-mobile-above {
+      color: #fff;
+    }
+  }
+
+  .p-dropdown-label {
+    @include screen-laptop-only {
+      max-width: 170px;
+    }
+  }
+
+  .pi {
+    @include screen-mobile-above {
+      color: #ffff;
+    }
+    font-size: 0.7rem;
+  }
+}

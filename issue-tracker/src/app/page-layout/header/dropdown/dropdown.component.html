@@ -1,0 +1,4 @@
+<p-dropdown *ngIf="header.branchDropdown.isEnable" [appendTo]="'body'" panelStyleClass="top-[45px]"
+  [autoDisplayFirst]="false" [(ngModel)]="selectedBranch" [options]="branchDropdownMenus" [scrollHeight]="'500px'"
+  optionLabel="branchName" (onChange)="onSelected($event)">
+</p-dropdown>
