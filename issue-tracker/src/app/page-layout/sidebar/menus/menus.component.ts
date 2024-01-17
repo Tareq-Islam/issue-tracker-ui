@@ -39,10 +39,35 @@ export class MenusComponent implements OnInit, OnDestroy {
       id: NavMenus.ISSUE_MANAGEMENT,
       label: 'issue management',
       icon: PrimeIcons.INBOX,
-      routerLink: '/issue',
+      routerLink: null,
       isEnable: true,
-      isDropdown: false,
-      dropdownMenus: [],
+      isDropdown: true,
+      dropdownMenus: [
+        {
+          label: 'Issues',
+          icon: 'pi pi-flag',
+          routerLink: '/issue-tracker/issue',
+          isEnable: true
+        },
+        {
+          label: 'Category',
+          icon: 'pi pi-sitemap',
+          routerLink: '/issue-tracker/category',
+          isEnable: true
+        },
+        {
+          label: 'Cause Findings',
+          icon: 'pi pi-money-bill',
+          routerLink: '/issue-tracker/cause/findings',
+          isEnable: true
+        },
+        {
+          label: 'Solution Tag',
+          icon: 'pi pi-check-square',
+          routerLink: '/issue-tracker/solution/tag',
+          isEnable: true
+        },
+      ],
     },
     {
       id: NavMenus.VENDOR,
@@ -74,7 +99,7 @@ export class MenusComponent implements OnInit, OnDestroy {
     {
       id: NavMenus.SITE,
       label: 'Site',
-      icon: PrimeIcons.ARROWS_ALT,
+      icon: PrimeIcons.BOLT,
       routerLink: '/site',
       isEnable: true,
       isDropdown: false,

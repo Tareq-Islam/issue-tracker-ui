@@ -19,7 +19,7 @@ const routes: Routes = [
         data: {endpoint: 'dashboard'}
       },
       {
-        path: 'issue',
+        path: 'issue-tracker',
         loadChildren: () => import('../issue-management/issue-management.module').then(x => x.IssueManagementModule),
         canActivate: [RouterGuardService],
         data: {endpoint: 'issue'}
@@ -43,6 +43,13 @@ const routes: Routes = [
         loadChildren: () => import('../vendor-management/vendor-management.module').then(x => x.VendorManagementModule),
         canActivate: [RouterGuardService],
         data: {endpoint: 'vendor'}
+      },
+
+      {
+        path: 'site',
+        loadChildren: () => import('../site-management/site-management.module').then(x => x.SiteManagementModule),
+        canActivate: [RouterGuardService],
+        data: {endpoint: 'site'}
       },
     ],
   },

@@ -1,21 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthPayload, UserClaim } from '@core/core/api/auth/login/auth.model';
+import { UserClaim } from '@core/core/api/auth/login/auth.model';
 import { STORAGE_KEY, STORAGE_TYPE, StorageService } from '@core/storage/storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginUserClaimService {
-  private _defaultPayload: AuthPayload = this._setPayload();
   private _accessToken!: string;
   private _userName!: string;
-  private _permissionName!: string;
   private _roleName!: string;
-  private _payload!: AuthPayload;
-  private _rights!: number[];
-  private _systemTime!: string;
-  isViewOnly = false;
 
   public get accessToken(): string {
     return this._accessToken;
@@ -23,22 +17,10 @@ export class LoginUserClaimService {
   public get userName(): string {
     return this._userName;
   }
-  public get permissionName(): string {
-    return this._permissionName;
-  }
   public get roleName(): string {
     return this._roleName;
   }
 
-  public get payload(): AuthPayload {
-    return this._payload;
-  }
-  public get rights(): number[] {
-    return this._rights;
-  }
-  public get systemTime(): string {
-    return this._systemTime;
-  }
 
   constructor(
     private _router: Router,
@@ -48,39 +30,15 @@ export class LoginUserClaimService {
   private _setProperty({
     token,
     userName,
-    permissionName,
     roleName,
-    payload,
-    rights,
   }: {
     token?: string;
     userName?: string;
-    permissionName?: string;
     roleName?: string;
-    payload?: AuthPayload;
-    rights?: string;
   }) {
     this._accessToken = token || '';
-    this._userName = userName || '';
-    this._permissionName = permissionName || '';
+    this._userName = userName || 'Administrative';
     this._roleName = roleName || '';
-    this._payload = payload || this._defaultPayload;
-    this._rights = [];
-    if (rights) {
-      const rightsArray = rights.split(',');
-      this._rights =
-        rightsArray.length > 0 ? rightsArray.map((x) => Number(x)) : [];
-    }
-  }
-
-  private _setPayload(): AuthPayload {
-    return {
-      customerId: '',
-      organizationId: '',
-      panelType: '',
-      permissionLevel: '',
-      userId: '',
-    };
   }
 
   onLoginProccess({
@@ -96,9 +54,6 @@ export class LoginUserClaimService {
       this._store(LoginRes.token, STORAGE_KEY.Login_token);
     }
     this._setProperty({
-      payload: LoginRes.payload,
-      permissionName: LoginRes.permissionName,
-      rights: LoginRes.rights,
       roleName: LoginRes.roleName,
       token: LoginRes.token ? LoginRes.token : this.getToken(),
       userName: LoginRes.userName,

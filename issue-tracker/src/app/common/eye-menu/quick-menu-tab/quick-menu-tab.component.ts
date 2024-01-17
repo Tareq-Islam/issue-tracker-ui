@@ -18,7 +18,7 @@ export class QuickMenuTabComponent {
   public get menus() : MenuItem[] {
     return this._items;
   }
-  onSelectTab(item: MenuItem) {
+  onSelectTab(item: any) {
     this.selectedTab = item;
     if (item.command) {
       item.command(item);

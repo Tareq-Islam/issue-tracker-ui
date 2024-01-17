@@ -1,20 +1,11 @@
 import { Adapter } from '../../common/api-response.model';
-
-interface AuthPayload {
-  userId: string;
-  panelType: string;
-  permissionLevel: string;
-  organizationId: string;
-  customerId: string;
-}
+import { RoleType } from '../../role/role.model';
 
 interface UserClaim {
   token?: string;
   userName?: string;
-  permissionName?: string;
   roleName?: string;
-  payload?: AuthPayload;
-  rights?: string;
+  roleType?: RoleType;
 }
 
 class PayloadAdapter implements Adapter<UserClaim> {
@@ -29,9 +20,7 @@ class PayloadAdapter implements Adapter<UserClaim> {
       item.data.accessToken,
       item.data.userName,
       item.data.roleName,
-      item.data.permissionName,
-      item.data.payload,
-      item.data.rights
+      item.data.roleType,
     );
   }
 }
@@ -41,32 +30,14 @@ class UserClaim {
     accessToken?: string,
     userName?: string,
     roleName?: string,
-    permissionName?: string,
-    payload?: {
-      cui: string;
-      usi: string;
-      ori: string;
-      pty: string;
-      plv: string;
-    },
-    rights?: string
+    roleType?: RoleType,
   ) {
     this.token = accessToken;
     this.userName = userName;
-    this.permissionName = permissionName;
     this.roleName = roleName;
-    if (payload) {
-      this.payload = {
-        customerId: payload.cui,
-        organizationId: payload.ori,
-        panelType: payload.pty,
-        permissionLevel: payload.plv,
-        userId: payload.usi,
-      };
-    }
-    this.rights = rights;
+    this.roleType = roleType;
   }
 }
 
-export { Adapter, AuthPayload, PayloadAdapter, UserClaim };
+export { Adapter, PayloadAdapter, UserClaim };
 

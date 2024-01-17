@@ -31,8 +31,8 @@ export class FormComponent implements OnInit {
       }
     });
   }
-  userName!: string;
-  password!: string;
+  userName: string = 'tareq';
+  password: string = '1234';
   _isError = false;
   _isLoading = false;
 

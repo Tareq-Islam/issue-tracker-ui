@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable, of } from 'rxjs';
 import { BaseHttpClientService } from '../../base/base-http-client.service';
 import { PayloadAdapter, UserClaim } from './auth.model';
+import { SeedValues } from '../../user/user.model';
 
 const endpoint = {
   mainV1: `api/Auth`,
@@ -24,10 +25,12 @@ export class AuthApiService {
 
   token(data: { loginName: string; password: string }): Observable<UserClaim> {
     const url = `${endpoint.mainV1}/${endpoint.login}`;
-    return this._baseApi
-      .post(url, data, {
-        notification: { error: false, response: false },
-      })
-      .pipe(map((x) => new PayloadAdapter().adapt(x)));
+    // return this._baseApi
+    //   .post(url, data, {
+    //     notification: { error: false, response: false },
+    //   })
+    //   .pipe(map((x) => new PayloadAdapter().adapt(x)));
+    const users = of(SeedValues);
+    return users.pipe(filter(x => x.some(y => y.userName === data.loginName && y.password === data.password)), map(x => new PayloadAdapter().adapt(x)));
   }
 }

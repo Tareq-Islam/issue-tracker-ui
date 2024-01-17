@@ -19,22 +19,6 @@ export class RouteNotFoundComponent {
   }
 
   onPayload() {
-    if (this._claim.payload && this._claim.payload.panelType) {
-      this.router.navigateByUrl('/');
-    } else {
-      this.router.navigate(['/404']);
-      // this._login.tokenDecode().subscribe(
-      //   (res) => {
-      //     this._claim.onLoginProccess({
-      //       LoginRes: res,
-      //       isTokenStore: false,
-      //     });
-      //     this.router.navigateByUrl('/');
-      //   },
-      //   (err) => {
-      //     this.router.navigate(['/404']);
-      //   }
-      // );
-    }
+    this.router.navigateByUrl('/');
   }
 }
