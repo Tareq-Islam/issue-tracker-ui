@@ -1,0 +1,138 @@
+<eye-modal *ngIf="isStatusDetailsModalOpen" [isModalOpen]="isStatusDetailsModalOpen" (modalClose)="onModalClose(false)">
+  <div modal-header>
+    <span class="text-[18px]">Door Status Details</span>
+  </div>
+  <div modal-body class="p-[15px] font-[14px]">
+    <div>
+      <p class="text-left italic leading-[1.2] py-[5px]">This door status is saved on that time when <b>{{commentUserName}}</b>
+        comments on this issue.</p>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Device ID</strong>
+        <p class="flex">
+          <span
+            class="h-[16px] {{currentStatus.deviceId !== 0 ? '' : 'bg-red-500 text-white'}} rounded px-1">{{currentStatus.deviceId !== 0 ? currentStatus.deviceId : 'No Device'}}</span>
+        </p>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Network Status</strong>
+        <div class="flex justify-start"><span
+            class="text-white text-[12px] h-[16px] bg-{{currentStatus.isOnline?'green':'red'}}-500 rounded px-1">{{currentStatus.isOnline?'Online':'Offline'}}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Last Communication Time</strong>
+        <span>{{currentStatus?.lastCommunicationTime | date: 'medium'}}</span>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Last Rssi Time</strong>
+        <span>{{currentStatus?.lastRssiTime | date: 'medium'}}</span>
+      </div>
+      <div *ngIf="!currentStatus.isOnline" class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Duration</strong>
+        <span>{{onCalDuration(currentStatus.networkErrorDuration)}}</span>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 py-[5px] border-t-[1px] border-b-[1px] border-gray-200">
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Door Status</strong>
+        <div *ngIf="currentStatus.doorStatus === 1 || currentStatus.doorStatus === 2" class="flex justify-start"><span
+            class="text-white text-[12px] h-[16px] bg-{{currentStatus.doorStatus === 1?'green':'red'}}-500 rounded px-1">{{currentStatus.doorStatus === 1?'Close':'Open'}}</span></div>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Door {{currentStatus?.doorStatus === 1 ? 'Close' : 'Open' }} Time</strong>
+        <span>{{currentStatus?.doorLogTime | date: 'medium'}}</span>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Last User Name</strong>
+        <span>{{currentStatus?.doorLastUnlockUserName || 'N/A'}} <fa-icon [icon]="faBell"></fa-icon> </span>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Last User Mobile</strong>
+        <span>{{currentStatus?.doorLastUnlockUserMobileNumber || 'N/A'}}</span>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Last User Permission</strong>
+        <span>{{currentStatus?.doorLastUnlockUserPermission || 'N/A'}}</span>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Last User Organization</strong>
+        <span>{{currentStatus?.doorLastUnlockUserOrganization || 'N/A'}}</span>
+      </div>
+      <div *ngIf="currentStatus.doorStatus !== 1" class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Duration</strong>
+        <span>{{onCalDuration(currentStatus.doorErrorDuration)}}</span>
+      </div>
+    </div>
+
+    <div class="py-[5px]">
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Lock Status</strong>
+        <div *ngIf="currentStatus.doorStatus === 1 || currentStatus.doorStatus === 2" class="flex justify-start">
+          <span
+            class="text-white text-[12px] h-[16px] bg-{{currentStatus.doorStatus === 1?'green':'red'}}-500 rounded px-1">{{lockStatus[currentStatus.lockStatus]}}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>{{lockStatus[currentStatus.lockStatus]}} Time</strong>
+        <span>{{currentStatus?.lockLogTime | date: 'medium'}}</span>
+      </div>
+      <div *ngIf="currentStatus.lockStatus !== 1" class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Duration</strong>
+        <span>{{onCalDuration(currentStatus.lockErrorDuration)}}</span>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 py-[5px] border-t-[1px] border-b-[1px] border-gray-200">
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Outdoor Reader Status</strong>
+        <div *ngIf="currentStatus.outdoorReader === 1 || currentStatus.outdoorReader === 2" class="flex justify-start">
+          <span
+            class="text-white text-[12px] h-[16px] leading-[1.5] bg-{{currentStatus.outdoorReader === 1?'green':'red'}}-500 rounded px-1">{{currentStatus.outdoorReader === 1?'Ok':'Fault'}}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Outdoor Reader Time</strong>
+        <span>{{currentStatus?.outdoorReaderLogTime | date: 'medium'}}</span>
+      </div>
+      <div *ngIf="currentStatus.outdoorReader === 2" class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Duration</strong>
+        <span>{{onCalDuration(currentStatus.outdoorReaderErrorDuration)}}</span>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 py-[5px] border-t-[1px] border-b-[1px] border-gray-200" *ngIf="currentStatus?.indoorReader > 0 && currentStatus?.isIndoorReaderEnable !== 0">
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Indoor Reader Status</strong>
+        <div *ngIf="currentStatus.indoorReader === 1 || currentStatus.indoorReader === 2" class="flex justify-start">
+          <span
+            class="text-white text-[12px] h-[16px] bg-{{currentStatus.indoorReader === 1?'green':'red'}}-500 rounded px-1">{{currentStatus.indoorReader === 1?'Ok':'Fault'}}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Indoor Reader Time</strong>
+        <span>{{currentStatus?.indoorReaderLogTime | date: 'medium'}}</span>
+      </div>
+      <div *ngIf="currentStatus.indoorReader === 2" class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Duration</strong>
+        <span>{{onCalDuration(currentStatus.indoorReaderErrorDuration)}}</span>
+      </div>
+    </div>
+
+    <div class="py-[5px]">
+      <div class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Memory Status</strong>
+        <div class="flex justify-start">
+          <span
+            class="text-white text-[12px] h-[16px] bg-{{currentStatus.isMemoryFault === 0?'green':'red'}}-500 rounded px-1">{{currentStatus.isMemoryFault === 0?'Ok':'Fault'}}</span>
+        </div>
+      </div>
+      <div *ngIf="currentStatus.isMemoryFault === 1" class="grid grid-cols-[50%,50%] px-[25px] leading-[1.5]">
+        <strong>Duration</strong>
+        <span>{{onCalDuration(currentStatus.memoryFaultDuration)}}</span>
+      </div>
+    </div>
+
+  </div>
+
+</eye-modal>

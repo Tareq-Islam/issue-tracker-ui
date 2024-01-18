@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<div>
+  <section class="bg-gray-50 w-full h-[30px] flex items-center justify-center border-b border-gray-200">
+    <eye-quick-menu [menus]="quickMenus"></eye-quick-menu>
+  </section>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+</div>

@@ -1,0 +1,75 @@
+<div class="grid p-[5px] mb-[5px] grid-cols-[0.4fr,4.6fr] {{comment.isNew ? 'bg-[#27ae6011]':''}}">
+  <div class="relative after:contents-[''] after:absolute after:h-[calc(100%-40px)] border-l-2 border-[#f1f1f1] left-[16px] bottom-0">
+    <button class="relative flex items-center justify-center p-0 cursor-default w-[35px] h-[35px] left-[-18px] m-0 rounded-full bg-[#f1f1f1]">
+      <span class="text-black text-[13px] font-medium">{{getShortName(comment?.creatorUserName)}}</span>
+      <fa-icon class="absolute right-[-2px] bottom-0 text-[12px]" *ngIf="isComment" [icon]="faComment"></fa-icon>
+    </button>
+  </div>
+  <div>
+    <div class="flex justify-between items-center">
+      <div>
+        <div class="d-flex align-items-center">
+          <strong class="text-sm text-gray-500">{{comment?.creatorUserName}}</strong>
+        </div>
+        <span class="block text-xs text-[#aaa]">{{isComment ? 'Commented' : 'Published'}} on {{comment?.creationTime |
+          date: 'medium'}}</span>
+      </div>
+      <div class="flex justify-end items-center gap-[10px]">
+        <eye-issue-status-icons [comment]="comment" (click)="onStatusDetails(comment)"></eye-issue-status-icons>
+
+        <div *ngIf="comment.isMenu">
+          <button type="button"
+          class="hover:bg-gray-100 hover:text-gray-600 text-gray-400  border-0 rounded-full flex items-center justify-center w-[35px] h-[35px]"
+          pRipple (click)="menu.toggle($event)">
+          <span class="pi pi-ellipsis-v text-sm font-black"></span></button>
+          <p-menu #menu [popup]="true" [appendTo]="'body'" [model]="comment.menus"></p-menu>
+        </div>
+      </div>
+    </div>
+    <div class="py-[10px]">
+      <div>
+        <h5 class="m-0 font-medium">{{comment?.subject}}</h5>
+      </div>
+      <div class="flex justify-between">
+        <span [innerHTML]="contentSecurity(comment.comment)"></span>
+
+        <div *ngIf="comment.seenAssignees.length > 0">
+          <eye-popover [appendTo]="'body'" #pop>
+            <ng-template>
+              <ul class="m-2" *ngFor="let d of comment.seenAssignees;">
+                <li class="capitalize">{{d}}</li>
+              </ul>
+            </ng-template>
+          </eye-popover>
+          <button class="text-[#aaa] text-[12px]" type="text" (mouseenter)="pop.toggle($event)" (mouseleave)="pop.toggle($event)"><fa-icon [icon]="faCheck"></fa-icon> Seen</button>
+        </div>
+
+
+
+      </div>
+      <div *ngIf="comment.imageUrls.length > 0" class="flex items-center gap-[15px] flex-wrap pt-[10px]">
+        <div *ngFor="let item of comment.imageUrls; let i=index">
+          <div *ngIf="i < 5" (click)="open(i)"
+            class="h-[70px] rounded-[3px] relative cursor-pointer w-[70px] overflow-hidden text-center border border-gray-300">
+            <img class="w-full h-full" *ngIf="item?.thumbnailImageUrl"
+              [defaultImage]="'/assets/images/image_loaded.gif'" [lazyLoad]="item?.thumbnailImageUrl" />
+            <img class="w-full h-full" *ngIf="item?.thumbnailImageUrl" />
+            <img class="w-full h-full" *ngIf="!item?.thumbnailImageUrl"
+              style="object-fit: cover;width: 100%;height: 100%;" [src]="'/assets/images/other/noimage-found_t.png'">
+            <div *ngIf="i === 4 && (comment.imageUrls.length - 5) !== 0"
+              class="absolute top-0 left-0 bg-[#0008] h-full w-full">
+              <span
+                class="flex justify-center items-center h-full w-full text-2xl text-white">+{{comment.imageUrls.length -
+                5}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Door Status Modal -->
+<eye-issue-door-status [currentStatus]="currentStatus" [commentUserName]="commentUserName" [isStatusDetailsModalOpen]="isStatusDetailsModalOpen" (modalClose)="isStatusDetailsModalOpen = $event" ></eye-issue-door-status>
+

@@ -1,0 +1,35 @@
+<div class="p-[3px] rounded-[3px] hover:bg-[#eee8]" *ngIf="comment?.doorCurrentSatus">
+  <div class="flex items-center gap-[7px]" style="cursor:pointer">
+    <div class="flex items-center gap-[7px]" style="cursor:pointer">
+      <span class="h-[16px]">
+        <img class="h-full w-full"
+          src="/assets/images/door/network/svg/network-{{networkChecker(comment?.doorCurrentSatus.rssi, comment?.doorCurrentSatus.isOnline)}}.svg">
+      </span>
+      <span class="h-[16px]" *ngIf="comment?.doorCurrentSatus.doorStatus !== 0">
+        <img class="h-full w-full"
+          src="/assets/images/door/door/door-{{doorOpenStatusChecker(comment?.doorCurrentSatus.doorStatus)}}.svg">
+      </span>
+      <span class="h-[16px]" *ngIf="comment?.doorCurrentSatus.lockStatus !== 0">
+        <img class="h-full w-full"
+          src="/assets/images/door/lock/lock-{{lockStatusChecker(comment?.doorCurrentSatus.lockStatus)}}.svg">
+      </span>
+      <span class="h-[16px]"
+        *ngIf="comment?.doorCurrentSatus.outdoorReader > 0 && comment?.doorCurrentSatus.isOutdoorReaderEnable !== 0 ">
+        <img class="h-full w-full"
+          src="/assets/images/door/rfid/rfid-{{readerFaultChecker(comment?.doorCurrentSatus.outdoorReader, 'outdoor')}}.svg">
+      </span>
+      <span class="h-[16px]"
+        *ngIf="comment?.doorCurrentSatus.indoorReader > 0 && comment?.doorCurrentSatus.isIndoorReaderEnable !== 0">
+        <img class="h-full w-full"
+          src="/assets/images/door/rfid/rfid-{{readerFaultChecker(comment?.doorCurrentSatus.indoorReader, 'indoor')}}.svg">
+      </span>
+      <div
+        class="flex justify-center items-center bg-green-700 bg-opacity-10 text-green-700 font-normal rounded-[0.25rem] px-[0.3rem] py-[0.1rem]"
+        [ngStyle]="{'color': comment.doorCurrentSatus.deviceId === 0 ? '#c0392b':''}">
+        <fa-icon [icon]="faMicrochip" class="mr-1 text-[16px]"></fa-icon> {{comment.doorCurrentSatus.deviceId > 0 ?
+        comment.doorCurrentSatus.deviceId : 'No Device'}}
+      </div>
+
+    </div>
+  </div>
+</div>

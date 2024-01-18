@@ -1,3 +1,112 @@
-<p>
-  cause-findings works!
-</p>
+<div>
+  <eye-filter-bar
+    styleClass="flex flex-wrap md:flex-nowrap justify-between items-center md:h-[43px] border-b-2 border-b-gray-100 p-2 px-4">
+    <section class="flex justify-between md:block w-full">
+      <div class=" flex justify-center">
+        <section class="flex justify-between md:block w-full"> </section>
+      </div>
+    </section>
+    <section class="grid grid-flow-col gap-2 items-center md:justify-end w-full">
+      <div>
+        <button pRipple pButton class="btn" type="button" label="Create" icon="pi pi-plus"></button>
+      </div>
+    </section>
+  </eye-filter-bar>
+  <eye-scroll-layout class="min-scrollbar" [height]="'calc(100vh - 118px)'"
+    styleClass="px-6 2xl:pr-12 2xl:px-16 py-3 flex justify-between flex-col h-full w-full">
+    <eye-items container *ngFor="let item of items; let i=index; trackBy:trackBy"
+      contentClass="px-5 grid-cols-[10%,34%,40%,13%]">
+      <eye-item>
+        <span>ID</span>
+        <span class="text-content">{{item?.id || 'N/A'}}</span>
+      </eye-item>
+      <eye-item>
+        <span>Name</span>
+        <span class="text-content">{{item?.cause || 'N/A'}}</span>
+      </eye-item>
+      <eye-item>
+        <span>Description</span>
+        <span class="text-content">{{item?.description || 'N/A'}}</span>
+      </eye-item>
+
+      <div class="justify-self-end">
+        <eye-item-menu *ngIf="item.menus.length > 0" [menus]="item.menus"></eye-item-menu>
+      </div>
+    </eye-items>
+    <eye-skeleton container *ngIf="isApiCalling" [rows]="15"></eye-skeleton>
+    <eye-not-found container *ngIf="notFound"></eye-not-found>
+  </eye-scroll-layout>
+</div>
+
+
+<!--
+<eye-modal [isModalOpen]="isModalOpen" (modalClose)="isModalOpen = false" [style]="{'width': '500px'}">
+  <div modal-header>
+    <span>Assign</span>
+  </div>
+  <div modal-body class="pb-0 flex flex-col justify-between gap-2">
+    <div>
+      <div class="mx-5 py-3 border-b border-gray-200">
+        <eye-typehead [wrapperStyleClass]="'h-8'" [search]="search" [dropdownMenuAppendTo]="'body'"
+          [menus]="searchMenus" [isLoading]="isLoading" [suggestionItems]="results"
+          [showEmptyMessage]="showEmptyMessage" [inputStyle]="{'width': '352px'}" [isCustomTemplate]="true"
+          (selectItem)="selectItem($event)" [panelStyleClass]="'right-[-32px] left-0 min-w-[266px]'">
+          <ng-template #eTemplate let-item>
+            <div>
+              <span class="font-medium capitalize">{{item.name}}</span>
+              <span *ngIf="item.email" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-envelope text-[0.6rem]"></span>
+                <span>{{item.email}}</span>
+              </span>
+              <span *ngIf="item.phone" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-phone text-[0.6rem]"></span>
+                <span>{{item.phone}}</span>
+              </span>
+              <span *ngIf="item.organization" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-id-card text-[0.6rem]"></span>
+                <span>{{item.organization}}</span>
+              </span>
+            </div>
+          </ng-template>
+        </eye-typehead>
+        <div>
+
+        </div>
+      </div>
+      <eye-scroll-layout class="min-scrollbar" [height]="'365px'" styleClass="px-5 min-h-[300px]">
+        <div container class="mt-4">
+          <div *ngFor="let item of selectedUsers"
+            class="my-2 p-3 border border-gray-200 rounded flex justify-between items-center">
+            <div>
+              <span class="font-medium capitalize">{{item.name}}</span>
+              <span *ngIf="item.email" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-envelope text-[0.6rem]"></span>
+                <span>{{item.email}}</span>
+              </span>
+              <span *ngIf="item.organization" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-id-card text-[0.6rem]"></span>
+                <span>{{item.organization}}</span>
+              </span>
+              <span *ngIf="item.phone" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-phone text-[0.6rem]"></span>
+                <span>{{item.phone}}</span>
+              </span>
+            </div>
+            <div>
+              <button pRipple (click)="removeSelectedItem(item)"><span
+                  class="text-red-500 pi pi-minus-circle"></span></button>
+            </div>
+          </div>
+        </div>
+        <eye-not-found container *ngIf="isError" [message]="errorMessage"
+          [wrapperStyleClass]="'flex items-center justify-center p-5'"
+          [textStyleClass]="'text-red-500 text-base'"></eye-not-found>
+      </eye-scroll-layout>
+
+    </div>
+    <div class="border-t border-gray-200 py-2 px-5 flex items-center justify-end">
+      <button pButton pRipple class="bg-green-500 py-2 px-3 rounded text-white border-0 text-xs"
+        (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+</eye-modal> -->

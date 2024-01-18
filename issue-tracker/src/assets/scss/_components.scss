@@ -197,3 +197,28 @@
   @extend .issue-badge;
   @apply bg-blueGray-500;
 }
+.status-open {
+  @extend .issue-badge;
+  @apply bg-green-500;
+}
+
+.status-reject {
+  @extend .issue-badge;
+  background: #8e44ad;
+  color: #fff;
+}
+
+.status-close {
+  @extend .issue-badge;
+  @apply bg-red-500;
+}
+
+.status-suspend {
+  @extend .issue-badge;
+  background: #f39c12;
+}
+
+.status-request {
+  @extend .issue-badge;
+  @apply bg-blueGray-500;
+}

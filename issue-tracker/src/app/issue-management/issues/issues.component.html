@@ -1,3 +1,55 @@
-<p>
-  issues works!
-</p>
+<div>
+  <eye-filter-bar styleClass="flex items-center justify-between gap-5 w-full px-8">
+    <eye-options-selector class="block xl:hidden" [scrollHeight]="'50vh'" [btnLabel]="'Filter By'"
+      [dropdownMenus]="filterMenus">
+    </eye-options-selector>
+    <div class="hidden xl:block">
+      <span class="p-buttonset btn-group">
+        <button *ngFor="let t of filterMenusForTab" pButton pRipple class="btn" [ngClass]="{'active': tab === t.id}"
+          (click)="t.command()">
+          <span>{{t.name}}</span>
+          <p-badge value="{{t.count}}" styleClass="badge"></p-badge>
+        </button>
+      </span>
+    </div>
+    <div class="grid grid-flow-col gap-2">
+      <button pRipple pButton class="btn" type="button" label="Import" icon="pi pi-upload"
+        (click)="onUploadIssue()"></button>
+      <button  pRipple pButton class="btn" type="button"
+        label="Create Issue" icon="pi pi-plus" (click)="onIssueCreate()"></button>
+    </div>
+  </eye-filter-bar>
+  <eye-issue-item (OnScrolling)="onScrolling()" [Items]="items" [IsApiCalling]="isApiCalling" [IsCustomerPanel]="false"
+    [NotFound]="notFound"></eye-issue-item>
+</div>
+
+<eye-modal [isModalOpen]="isEditModal" (modalClose)="isEditModal = false">
+  <div modal-header>
+    <span>Edit Issue</span>
+  </div>
+  <div modal-body>
+    <eye-json-form [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}"
+      (formSubmit)="onIssueEditSubmit($event)"></eye-json-form>
+  </div>
+</eye-modal>
+
+<eye-modal [isModalOpen]="isChangePriorityModalOpen" (modalClose)="isChangePriorityModalOpen = false">
+  <div modal-header>
+    <span>Change Priority</span>
+  </div>
+  <div modal-body>
+    <eye-json-form [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}"
+      (formSubmit)="changeIssuePrioritySubmitted($event)"></eye-json-form>
+  </div>
+</eye-modal>
+
+
+<eye-modal [isModalOpen]="isIssueRequestRejectModalOpen" (modalClose)="isIssueRequestRejectModalOpen = false">
+  <div modal-header>
+    <span>Reject Issue</span>
+  </div>
+  <div modal-body>
+    <eye-json-form [form]="form" [fields]="fields" [footer]="{isReset:false, isFooter:true}" [model]="model"
+      (formSubmit)="issueRejectSubmitted($event)"></eye-json-form>
+  </div>
+</eye-modal>
