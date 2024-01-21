@@ -1,0 +1,228 @@
+<div class="flex flex-col gap-[5px] p-[10px]">
+
+  <div>
+    <div class="flex justify-between items-center p-[5px]">
+      <h3 class="text-[15px] text-gray-400">Cause Findings</h3>
+      <button
+        class="bg-[#16a085] hover:bg-green-500 text-white text-[11px] px-2 rounded p-0" (click)="onAddCauseFinding()">
+        {{details?.causeDetails ? 'Update' : 'Add'}}
+      </button>
+    </div>
+    <div>
+      <div>
+        <span class="block text-[14px] leading-[8px] font-[400]" *ngIf="details?.causeDetails"
+          [innerHTML]="contentSecurity(details?.causeDetails)"></span>
+        <div *ngIf="details?.causeDetails === null"
+          class="flex justify-end items-center gap-[11px] p-[5px] rounded-[3px] bg-[#ccc1] border border-[#ccc4]">
+          <fa-icon class="text-base text-gray-400" [icon]="faInfoCircle"></fa-icon>
+          <span class="italic text-[13px] leading-[1.2] font-[400]">
+            This issue is under observation. Cause findings of the issue will be shown as soon as it is found.
+          </span>
+        </div>
+      </div>
+      <div *ngIf="details?.causePoints.length > 0" class="mt-[5px]">
+        <ul class="list-disc pl-7 text-[13px] font-[300]" *ngFor="let item of details?.causePoints">
+          <li>{{item?.cause}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="w-full border-t border-t-[#eee]">
+    <div class="flex justify-between items-center p-[5px]">
+      <h3 class="text-[15px]">
+        <span class="text-gray-400">Assignees </span>
+        <button class="text-[13px] text-gray-500" type="text" (mouseenter)="pop.toggle($event)"
+          (mouseleave)="pop.toggle($event)">
+          <fa-icon [icon]="faInfoCircle"></fa-icon>
+        </button>
+        <eye-popover [appendTo]="'body'" #pop>
+          <ng-template>
+            <div class="w-[200px] p-4 text-[13px]">
+              <p class="leading-[1.3]">{{assignessTooltip}}</p>
+            </div>
+          </ng-template>
+        </eye-popover>
+      </h3>
+      <button
+        *ngIf="(details?.status === 1 || details?.status === 3)"
+        pRipple class="bg-[#16a085] hover:bg-green-500 text-white text-[11px] px-2 rounded p-0"
+        (click)="onAddAssignee()">Add</button>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let item of details?.assignees"
+          class="group flex justify-between align-middle hover:bg-gray-50 p-1">
+          <div>
+            <strong class="text-[14px] block leading-[0.5]">
+              {{item?.userName}} {{item?.isAuthor ? '(Author)':''}}
+            </strong>
+            <span>{{item?.orgName}}</span>
+          </div>
+          <div *ngIf="userId !== item.userId && (details?.status === 1 || details?.status === 3)"
+            class="hidden group-hover:flex">
+            <div *ngIf="!item?.isAuthor" class="flex justify-center items-center mr-3">
+              <button
+                class="leading-0"><span class="pi pi-minus-circle text-red-400 hover:shadow-sm hover:text-red-600"
+                  (click)="deleteAssigne(item)"></span></button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="details?.customerName" class="w-full border-t border-t-[#eee] p-[5px]">
+    <h3 class="text-[15px] text-gray-400">Customer</h3>
+    <div>
+      <ul>
+        <li class="leading-[1.2] text-[13px]">
+          <strong>
+            {{details?.customerName}}
+          </strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="details?.doorName" class="w-full border-t border-t-[#eee]">
+    <h3 class="text-[15px] text-gray-400">Door</h3>
+    <div class="leading-[0.8]" style="padding-top: 0;">
+      <ul>
+        <li class="leading-[0.8] text-[14px]">
+          <strong>
+            {{details?.doorName}}
+          </strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="w-full border-t border-t-[#eee] issue-creator">
+    <h3 class="text-[15px] text-gray-400">Issue Creator</h3>
+    <div class="assigness-list" style="padding-top: 0;">
+      <ul>
+        <li>
+          <strong class="block leading-[0.8]">
+            {{details?.issueCreatorUserName}}
+          </strong>
+          <span class="text-[13px]">
+            {{details?.issueCreationTime | date: 'medium'}}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="details?.solutionTags.length > 0" class="w-full border-t border-t-[#eee] issue-solution-tag">
+    <div class="flex justify-between items-center p-[5px]">
+      <h3 class="text-[15px] text-gray-400">Solution Tag</h3>
+      <button  pRipple
+        class="bg-[#16a085] hover:bg-green-500 text-white text-[11px] px-2 rounded p-0"
+        (click)="onSolutionTagUpdate()">Update</button>
+    </div>
+    <div>
+      <ul class="list-disc pl-7" *ngFor="let item of details?.solutionTags">
+        <li class="text-[13px] leading-[1.2]">
+          {{item?.solutionTagName}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="w-full border-t border-t-[#eee]" *ngIf="details?.remark">
+    <h3 class="text-[15px] text-gray-400">Note</h3>
+    <div class="assigness-list">
+      <ul>
+        <li>
+          <p class="issue-remark">
+            <span [innerHTML]="contentSecurity(details?.remark)"></span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!--Cause Finding Modal-->
+<eye-modal *ngIf="isCauseFindingModalOpen" [isModalOpen]="isCauseFindingModalOpen"
+  (modalClose)="isCauseFindingModalOpen = false">
+  <div modal-header>
+    <span class="text-[18px]">{{details?.causePoints.length > 0? 'Update' : 'Add '}} Cause Findings</span>
+  </div>
+  <div modal-body class="p-2 font-[14px]">
+    <eye-json-form [bodyHeight]="'calc(100vh - 333px)'" [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}"
+      (formSubmit)="onCauseFindingSubmit($event)"></eye-json-form>
+  </div>
+</eye-modal>
+
+<!--Solution Tag Modal-->
+<eye-modal *ngIf="isSolutionTagModal" [isModalOpen]="isSolutionTagModal" (modalClose)="isSolutionTagModal = false">
+  <div modal-header>
+    <span class="text-[18px]">Update Solution Tag</span>
+  </div>
+  <div modal-body class="p-2 font-[14px]">
+    <eye-json-form [bodyHeight]="'calc(100vh - 333px)'" [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}"
+      (formSubmit)="onSolutionTagSubmit($event)"></eye-json-form>
+  </div>
+</eye-modal>
+
+
+<!--Add Assignee Modal-->
+<eye-modal [isModalOpen]="isAddAssigneeModalOpen" (modalClose)="addAssigneeModalClose()" [style]="{'width': '500px'}">
+  <div modal-header>
+    <span class="text-[18px]">Add Assignees</span>
+  </div>
+  <div modal-body class="pb-0 flex flex-col justify-between gap-2">
+    <div>
+      <div class="mx-5 py-3 border-b border-gray-200">
+        <eye-typehead [wrapperStyleClass]="'h-8'" [search]="search" [dropdownMenuAppendTo]="'body'" [menus]="typeHeadSearchMenu"
+          [isLoading]="false" [suggestionItems]="results" [showEmptyMessage]="true" [inputStyle]="{'width': '352px'}" [isCustomTemplate]="true"
+          (selectItem)="selectItem($event)" [panelStyleClass]="'right-[-32px] left-0 min-w-[266px]'">
+          <ng-template #eTemplate let-item>
+            <div>
+              <span class="font-medium capitalize">{{item.userName}}</span>
+              <span *ngIf="item.organization" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-flag text-[0.6rem]"></span>
+                <span>{{item.organization}}</span>
+              </span>
+              <span *ngIf="item.mobileNumber" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-phone text-[0.6rem]"></span>
+                <span>{{item.mobileNumber}}</span>
+              </span>
+            </div>
+          </ng-template>
+        </eye-typehead>
+        <div>
+
+        </div>
+      </div>
+      <eye-scroll-layout class="min-scrollbar" [height]="'365px'" styleClass="px-5 min-h-[300px]">
+        <div container class="mt-4">
+          <div *ngFor="let item of selectedAssignee" class="my-2 p-3 border border-gray-200 rounded flex justify-between items-center">
+            <div>
+              <span class="font-medium capitalize">{{item.userName}}</span>
+              <span *ngIf="item.organization" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-envelope text-[0.6rem]"></span>
+                <span>{{item.organization}}</span>
+              </span>
+              <span *ngIf="item.mobileNumber" class="flex items-center gap-2 text-xs">
+                <span class="pi pi-phone text-[0.6rem]"></span>
+                <span>{{item.mobileNumber}}</span>
+              </span>
+            </div>
+            <div class="flex align-middle">
+              <button pRipple (click)="removeFromSelectedAssignee(item)" class="leading-0"><span class="text-red-500 pi pi-minus-circle"></span></button>
+            </div>
+          </div>
+        </div>
+        <eye-not-found container *ngIf="isError" [message]="errorMessage" [wrapperStyleClass]="'flex items-center justify-center p-5'" [textStyleClass]="'text-red-500 text-base'"></eye-not-found>
+      </eye-scroll-layout>
+
+    </div>
+    <div class="border-t border-gray-200 py-2 px-5 flex items-center justify-end">
+      <button pButton pRipple class="bg-green-500 py-2 px-3 rounded text-white border-0 text-xs" (click)="onAddAssigneeSubmit()">Submit</button>
+    </div>
+  </div>
+</eye-modal>

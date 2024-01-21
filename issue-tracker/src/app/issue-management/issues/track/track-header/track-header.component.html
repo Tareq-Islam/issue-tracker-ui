@@ -1,0 +1,49 @@
+<div class="flex justify-between content-center">
+  <div class="grid grid-flow-col">
+    <span class="text-sm font-medium text-gray-500">
+      {{details.categoryName}}
+      <small title="Issue Priority" [style.marginLeft.px]="5"
+        class="priority-{{priority[details?.priority] | lowercase}}">
+        {{priority[details?.priority]}}
+      </small>
+      <small title="Issue Visibility" [style.marginLeft.px]="5"
+        class="visibility-{{details?.isGlobalOnly ? 'private' : 'public'}}">
+        {{details?.isGlobalOnly ? 'Private' : 'Public'}}
+      </small>
+    </span>
+  </div>
+  <div class="grid grid-flow-col gap-2">
+    <div class="issue-current-status">
+      <span class="status-{{status[details?.status - 1] | lowercase}}">Issue {{status[details?.status - 1]}}</span>
+    </div>
+
+    <button *ngIf="details?.status === 1" pRipple class="btn btn-suspend" (click)="onIssueSuspend()">
+      <span class="pi pi-ban"></span>
+      <span>Suspend</span>
+    </button>
+    <button *ngIf="(details?.status === 1 || details?.status === 3)" pRipple class="btn btn-issue-close" (click)="onIssueClose()">
+      <span class="pi pi-lock"></span>
+      <span>Close Issue</span>
+    </button>
+
+  </div>
+</div>
+
+<eye-modal *ngIf="isIssueSuspendModalOpen" [isModalOpen]="isIssueSuspendModalOpen" (modalClose)="isIssueSuspendModalOpen = false">
+  <div modal-header>
+    <span class="text-[18px]">Suspend Issue</span>
+  </div>
+  <div modal-body class="p-2 font-[14px]">
+    <eye-json-form [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}" (formSubmit)="onSuspendSubmit($event)"></eye-json-form>
+  </div>
+</eye-modal>
+
+<eye-modal *ngIf="isIssueCloseModalOpen" [isModalOpen]="isIssueCloseModalOpen" (modalClose)="isIssueCloseModalOpen = false">
+  <div modal-header>
+    <span class="text-[18px]">Close Issue</span>
+  </div>
+  <div modal-body class="p-2 font-[14px]">
+    <eye-json-form [bodyHeight]="'calc(100vh - 333px)'" [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}" (formSubmit)="onSubmitIssueClose($event)"></eye-json-form>
+  </div>
+</eye-modal>
+

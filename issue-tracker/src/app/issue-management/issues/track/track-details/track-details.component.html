@@ -1,0 +1,9 @@
+<div class="track-details-wrapper mt-3 pl-2 pb-2">
+  <div *ngFor="let item of trackingData;let i=index">
+    <eye-issue-comment *ngIf="item.logType === 1" [comment]="item" [isComment]="i === 0 ? false : true" [issueDetails]="issue"></eye-issue-comment>
+    <eye-issue-comment-options *ngIf="item.logType !== 1" [options]="item"></eye-issue-comment-options>
+  </div>
+  <div *ngIf="(issue.status === 1 || issue.status === 3)" class="mb-2 ml-[40px] p-[5px] mt-[20px] border border-[#f1f1f1] rounded-[5px]">
+    <eye-json-form [bodyHeight]="'calc(100vh - 191px)'" [options]="options" [styleClass]="'p-[5px] w-full'" [form]="form" [fields]="fields" [footer]="{isFooter:true, submitLabel:'Comment', isReset:false}" [model]="model" (formSubmit)="onSubmit($event)"></eye-json-form>
+  </div>
+</div>
