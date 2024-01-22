@@ -15,17 +15,21 @@
   <eye-scroll-layout class="min-scrollbar" [height]="'calc(100vh - 88px)'"
     styleClass="px-6 2xl:pr-12 2xl:px-16 py-3 flex justify-between flex-col h-full w-full">
     <eye-items container *ngFor="let item of items; let i=index; trackBy:trackBy"
-      contentClass="px-5 grid-cols-[34%,50%,15%]">
+      contentClass="px-5 grid-cols-[30%,12%,40%,15%]">
       <eye-item>
         <span>Name</span>
         <span class="text-content">{{item?.name || 'N/A'}}</span>
+      </eye-item>
+      <eye-item>
+        <span>Type</span>
+        <span class="text-content">{{roleTypes[item.roleType]}}</span>
       </eye-item>
       <eye-item>
         <span>Description</span>
         <span class="text-content">{{item?.description || 'N/A'}}</span>
       </eye-item>
       <div class="justify-self-end">
-        <eye-item-menu *ngIf="item.menus.length > 0 && item.name !== 'Super Admin'" [menus]="item.menus"></eye-item-menu>
+        <eye-item-menu *ngIf="item.menus.length > 0 && item.roleType !== roleType.SUPER_ADMIN" [menus]="item.menus"></eye-item-menu>
       </div>
     </eye-items>
     <eye-skeleton container *ngIf="isApiCalling" [rows]="15"></eye-skeleton>

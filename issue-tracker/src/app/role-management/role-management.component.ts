@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { RoleType } from '@core/core/api/role/role.model';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HeaderService } from '@page-layout/header/service/header.service';
@@ -9,6 +10,7 @@ interface Role {
   id: number;
   name: string;
   description: string;
+  roleType: number;
   isDefault: number;
   menus: MenuItem[];
 }
@@ -24,6 +26,7 @@ export class RoleManagementComponent implements OnInit {
   isApiCalling = false;
   notFound = false;
   isModalOpen = false;
+  roleType = RoleType;
   form!: UntypedFormGroup;
   model = {};
   fields: FormlyFieldConfig[] = [];
@@ -48,6 +51,12 @@ export class RoleManagementComponent implements OnInit {
       },
     },
   ];
+  roleTypes = [
+    'Super',
+    'Admin',
+    'Vendor',
+    'Operation'
+  ];
   constructor(
     // private _vendorApi: VendorApiService,
     // private _swal: EyeSwalService,
@@ -70,20 +79,23 @@ export class RoleManagementComponent implements OnInit {
         id: 1,
         name: 'Super Admin',
         description: 'super admin can execute every operation.',
+        roleType: 0,
         isDefault: 1,
         menus: this.itemMenus
       },
       {
         id: 2,
         name: 'Admin',
-        description: 'admin can execute operational task.',
+        description: 'admin controll vendor and operation.',
+        roleType: 1,
         isDefault: 0,
         menus: this.itemMenus
       },
       {
         id: 3,
         name: 'Vendor Admin',
-        description: 'vendor admin can execute operational task',
+        description: 'vendor admin controll operation.',
+        roleType: 2,
         isDefault: 0,
         menus: this.itemMenus
       },
@@ -91,6 +103,7 @@ export class RoleManagementComponent implements OnInit {
         id: 4,
         name: 'Operation',
         description: 'operation can execute operational task',
+        roleType: 3,
         isDefault: 0,
         menus: this.itemMenus
       }

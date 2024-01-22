@@ -24,8 +24,8 @@
         </ng-container>
       </eye-item>
       <eye-item>
-        <span>Door</span>
-        <span class="text-content">{{item.doorName || 'No Door'}}</span>
+        <span>Site Code</span>
+        <span class="text-content">{{item.siteCode || 'No Site'}}</span>
       </eye-item>
       <eye-item>
         <span class="flex flex-wrap gap-2">
@@ -39,14 +39,6 @@
           </div>
         </span>
       </eye-item>
-      <!-- <eye-item class="{{IsCustomerPanel ? '' : 'lg:hidden xl:block'}}">
-        <span>Issue Creator</span>
-        <span class="text-content">
-          <span>{{item.issueCreatorUserName}}</span>
-          <small class="block text-xs">{{item.issueCreationTime | date:'short'}}</small>
-        </span>
-      </eye-item> -->
-
 
       <eye-item class="text-right">
         <ng-container *ngIf="item.unseenNotification > 0">
@@ -69,10 +61,7 @@
     </div>
 
     <div secondRow class="grid items-center gap-1 grid-cols-[13%,13%,13%,21%,20%,20%]">
-      <eye-item>
-        <span>Site</span>
-        <span class="text-content">{{item.siteName || 'No Site'}}</span>
-      </eye-item>
+
       <eye-item>
         <span>Zone</span>
         <span class="text-content">{{item.zoneName || 'No Zone'}}</span>
@@ -84,20 +73,6 @@
       <eye-item>
         <span>Remark</span>
         <span class="text-content" [innerHTML]="contentSecurity(item.remark)"></span>
-      </eye-item>
-      <eye-item *ngIf="!IsCustomerPanel" class="lg:block xl:hidden">
-        <span>Issue Creator</span>
-        <span class="text-content">
-          <span>{{item.issueCreatorUserName}}</span>
-          <small class="block text-xs">{{item.issueCreationTime | date:'short'}}</small>
-        </span>
-      </eye-item>
-      <eye-item *ngIf="!IsCustomerPanel" class="lg:block xl:hidden">
-        <span *ngIf="item.issueCloserUserName && item.issueCloseTime">Issue Closed</span>
-        <span class="text-content">
-          <span>{{item.issueCloserUserName}}</span>
-          <small class="block text-xs">{{item.issueCloseTime | date:'short'}}</small>
-        </span>
       </eye-item>
     </div>
 

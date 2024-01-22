@@ -41,9 +41,7 @@ export interface Issue {
   issueId: number;
   issueCategoryId: number;
   categoryName: string;
-  doorId?: number;
-  doorName: string;
-  siteName: string;
+  siteCode: string;
   zoneName: string;
   clusterName: string;
   vendorId?: number;
@@ -78,8 +76,8 @@ export class IssuesComponent implements OnInit, OnDestroy {
 
   searchMenus: TypeheadMenus[] = [
     {
-      label: 'Door',
-      placeholder: 'type door name',
+      label: 'Site Code',
+      placeholder: 'type site code',
       search: (e: { keyword: string; item: EyeMenus } | null) => {
         this.onSearch({
           searchType: IssueSearchField.Door,
@@ -235,22 +233,6 @@ export class IssuesComponent implements OnInit, OnDestroy {
         // this.onDeleteIssue(e.item.issue);
       },
     },
-    {
-      label: 'Accept',
-      icon: PrimeIcons.CHECK_SQUARE,
-      visible: true,
-      command: (e) => {
-        // this.approvedIssueRequest(e.item.issue);
-      },
-    },
-    {
-      label: 'Reject',
-      icon: PrimeIcons.TIMES,
-      visible: true,
-      command: (e) => {
-        // this.onRejectIssue(e.item.issue);
-      },
-    },
   ];
 
   isApiCalling = false;
@@ -315,7 +297,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         label: item.categoryName,
         value: item.issueCategoryId,
       },
-      doorId: { label: item.doorName, value: item.doorId },
+      doorId: { label: item.siteCode, value: item.siteCode },
       remark: item.remark,
     };
 
@@ -612,22 +594,6 @@ export class IssuesComponent implements OnInit, OnDestroy {
           this.onFilter(IssueStatusEnum.Suspend);
         },
       },
-      {
-        id: 5,
-        name: `Requested (${request})`,
-        visable: true,
-        command: (event) => {
-          this.onFilter(IssueStatusEnum.Request);
-        },
-      },
-      {
-        id: 6,
-        name: `Rejected (${reject})`,
-        visable: true,
-        command: (event) => {
-          this.onFilter(IssueStatusEnum.Reject);
-        },
-      },
     ];
 
     this.filterMenusForTab = [
@@ -671,26 +637,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
           this.onFilter(IssueStatusEnum.Suspend);
         },
       },
-      {
-        id: 5,
-        name: `Requested`,
-        count: request,
-        visable: true,
-        command: (event: any) => {
-          this.tab = this.filterMenusForTab[4].id;
-          this.onFilter(IssueStatusEnum.Request);
-        },
-      },
-      {
-        id: 6,
-        name: `Rejected`,
-        count: reject,
-        visable: true,
-        command: (event: any) => {
-          this.tab = this.filterMenusForTab[5].id;
-          this.onFilter(IssueStatusEnum.Reject);
-        },
-      },
+
     ];
   }
 
@@ -723,11 +670,9 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 830,
         issueCategoryId: 1,
         categoryName: 'Others',
-        doorId: 1,
-        doorName: 'OfficeFirstDoor',
-        siteName: 'OfficeFirstDoor',
-        zoneName: 'Mirpur',
-        clusterName: 'Dhaka',
+        siteCode: 'TGSDR70',
+        zoneName: 'Gazipur',
+        clusterName: 'Dhaka Outer',
         vendorId: 1,
         vendorName: 'Eye Electronics',
         status: 1,
@@ -745,9 +690,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 829,
         issueCategoryId: 8,
         categoryName: 'Theft Incident',
-        doorId: 14837,
-        doorName: 'GPSYKNG009',
-        siteName: 'GPSYKNG009',
+        siteCode: 'GPSYKNG009',
         zoneName: 'Sylhet',
         clusterName: 'Sylhet',
         vendorId: 1,
@@ -766,9 +709,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 828,
         issueCategoryId: 11,
         categoryName: 'Unlock Issue',
-        doorId: 11927,
-        doorName: 'JSSDRB3B',
-        siteName: 'JSSDRB3',
+        siteCode: 'JSSDRB3',
         zoneName: 'Jessore',
         clusterName: 'Khulna',
         vendorId: 1,
@@ -787,9 +728,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 826,
         issueCategoryId: 4,
         categoryName: 'Lock Fault',
-        doorId: 3512,
-        doorName: 'KHDMR05',
-        siteName: 'KHDMR05',
+        siteCode: 'KHDMR05',
         zoneName: 'Khulna',
         clusterName: 'Khulna',
         vendorId: 1,
@@ -808,9 +747,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 825,
         issueCategoryId: 11,
         categoryName: 'Unlock Issue',
-        doorId: 1511,
-        doorName: 'FNSNG53',
-        siteName: 'FNSNG53',
+        siteCode: 'FNSNG53',
         zoneName: 'Feni',
         clusterName: 'Noakhali',
         vendorId: 1,
@@ -829,9 +766,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 824,
         issueCategoryId: 10,
         categoryName: 'Security Breach',
-        doorId: 61,
-        doorName: 'NSSBP06',
-        siteName: 'NSSBP06',
+        siteCode: 'NSSBP06',
         zoneName: 'Uttara',
         clusterName: 'Dhaka North',
         vendorId: 1,
@@ -851,9 +786,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 823,
         issueCategoryId: 9,
         categoryName: 'Memory Fault',
-        doorId: 15331,
-        doorName: 'TGPGN12',
-        siteName: 'TGPGN12',
+        siteCode: 'TGPGN12',
         zoneName: 'Rangpur',
         clusterName: 'Rangpur',
         vendorId: 1,
@@ -872,9 +805,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 822,
         issueCategoryId: 3,
         categoryName: 'Lock Close Failed',
-        doorId: 5560,
-        doorName: 'CPSDR80B',
-        siteName: 'CPSDR80',
+        siteCode: 'CPSDR80',
         zoneName: 'Chandpur',
         clusterName: 'Comilla',
         vendorId: 2,
@@ -894,9 +825,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 821,
         issueCategoryId: 2,
         categoryName: 'Device Offline',
-        doorId: 14273,
-        doorName: 'MYNND38',
-        siteName: 'MYNND38',
+        siteCode: 'MYNND38',
         zoneName: 'Mymensingh',
         clusterName: 'Mymensingh',
         vendorId: 2,
@@ -915,9 +844,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 803,
         issueCategoryId: 2,
         categoryName: 'Device Offline',
-        doorId: 12776,
-        doorName: 'BLMYGFG002',
-        siteName: 'BLMYGFG002',
+        siteCode: 'BLMYGFG002',
         zoneName: 'Mymensingh',
         clusterName: 'Mymensingh',
         vendorId: 2,
@@ -936,9 +863,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 801,
         issueCategoryId: 2,
         categoryName: 'Device Offline',
-        doorId: 14109,
-        doorName: 'MYFLP54',
-        siteName: 'MYFLP54',
+        siteCode: 'MYFLP54',
         zoneName: 'Mymensingh',
         clusterName: 'Mymensingh',
         vendorId: 2,
@@ -957,9 +882,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 800,
         issueCategoryId: 2,
         categoryName: 'Device Offline',
-        doorId: 1603,
-        doorName: 'MYGFG25',
-        siteName: 'MYGFG25',
+        siteCode: 'MYGFG25',
         zoneName: 'Mymensingh',
         clusterName: 'Mymensingh',
         vendorId: 2,
@@ -978,9 +901,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 799,
         issueCategoryId: 2,
         categoryName: 'Device Offline',
-        doorId: 6850,
-        doorName: 'MYDBR16',
-        siteName: 'MYDBR16',
+        siteCode: 'MYDBR16',
         zoneName: 'Mymensingh',
         clusterName: 'Mymensingh',
         vendorId: 2,
@@ -999,9 +920,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 798,
         issueCategoryId: 2,
         categoryName: 'Device Offline',
-        doorId: 1282,
-        doorName: 'MYSDR08',
-        siteName: 'MYSDR08',
+        siteCode: 'MYSDR08',
         zoneName: 'Mymensingh',
         clusterName: 'Mymensingh',
         vendorId: 2,
@@ -1020,9 +939,7 @@ export class IssuesComponent implements OnInit, OnDestroy {
         issueId: 797,
         issueCategoryId: 11,
         categoryName: 'Unlock Issue',
-        doorId: 2212,
-        doorName: 'MYSDR02',
-        siteName: 'MYSDR02',
+        siteCode: 'MYSDR02',
         zoneName: 'Mymensingh',
         clusterName: 'Mymensingh',
         vendorId: 2,
