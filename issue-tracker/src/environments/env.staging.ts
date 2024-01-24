@@ -1,6 +1,6 @@
 const STAGING = {
-  base_url: 'http://192.168.0.240:5005',
-  front_end_url: 'http://192.168.0.240:4005',
+  base_url: 'http://issue-tracker-api.localhost',
+  front_end_url: 'http://issue-tracker.localhost',
 };
 
 

@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { HeaderService } from '@page-layout/header/service/header.service';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TrackComponent } from './track/track.component';
 export enum IssuePriorityEnum {
   Null = 0,
   Low = 1,
@@ -381,26 +382,24 @@ export class IssuesComponent implements OnInit, OnDestroy {
   }
 
   onIssueTrack(issue: any) {
-    // const ref = this._dialogService.open(TrackComponent, {
-    //   header: `ISSUE ID - #${issue.issueId}`,
-    //   closeOnEscape: false,
-    //   data: {
-    //     issue: issue,
-    //   },
-    //   styleClass: 'w-[80vw]',
-    //   contentStyle: {
-    //     padding: 0,
-    //     'border-bottom-right-radius': '0.375rem',
-    //     'border-bottom-left-radius': '0.375rem',
-    //   },
-    // });
-    // ref.onClose.subscribe(async (res) => {
-    //   await this.updateNotificationSeenStatus(issue.issueId);
-    //   this.getFilterCount();
-    //   this.page = 1;
-    //   this.params = this.params.delete('page').append('page', this.page);
-    //   this.getItems();
-    // });
+    const ref = this._dialogService.open(TrackComponent, {
+      header: `ISSUE ID - #${issue.issueId}`,
+      closeOnEscape: false,
+      data: {
+        issue: issue,
+      },
+      styleClass: 'w-[80vw]',
+      contentStyle: {
+        padding: 0,
+        'border-bottom-right-radius': '0.375rem',
+        'border-bottom-left-radius': '0.375rem',
+      },
+    });
+    ref.onClose.subscribe(async (res) => {
+      this.page = 1;
+      this.params = this.params.delete('page').append('page', this.page);
+
+    });
   }
 
   onSearch(event: { searchType: IssueSearchField; keyword: any }) {

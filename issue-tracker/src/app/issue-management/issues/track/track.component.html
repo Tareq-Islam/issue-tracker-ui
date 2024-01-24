@@ -1,20 +1,20 @@
 <div>
   <div class="px-5 py-1 border-t border-b border-gray-200">
-    <eye-track-header *ngIf="issueDetails" [issueId]="issue.issueId" [details]="issueDetails"></eye-track-header>
+    <eye-track-header  [issueId]="issue.issueId" [details]="issueDetails"></eye-track-header>
   </div>
 
   <div class="grid grid-cols-[65%,35%] xl:grid-cols-[65%,35%] 2xl:grid-cols-[75%,25%]">
     <div>
       <eye-scroll-layout class="min-scrollbar" [height]="'75vh'" style="height: 75vh;" styleClass="px-[20px]">
         <div container>
-          <eye-track-details *ngIf="issueTrackingDetails" [trackingData]="issueTrackingDetails" [issue]="issue"></eye-track-details>
+          <eye-track-details  [trackingData]="issueTrackingDetails" [issue]="issue"></eye-track-details>
         </div>
       </eye-scroll-layout>
     </div>
     <div>
       <eye-scroll-layout class="min-scrollbar" [height]="'75vh'" style="height: 75vh;" styleClass="pr-2">
         <div container>
-          <eye-track-sidebar *ngIf="issueDetails" [issueId]="issue.issueId" [details]="issueDetails"></eye-track-sidebar>
+          <eye-track-sidebar [issueId]="issue.issueId" [details]="issueDetails"></eye-track-sidebar>
         </div>
       </eye-scroll-layout>
     </div>
