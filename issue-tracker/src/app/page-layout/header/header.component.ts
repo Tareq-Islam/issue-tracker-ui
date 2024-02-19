@@ -54,13 +54,13 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this._claim && this._claim.userName) {
-      this.user.avatar = this._claim.userName[0].toUpperCase();
-      this.user.name = this._claim.userName;
+    if (this._claim && this._claim.payload.userName) {
+      this.user.avatar = this._claim.payload.userName[0].toUpperCase();
+      this.user.name = this._claim.payload.userName;
     }
 
-    if (this._claim && this._claim.roleName)
-      this.user.roleName = this._claim.roleName;
+    if (this._claim && this._claim.payload.roleName)
+      this.user.roleName = this._claim.payload.roleName;
 
     this.header.profile = { menus: this.profileMenus, user: this.user };
   }

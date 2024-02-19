@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { RoleType } from '@core/core/api/role/role.model';
+import { RoleType } from '@core/core/api/auth/login/auth.model';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HeaderService } from '@page-layout/header/service/header.service';

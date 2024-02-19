@@ -15,8 +15,8 @@ interface Payload {
 }
 
 interface UserClaim {
-  token: string;
-  payload: Payload;
+  token?: string;
+  payload?: Payload;
 }
 
 class PayloadAdapter implements Adapter<UserClaim> {
@@ -44,11 +44,13 @@ class UserClaim {
   ) {
     this.token = token || '';
     if (payload) {
-      this.payload.roleId = payload.rid;
-      this.payload.roleName = payload.roleName;
-      this.payload.userId = payload.uid;
-      this.payload.userName = payload.userName;
-      this.payload.roleType = <RoleType>payload.roleType;
+      this.payload = {
+        roleId: payload.rid,
+        userId: payload.uid,
+        userName: payload.userName,
+        roleType: <RoleType>payload.roleType,
+        roleName: payload.roleName
+      };
     }
 
   }
