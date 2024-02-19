@@ -1,11 +1,22 @@
 import { Adapter } from '../../common/api-response.model';
-import { RoleType } from '../../role/role.model';
+
+enum RoleType {
+  SUPER_ADMIN = 1,
+  ADMIN,
+  VENDOR_ADMIN,
+  OPERATION,
+}
+interface Payload {
+  roleId: number;
+  userName: string;
+  userId: number;
+  roleName: string;
+  roleType: RoleType;
+}
 
 interface UserClaim {
-  token?: string;
-  userName?: string;
-  roleName?: string;
-  roleType?: RoleType;
+  token: string;
+  payload: Payload;
 }
 
 class PayloadAdapter implements Adapter<UserClaim> {
@@ -16,28 +27,31 @@ class PayloadAdapter implements Adapter<UserClaim> {
     if (!item.data) {
       return new UserClaim();
     }
-    return new UserClaim(
-      item.data.accessToken,
-      item.data.userName,
-      item.data.roleName,
-      item.data.roleType,
-    );
+    return new UserClaim(item.data.token, item.data.payload);
   }
 }
 
 class UserClaim {
   constructor(
-    accessToken?: string,
-    userName?: string,
-    roleName?: string,
-    roleType?: RoleType,
+    token?: string,
+    payload?: {
+      rid: number;
+      userName: string;
+      uid: number;
+      roleName: string;
+      roleType: number;
+    }
   ) {
-    this.token = accessToken;
-    this.userName = userName;
-    this.roleName = roleName;
-    this.roleType = roleType;
+    this.token = token || '';
+    if (payload) {
+      this.payload.roleId = payload.rid;
+      this.payload.roleName = payload.roleName;
+      this.payload.userId = payload.uid;
+      this.payload.userName = payload.userName;
+      this.payload.roleType = <RoleType>payload.roleType;
+    }
+
   }
 }
 
-export { Adapter, PayloadAdapter, UserClaim };
-
+export { Adapter, PayloadAdapter, UserClaim, Payload, RoleType };

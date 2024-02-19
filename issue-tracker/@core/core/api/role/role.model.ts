@@ -1,9 +1,5 @@
-export enum RoleType {
-  SUPER_ADMIN,
-  ADMIN,
-  VENDOR,
-  OPERATION
-}
+import { RoleType } from "../auth/login/auth.model";
+
 
 export interface Role {
   id: number;
@@ -33,7 +29,7 @@ export const SeedValues: Role[] = [
     name: 'Vendor Admin',
     description: 'vendor admin can execute operational task',
     isDefault: 0,
-    type: RoleType.VENDOR,
+    type: RoleType.VENDOR_ADMIN,
   },
   {
     id: 4,

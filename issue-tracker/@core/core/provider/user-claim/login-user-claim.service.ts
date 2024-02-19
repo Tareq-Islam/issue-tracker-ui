@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserClaim } from '@core/core/api/auth/login/auth.model';
+import { Payload, UserClaim } from '@core/core/api/auth/login/auth.model';
 import { STORAGE_KEY, STORAGE_TYPE, StorageService } from '@core/storage/storage.service';
 
 @Injectable({
@@ -8,19 +8,15 @@ import { STORAGE_KEY, STORAGE_TYPE, StorageService } from '@core/storage/storage
 })
 export class LoginUserClaimService {
   private _accessToken!: string;
-  private _userName!: string;
-  private _roleName!: string;
+  private _payload!: Payload;
 
   public get accessToken(): string {
     return this._accessToken;
   }
-  public get userName(): string {
-    return this._userName;
-  }
-  public get roleName(): string {
-    return this._roleName;
-  }
 
+  public get payload(): Payload {
+    return this._payload;
+  }
 
   constructor(
     private _router: Router,
@@ -29,16 +25,13 @@ export class LoginUserClaimService {
 
   private _setProperty({
     token,
-    userName,
-    roleName,
+    payload
   }: {
     token?: string;
-    userName?: string;
-    roleName?: string;
+    payload?: Payload;
   }) {
     this._accessToken = token || '';
-    this._userName = userName || 'Administrative';
-    this._roleName = roleName || '';
+    this._payload = payload || {roleId: 0, roleName: '', roleType: 1, userId: 0, userName: ''}
   }
 
   onLoginProccess({
@@ -54,9 +47,8 @@ export class LoginUserClaimService {
       this._store(LoginRes.token, STORAGE_KEY.Login_token);
     }
     this._setProperty({
-      roleName: LoginRes.roleName,
       token: LoginRes.token ? LoginRes.token : this.getToken(),
-      userName: LoginRes.userName,
+      payload: LoginRes.payload
     });
     this._router.navigate([returnUrl]);
   }
