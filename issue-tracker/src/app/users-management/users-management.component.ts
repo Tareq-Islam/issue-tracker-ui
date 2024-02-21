@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { UserApiService } from '@core/core/api/user/user-api.service';
+import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HeaderService } from '@page-layout/header/service/header.service';
@@ -21,7 +23,7 @@ interface User {
 })
 export class UsersManagementComponent implements OnInit {
 
-  items: User[] = [];
+  items: any[] = [];
   isApiCalling = false;
   notFound = false;
   isModalOpen = false;
@@ -53,13 +55,14 @@ export class UsersManagementComponent implements OnInit {
       icon: PrimeIcons.TRASH,
       visible: true,
       command: ({ item }) => {
-        // this.onDelete(this.items.filter((x) => x.id === item.id)[0]);
+        if (item)
+        this.onDelete(this.items.filter((x) => x.id === item.id)[0]);
       },
     },
   ];
   constructor(
-    // private _vendorApi: VendorApiService,
-    // private _swal: EyeSwalService,
+    private _userApi: UserApiService,
+    private _swal: EyeSwalService,
     private _header: HeaderService,
     public claim: LoginUserClaimService,
   ) { }
@@ -74,76 +77,22 @@ export class UsersManagementComponent implements OnInit {
   }
 
   getItems() {
-    this.items = [
-      {
-        id: 1,
-        name: 'Administrative',
-        userName: 'admin',
-        roleName: 'super admin',
-        menus: this.itemMenus
+    this.isApiCalling = true;
+    this._userApi.gets().subscribe({
+      next: (res) => {
+        this.isApiCalling = false;
+        this.notFound = false;
+        if (res.data.length > 0) {
+          this.items = res.data;
+        } else {
+          this.notFound = true;
+          this.items = [];
+        }
       },
-      {
-        id: 2,
-        name: 'Imam Uddin',
-        userName: 'imam',
-        roleName: 'admin',
-        menus: this.itemMenus
+      error: (err) => {
+        this.isApiCalling = false;
       },
-      {
-        id: 3,
-        name: 'Sultan',
-        vendorName: 'Eye Electronics',
-        vendorId: 1,
-        roleName: 'vendor admin',
-        userName: 'sultan',
-        menus: this.itemMenus
-      },
-
-      {
-        id: 4,
-        name: 'Khairul Hasan',
-        vendorName: 'Eye Electronics',
-        vendorId: 1,
-        roleName: 'operation',
-        userName: 'khairul',
-        menus: this.itemMenus
-      },
-      {
-        id: 5,
-        name: 'Akash',
-        vendorName: 'HS Engineering And Technology Ltd',
-        vendorId: 2,
-        roleName: 'vendor admin',
-        userName: 'akash',
-        menus: this.itemMenus
-      },
-
-      {
-        id: 6,
-        name: 'Ahad',
-        vendorName: 'HS Engineering And Technology Ltd',
-        vendorId: 2,
-        roleName: 'operation',
-        userName: 'ahad',
-        menus: this.itemMenus
-      }
-    ]
-    // this.isApiCalling = true;
-    // this._vendorApi.gets().subscribe({
-    //   next: (res) => {
-    //     this.isApiCalling = false;
-    //     this.notFound = false;
-    //     if (res.data.length > 0) {
-    //       this.items = res.data;
-    //     } else {
-    //       this.notFound = true;
-    //       this.items = [];
-    //     }
-    //   },
-    //   error: (err) => {
-    //     this.isApiCalling = false;
-    //   },
-    // });
+    });
   }
 
   onSubmit() {
@@ -163,16 +112,16 @@ export class UsersManagementComponent implements OnInit {
     // }
   }
 
-  onDelete(item: User) {
-    // this._swal
-    //   .confirm({
-    //     message: `You want to unassign the ${item.userName}`,
-    //   })
-    //   .then((cn: boolean) => {
-    //     this._vendorApi.delete(item.id).subscribe((res) => {
-    //       this.items = this.items.filter((x) => x.id !== item.id);
-    //     });
-    //   });
+  onDelete(item: any) {
+    this._swal
+      .confirm({
+        message: `You want to delete the ${item.userName}`,
+      })
+      .then((cn: boolean) => {
+        this._userApi.delete(item.id).subscribe((res) => {
+          this.items = this.items.filter((x) => x.id !== item.id);
+        });
+      });
   }
 
 }

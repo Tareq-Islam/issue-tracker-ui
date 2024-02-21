@@ -33,12 +33,24 @@ export class RouterGuardService implements CanActivate {
 
     if (this._claim.isloggedIn()) {
       if (this._claim.payload) {
-
         if (endpoint === 'dashboard') {
           return true;
         }
-
-
+        if (endpoint === 'user') {
+          return true;
+        }
+        if (endpoint === 'vendor') {
+          return true;
+        }
+        if (endpoint === 'issue-tracker') {
+          return true;
+        }
+        if (endpoint === 'role') {
+          return true;
+        }
+        if (endpoint === 'site') {
+          return true;
+        }
         this._router.navigate(['/404']);
         return false;
 

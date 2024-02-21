@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { RoleType } from '@core/core/api/auth/login/auth.model';
+import { RoleApiService } from '@core/core/api/role/role-api.service';
+import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HeaderService } from '@page-layout/header/service/header.service';
@@ -58,8 +60,8 @@ export class RoleManagementComponent implements OnInit {
     'Operation'
   ];
   constructor(
-    // private _vendorApi: VendorApiService,
-    // private _swal: EyeSwalService,
+    private _roleApi: RoleApiService,
+    private _swal: EyeSwalService,
     private _header: HeaderService,
     public claim: LoginUserClaimService,
   ) { }
@@ -74,56 +76,22 @@ export class RoleManagementComponent implements OnInit {
   }
 
   getItems() {
-    this.items = [
-      {
-        id: 1,
-        name: 'Super Admin',
-        description: 'super admin can execute every operation.',
-        roleType: 0,
-        isDefault: 1,
-        menus: this.itemMenus
+    this.isApiCalling = true;
+    this._roleApi.gets().subscribe({
+      next: (res) => {
+        this.isApiCalling = false;
+        this.notFound = false;
+        if (res.data.length > 0) {
+          this.items = res.data;
+        } else {
+          this.notFound = true;
+          this.items = [];
+        }
       },
-      {
-        id: 2,
-        name: 'Admin',
-        description: 'admin controll vendor and operation.',
-        roleType: 1,
-        isDefault: 0,
-        menus: this.itemMenus
+      error: (err) => {
+        this.isApiCalling = false;
       },
-      {
-        id: 3,
-        name: 'Vendor Admin',
-        description: 'vendor admin controll operation.',
-        roleType: 2,
-        isDefault: 0,
-        menus: this.itemMenus
-      },
-      {
-        id: 4,
-        name: 'Operation',
-        description: 'operation can execute operational task',
-        roleType: 3,
-        isDefault: 0,
-        menus: this.itemMenus
-      }
-    ]
-    // this.isApiCalling = true;
-    // this._vendorApi.gets().subscribe({
-    //   next: (res) => {
-    //     this.isApiCalling = false;
-    //     this.notFound = false;
-    //     if (res.data.length > 0) {
-    //       this.items = res.data;
-    //     } else {
-    //       this.notFound = true;
-    //       this.items = [];
-    //     }
-    //   },
-    //   error: (err) => {
-    //     this.isApiCalling = false;
-    //   },
-    // });
+    });
   }
 
   onSubmit() {
@@ -144,15 +112,15 @@ export class RoleManagementComponent implements OnInit {
   }
 
   onDelete(item: Role) {
-    // this._swal
-    //   .confirm({
-    //     message: `You want to unassign the ${item.userName}`,
-    //   })
-    //   .then((cn: boolean) => {
-    //     this._vendorApi.delete(item.id).subscribe((res) => {
-    //       this.items = this.items.filter((x) => x.id !== item.id);
-    //     });
-    //   });
+    this._swal
+      .confirm({
+        message: `You want to delete the ${item.name}`,
+      })
+      .then((cn: boolean) => {
+        this._roleApi.delete(item.id).subscribe((res) => {
+          this.items = this.items.filter((x) => x.id !== item.id);
+        });
+      });
   }
 
 }

@@ -6,11 +6,14 @@ import { Subscription } from 'rxjs';
 import { EyeSidebarService } from '../service/sidebar.service';
 import { Rights } from '@core/core/enum/rights/rights.enum';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
-import { PanelType } from '@core/core/enum/common/common';
+import { RoleType } from '@core/core/api/auth/login/auth.model';
 
 enum NavMenus {
   DASHBOARD = 1,
   ISSUE_MANAGEMENT,
+  ISSUE_CATEGORY,
+  ISSUE_CAUSE_FINDINGS,
+  ISSUE_SOLUTION_TAG,
   VENDOR,
   USER,
   SITE,
@@ -50,18 +53,21 @@ export class MenusComponent implements OnInit, OnDestroy {
           isEnable: true
         },
         {
+          id: NavMenus.ISSUE_MANAGEMENT,
           label: 'Category',
           icon: 'pi pi-sitemap',
           routerLink: '/issue-tracker/category',
           isEnable: true
         },
         {
+          id: NavMenus.ISSUE_MANAGEMENT,
           label: 'Cause Findings',
           icon: 'pi pi-money-bill',
           routerLink: '/issue-tracker/cause/findings',
           isEnable: true
         },
         {
+          id: NavMenus.ISSUE_MANAGEMENT,
           label: 'Solution Tag',
           icon: 'pi pi-check-square',
           routerLink: '/issue-tracker/solution/tag',
@@ -143,25 +149,17 @@ export class MenusComponent implements OnInit, OnDestroy {
 
   onNavMenusRights() {
     this.menus.forEach((x) => {
-      // switch (x.id) {
-      //   case NavMenus.TICKET: x.isEnable = Number(this._claim.payload.panelType) === PanelType.Vendor || Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.TASK:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Task) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.TASK_CATEGORY:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Ticket_Template) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.CAUSE_FINDINGS:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Cause_Findings) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.TASK_SOLUTION:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Task_Solution) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      //   case NavMenus.Vendor:
-      //     x.isEnable = this._claim.rights.includes(this.rights.View_Vendor_Representatives) && Number(this._claim.payload.panelType) === PanelType.Customer;
-      //   break;
-      // }
+      switch (x.id) {
+        case NavMenus.ROLE:
+        case NavMenus.USER:
+        case NavMenus.SITE:
+        case NavMenus.VENDOR:
+        case NavMenus.ISSUE_CATEGORY:
+        case NavMenus.ISSUE_CAUSE_FINDINGS:
+        case NavMenus.ISSUE_SOLUTION_TAG:
+          x.isEnable = this._claim.payload.roleType === RoleType.ADMIN || this._claim.payload.roleType === RoleType.SUPER_ADMIN;
+        break;
+      }
     });
   }
 

@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpClientService } from '../base/base-http-client.service';
-import { ApiResponse } from '../common/api-response.model';
 import { Observable } from 'rxjs';
+import { ApiResponse } from '../common/api-response.model';
 
 const endpoint = {
-  mainV1: `api/vendor`,
+  mainV1: `api/SolutionTag`,
 };
 
 @Injectable({
   providedIn: 'root',
 })
-export class VendorApiService {
+export class SolutionTagApiService {
   constructor(private _baseApi: BaseHttpClientService) {}
   gets(): Observable<ApiResponse<any[]>> {
     return this._baseApi.get<any>(endpoint.mainV1, {
