@@ -9,6 +9,7 @@ import { EyeMenuModule } from '@menu/eye-menu.module';
 import { ScrollLayoutModule } from '@scroll-layout/scroll-layout.module';
 import { RippleModule } from 'primeng/ripple';
 import { HeaderModule } from '@page-layout/header/header.module';
+import { EyeFormsModule } from '@forms/eye-forms.module';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
      ListItemsModule,
      HeaderModule,
      EyeMenuModule,
+     EyeFormsModule
   ],
   declarations: [UsersManagementComponent]
 })

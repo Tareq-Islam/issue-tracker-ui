@@ -222,6 +222,6 @@ onSubmit() {
         });
       this.isModalOpen = false;
     }
-  }
+}
 
 }
