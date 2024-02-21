@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { SolutionTagApiService } from '@core/core/api/solution-tag/solution-tag-api.service';
+import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
+import { EyeFormFieldsType } from '@forms/model/eye-forms.model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { HeaderService } from '@page-layout/header/service/header.service';
 import { MenuItem, PrimeIcons } from 'primeng/api';
+
 interface Tag {
   id: number;
-  tagName: string;
-  description: string | null;
+  name: string;
+  description: string;
   menus: MenuItem[];
 }
+
+enum ModalType {
+  Create,
+  Update,
+}
+
 @Component({
   selector: 'app-solution-tag',
   templateUrl: './solution-tag.component.html',
@@ -20,7 +29,8 @@ export class SolutionTagComponent implements OnInit {
   notFound = false;
   isModalOpen = false;
   form!: UntypedFormGroup;
-  model = {};
+  model: any;
+  modalName = 'Default';
   fields: FormlyFieldConfig[] = [];
   itemMenus: MenuItem[] = [
     {
@@ -28,24 +38,25 @@ export class SolutionTagComponent implements OnInit {
       icon: PrimeIcons.USER_EDIT,
       visible: true,
       command: ({ item }) => {
-        // this.onModalOpen(
-        //   this.modalType.Update,
-        //   this.items.filter((x) => x.id === item.id)[0]
-        // );
+        this.onModalOpen(
+          ModalType.Update,
+          item?.state?.item
+        );
+
       },
     },
-       {
+    {
       label: 'Delete',
       icon: PrimeIcons.TRASH,
       visible: true,
       command: ({ item }) => {
-        // this.onDelete(this.items.filter((x) => x.id === item.id)[0]);
+        this.onDelete(item?.state?.item);
       },
     },
   ];
   constructor(
-    // private _vendorApi: VendorApiService,
-    // private _swal: EyeSwalService,
+    private _tagApi: SolutionTagApiService,
+    private _swal: EyeSwalService,
     public claim: LoginUserClaimService
   ) {}
 
@@ -58,143 +69,146 @@ export class SolutionTagComponent implements OnInit {
   }
 
   getItems() {
-    this.items = [
-      {
-        id:1,
-        tagName: 'Antenna Replace',
-        description: null,
-        menus: this.itemMenus
+    this.isApiCalling = true;
+    this._tagApi.gets().subscribe({
+      next: (res) => {
+        this.isApiCalling = false;
+        this.notFound = false;
+        if (res.data.length > 0) {
+          this.items = this.onUpdateItem(res.data);
+        } else {
+          this.notFound = true;
+          this.items = [];
+        }
       },
-      {
-        id: 2,
-        tagName: 'Cable Reconnected',
-        description: null,
-        menus: this.itemMenus
-
+      error: (err) => {
+        this.isApiCalling = false;
       },
-      {
-        id: 3,
-        tagName: 'Controler Internal Fuse Replace',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 4,
-        tagName: 'Controler Replace',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 5,
-        tagName: 'Controller Power Cable Replace',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 6,
-        tagName: 'Controller power connected',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 7,
-        tagName: 'Door Rectification Pending',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 8,
-        tagName: 'Door-Lock Sensor Cable Connect',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 9,
-        tagName: 'Drop Bolt Lock Replace',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 10,
-        tagName: 'External Fuse Replace',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 11,
-        tagName: 'Firmware update',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 12,
-        tagName: 'GPRS Issue Resolved & Online Available',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 13,
-        tagName: 'Lock Box Replace',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 14,
-        tagName: 'Lock Magnet Plate Position Change',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id:15,
-        tagName: 'Lock Magnet Plate Replace',
-        description: null,
-        menus: this.itemMenus
-      },
-    ];
-    // this.isApiCalling = true;
-    // this._vendorApi.gets().subscribe({
-    //   next: (res) => {
-    //     this.isApiCalling = false;
-    //     this.notFound = false;
-    //     if (res.data.length > 0) {
-    //       this.items = res.data;
-    //     } else {
-    //       this.notFound = true;
-    //       this.items = [];
-    //     }
-    //   },
-    //   error: (err) => {
-    //     this.isApiCalling = false;
-    //   },
-    // });
+    });
   }
 
-  onSubmit() {
-    // this.isError = false;
-    // if (this.selectedUsers.length === 0) {
-    //   this.isError = true;
-    //   this.errorMessage = 'Please select users.';
-    //   return;
-    // }
-    // if (this.selectedUsers.length > 0) {
-    //   this.isModalOpen = false;
-    //   const userIds: number[] = [];
-    //   this.selectedUsers.forEach((x) => {
-    //     userIds.push(x.id);
-    //   });
-    //   this._vendorApi.save({userIds: userIds}).subscribe((res) => {this.getItems();});
-    // }
+  onUpdateItem(items: any[]): Tag[] {
+    return items.map((x) => {
+      const data: any = {
+        ...x,
+      };
+      data.menus = this.itemMenus
+        .filter((z) => z.visible)
+        .map((y) => {
+          return {
+            ...y,
+            state: {
+              item: x
+            }
+          };
+        });
+      return data;
+    });
   }
 
   onDelete(item: Tag) {
-    // this._swal
-    //   .confirm({
-    //     message: `You want to unassign the ${item.userName}`,
-    //   })
-    //   .then((cn: boolean) => {
-    //     this._vendorApi.delete(item.id).subscribe((res) => {
-    //       this.items = this.items.filter((x) => x.id !== item.id);
-    //     });
-    //   });
+    this._swal
+      .confirm({
+        message: `You want to delete the ${item.name}`,
+      })
+      .then((cn: boolean) => {
+        this._tagApi.delete(item.id).subscribe((res) => {
+          this.items = this.items.filter((x) => x.id !== item.id);
+        });
+      });
+  }
+
+  onModalOpen(modalType: ModalType, item?: Tag) {
+    this.modalName = 'Default';
+    this.form = new UntypedFormGroup({});
+    this.fields = [];
+    this.model = {};
+    if (modalType === ModalType.Create) {
+      this.model = {
+        name: '',
+        description: '',
+      };
+      this.modalName = 'Create';
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    if (modalType === ModalType.Update) {
+      this.modalName = 'Update';
+      this.model = {
+        id: item?.id,
+        name: item?.name,
+        description: item?.description
+      };
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    this.isModalOpen = true;
+  }
+
+  onSubmit() {
+    if (this.modalName == 'Create') {
+      this._tagApi
+        .save({
+          name: this.model.name,
+          Description: this.model.description,
+        })
+        .subscribe((res) => {
+          if (res) {
+            this.getItems();
+          }
+        });
+      this.isModalOpen = false;
+    }
+    if (this.modalName == 'Update') {
+        this._tagApi
+          .update(this.model.id, {
+            name: this.model.name,
+            Description: this.model.description,
+          })
+          .subscribe((res) => {
+            if (res) {
+              this.getItems();
+            }
+          });
+        this.isModalOpen = false;
+      }
   }
 }

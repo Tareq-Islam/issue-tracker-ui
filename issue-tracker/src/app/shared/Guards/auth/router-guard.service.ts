@@ -42,7 +42,7 @@ export class RouterGuardService implements CanActivate {
         if (endpoint === 'vendor') {
           return true;
         }
-        if (endpoint === 'issue-tracker') {
+        if (endpoint === 'issue') {
           return true;
         }
         if (endpoint === 'role') {

@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { CategoryApiService } from '@core/core/api/category/category-api.service';
+import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
+import { EyeFormFieldsType } from '@forms/model/eye-forms.model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HeaderService } from '@page-layout/header/service/header.service';
 import { MenuItem, PrimeIcons } from 'primeng/api';
 interface Category {
   id: number;
-  categoryName: string;
-  description: string | null;
+  name: string;
+  description: String;
   menus: MenuItem[];
+}
+enum ModalType {
+  Create,
+  Update,
 }
 @Component({
   selector: 'app-category',
@@ -20,7 +27,8 @@ export class CategoryComponent implements OnInit {
   notFound = false;
   isModalOpen = false;
   form!: UntypedFormGroup;
-  model = {};
+  model: any;
+  modalName = 'Default';
   fields: FormlyFieldConfig[] = [];
   itemMenus: MenuItem[] = [
     {
@@ -28,10 +36,11 @@ export class CategoryComponent implements OnInit {
       icon: PrimeIcons.USER_EDIT,
       visible: true,
       command: ({ item }) => {
-        // this.onModalOpen(
-        //   this.modalType.Update,
-        //   this.items.filter((x) => x.id === item.id)[0]
-        // );
+        this.onModalOpen(
+          ModalType.Update,
+          item?.state?.item
+        );
+
       },
     },
     {
@@ -39,14 +48,13 @@ export class CategoryComponent implements OnInit {
       icon: PrimeIcons.TRASH,
       visible: true,
       command: ({ item }) => {
-        // this.onDelete(this.items.filter((x) => x.id === item.id)[0]);
+        this.onDelete(item?.state?.item);
       },
     },
   ];
   constructor(
-    // private _vendorApi: VendorApiService,
-    // private _swal: EyeSwalService,
-    private _header: HeaderService,
+    private _categoryApi: CategoryApiService,
+    private _swal: EyeSwalService,
     public claim: LoginUserClaimService
   ) {}
 
@@ -59,172 +67,146 @@ export class CategoryComponent implements OnInit {
   }
 
   getItems() {
-    this.items = [
-      {
-        id: 8,
-        categoryName: 'Theft Incident',
-        description: null,
-        menus: this.itemMenus,
+    this.isApiCalling = true;
+    this._categoryApi.gets().subscribe({
+      next: (res) => {
+        this.isApiCalling = false;
+        this.notFound = false;
+        if (res.data.length > 0) {
+          this.items = this.onUpdateItem(res.data);
+        } else {
+          this.notFound = true;
+          this.items = [];
+        }
       },
-      {
-        id: 14,
-        categoryName: 'Unauthorized Card Insert',
-        description: null,
-        menus: this.itemMenus,
+      error: (err) => {
+        this.isApiCalling = false;
       },
-      {
-        id: 11,
-        categoryName: 'Unlock Issue',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 13,
-        categoryName: 'Unlock Switch Fault',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 7,
-        categoryName: 'Wrong Installation',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 17,
-        categoryName: 'Cabinet Dismantle\t',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 2,
-        categoryName: 'Device Offline',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 3,
-        categoryName: 'Lock Close Failed',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 4,
-        categoryName: 'Lock Fault',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 12,
-        categoryName: 'Lock Malfunction',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 19,
-        categoryName: 'Magnet Missing',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 9,
-        categoryName: 'Memory Fault',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 16,
-        categoryName: 'Network Issue',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 1,
-        categoryName: 'Others',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 6,
-        categoryName: 'RFID Reader Fault\t',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 10,
-        categoryName: 'Security Breach',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 18,
-        categoryName: 'SIM Device Issue',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 20,
-        categoryName: 'SIM Fault Issue',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 15,
-        categoryName: 'Site Dismantle',
-        description: null,
-        menus: this.itemMenus,
-      },
-      {
-        id: 5,
-        categoryName: 'Software Bug',
-        description: null,
-        menus: this.itemMenus,
-      },
-    ];
-    // this.isApiCalling = true;
-    // this._vendorApi.gets().subscribe({
-    //   next: (res) => {
-    //     this.isApiCalling = false;
-    //     this.notFound = false;
-    //     if (res.data.length > 0) {
-    //       this.items = res.data;
-    //     } else {
-    //       this.notFound = true;
-    //       this.items = [];
-    //     }
-    //   },
-    //   error: (err) => {
-    //     this.isApiCalling = false;
-    //   },
-    // });
+    });
   }
 
-  onSubmit() {
-    // this.isError = false;
-    // if (this.selectedUsers.length === 0) {
-    //   this.isError = true;
-    //   this.errorMessage = 'Please select users.';
-    //   return;
-    // }
-    // if (this.selectedUsers.length > 0) {
-    //   this.isModalOpen = false;
-    //   const userIds: number[] = [];
-    //   this.selectedUsers.forEach((x) => {
-    //     userIds.push(x.id);
-    //   });
-    //   this._vendorApi.save({userIds: userIds}).subscribe((res) => {this.getItems();});
-    // }
+  onUpdateItem(items: any[]): Category[] {
+    return items.map((x) => {
+      const data: any = {
+        ...x,
+      };
+      data.menus = this.itemMenus
+        .filter((z) => z.visible)
+        .map((y) => {
+          return {
+            ...y,
+            state: {
+              item: x
+            }
+          };
+        });
+      return data;
+    });
   }
 
   onDelete(item: Category) {
-    // this._swal
-    //   .confirm({
-    //     message: `You want to unassign the ${item.userName}`,
-    //   })
-    //   .then((cn: boolean) => {
-    //     this._vendorApi.delete(item.id).subscribe((res) => {
-    //       this.items = this.items.filter((x) => x.id !== item.id);
-    //     });
-    //   });
+    this._swal
+      .confirm({
+        message: `You want to delete the ${item.name}`,
+      })
+      .then((cn: boolean) => {
+        this._categoryApi.delete(item.id).subscribe((res) => {
+          this.items = this.items.filter((x) => x.id !== item.id);
+        });
+      });
+  }
+
+  onModalOpen(modalType: ModalType, item?: Category) {
+    this.modalName = 'Default';
+    this.form = new UntypedFormGroup({});
+    this.fields = [];
+    this.model = {};
+    if (modalType === ModalType.Create) {
+      this.model = {
+        name: '',
+        description: '',
+      };
+      this.modalName = 'Create';
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    if (modalType === ModalType.Update) {
+      this.modalName = 'Update';
+      this.model = {
+        id: item?.id,
+        name: item?.name,
+        description: item?.description
+      };
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    this.isModalOpen = true;
+  }
+
+  onSubmit() {
+    if (this.modalName == 'Create') {
+      this._categoryApi
+        .save({
+          name: this.model.name,
+          Description: this.model.description,
+        })
+        .subscribe((res) => {
+          if (res) {
+            this.getItems();
+          }
+        });
+      this.isModalOpen = false;
+    }
+    if (this.modalName == 'Update') {
+        this._categoryApi
+          .update(this.model.id, {
+            name: this.model.name,
+            Description: this.model.description,
+          })
+          .subscribe((res) => {
+            if (res) {
+              this.getItems();
+            }
+          });
+        this.isModalOpen = false;
+      }
   }
 }

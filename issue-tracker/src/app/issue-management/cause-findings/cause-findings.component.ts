@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { CauseFindingsApiService } from '@core/core/api/cause-findings/cause-finding-api.service';
+import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
+import { EyeFormFieldsType } from '@forms/model/eye-forms.model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { HeaderService } from '@page-layout/header/service/header.service';
 import { MenuItem, PrimeIcons } from 'primeng/api';
 interface Findings {
   id: number;
-  cause: string;
+  name: string;
   description: string | null;
   menus: MenuItem[];
+}
+enum ModalType {
+  Create,
+  Update,
 }
 @Component({
   selector: 'app-cause-findings',
@@ -20,7 +26,8 @@ export class CauseFindingsComponent implements OnInit {
   notFound = false;
   isModalOpen = false;
   form!: UntypedFormGroup;
-  model = {};
+  model: any;
+  modalName = 'Default';
   fields: FormlyFieldConfig[] = [];
   itemMenus: MenuItem[] = [
     {
@@ -28,10 +35,11 @@ export class CauseFindingsComponent implements OnInit {
       icon: PrimeIcons.USER_EDIT,
       visible: true,
       command: ({ item }) => {
-        // this.onModalOpen(
-        //   this.modalType.Update,
-        //   this.items.filter((x) => x.id === item.id)[0]
-        // );
+        this.onModalOpen(
+          ModalType.Update,
+          item?.state?.item
+        );
+
       },
     },
     {
@@ -39,14 +47,13 @@ export class CauseFindingsComponent implements OnInit {
       icon: PrimeIcons.TRASH,
       visible: true,
       command: ({ item }) => {
-        // this.onDelete(this.items.filter((x) => x.id === item.id)[0]);
+        this.onDelete(item?.state?.item);
       },
     },
   ];
   constructor(
-    // private _vendorApi: VendorApiService,
-    // private _swal: EyeSwalService,
-    private _header: HeaderService,
+    private _causeApi: CauseFindingsApiService,
+    private _swal: EyeSwalService,
     public claim: LoginUserClaimService
   ) {}
 
@@ -59,172 +66,146 @@ export class CauseFindingsComponent implements OnInit {
   }
 
   getItems() {
-    this.items = [
-      {
-        id: 37,
-        cause: 'BTS Unavailable',
-        description: null,
-       menus: this.itemMenus
+    this.isApiCalling = true;
+    this._causeApi.gets().subscribe({
+      next: (res) => {
+        this.isApiCalling = false;
+        this.notFound = false;
+        if (res.data.length > 0) {
+          this.items = this.onUpdateItem(res.data);
+        } else {
+          this.notFound = true;
+          this.items = [];
+        }
       },
-      {
-        id: 34,
-        cause: 'Controller Power Cable Fault',
-        description: null,
-        menus: this.itemMenus
+      error: (err) => {
+        this.isApiCalling = false;
       },
-      {
-        id: 29,
-        cause: 'Controller power disconnected',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 35,
-        cause: 'Device burn due to thundering',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 1,
-        cause: 'Device fault due to device internal issue',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 19,
-        cause: 'Device fault due to the theft attempt',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 13,
-        cause: 'Device internal fuse fault',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 4,
-        cause: 'Device Memory Fault',
-        description: '',
-        menus: this.itemMenus
-      },
-      {
-        id: 15,
-        cause: 'Door alignment issue',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 27,
-        cause: 'Door-Lock Sensor Cable Connection Issue',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 33,
-        cause: 'External Fuse Fault',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 38,
-        cause: 'GPRS Online Issue',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 32,
-        cause: 'Key access issue',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 5,
-        cause: 'Lock fault due to door angle issue',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 2,
-        cause: 'Lock fault due to lock close failed',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 6,
-        cause: 'Lock fault due to lock physically damage ',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 24,
-        cause: 'Lock fault due to rainwater',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 14,
-        cause: 'Lock fault due to the lock internal issue',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 3,
-        cause: 'Lock fault due to the theft incident',
-        description: null,
-        menus: this.itemMenus
-      },
-      {
-        id: 11,
-        cause: 'Lock Fault due to the wrong installation',
-        description: null,
-        menus: this.itemMenus
-      },
-    ];
-    // this.isApiCalling = true;
-    // this._vendorApi.gets().subscribe({
-    //   next: (res) => {
-    //     this.isApiCalling = false;
-    //     this.notFound = false;
-    //     if (res.data.length > 0) {
-    //       this.items = res.data;
-    //     } else {
-    //       this.notFound = true;
-    //       this.items = [];
-    //     }
-    //   },
-    //   error: (err) => {
-    //     this.isApiCalling = false;
-    //   },
-    // });
+    });
   }
 
-  onSubmit() {
-    // this.isError = false;
-    // if (this.selectedUsers.length === 0) {
-    //   this.isError = true;
-    //   this.errorMessage = 'Please select users.';
-    //   return;
-    // }
-    // if (this.selectedUsers.length > 0) {
-    //   this.isModalOpen = false;
-    //   const userIds: number[] = [];
-    //   this.selectedUsers.forEach((x) => {
-    //     userIds.push(x.id);
-    //   });
-    //   this._vendorApi.save({userIds: userIds}).subscribe((res) => {this.getItems();});
-    // }
+  onUpdateItem(items: any[]): Findings[] {
+    return items.map((x) => {
+      const data: any = {
+        ...x,
+      };
+      data.menus = this.itemMenus
+        .filter((z) => z.visible)
+        .map((y) => {
+          return {
+            ...y,
+            state: {
+              item: x
+            }
+          };
+        });
+      return data;
+    });
   }
 
   onDelete(item: Findings) {
-    // this._swal
-    //   .confirm({
-    //     message: `You want to unassign the ${item.userName}`,
-    //   })
-    //   .then((cn: boolean) => {
-    //     this._vendorApi.delete(item.id).subscribe((res) => {
-    //       this.items = this.items.filter((x) => x.id !== item.id);
-    //     });
-    //   });
+    this._swal
+      .confirm({
+        message: `You want to delete the ${item.name}`,
+      })
+      .then((cn: boolean) => {
+        this._causeApi.delete(item.id).subscribe((res) => {
+          this.items = this.items.filter((x) => x.id !== item.id);
+        });
+      });
+  }
+
+  onModalOpen(modalType: ModalType, item?: Findings) {
+    this.modalName = 'Default';
+    this.form = new UntypedFormGroup({});
+    this.fields = [];
+    this.model = {};
+    if (modalType === ModalType.Create) {
+      this.model = {
+        name: '',
+        description: '',
+      };
+      this.modalName = 'Create';
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    if (modalType === ModalType.Update) {
+      this.modalName = 'Update';
+      this.model = {
+        id: item?.id,
+        name: item?.name,
+        description: item?.description
+      };
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    this.isModalOpen = true;
+  }
+
+  onSubmit() {
+    if (this.modalName == 'Create') {
+      this._causeApi
+        .save({
+          name: this.model.name,
+          Description: this.model.description,
+        })
+        .subscribe((res) => {
+          if (res) {
+            this.getItems();
+          }
+        });
+      this.isModalOpen = false;
+    }
+    if (this.modalName == 'Update') {
+        this._causeApi
+          .update(this.model.id, {
+            name: this.model.name,
+            Description: this.model.description,
+          })
+          .subscribe((res) => {
+            if (res) {
+              this.getItems();
+            }
+          });
+        this.isModalOpen = false;
+      }
   }
 }

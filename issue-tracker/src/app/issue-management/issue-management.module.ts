@@ -12,6 +12,7 @@ import { ListItemsModule } from '@list-item/list-items.module';
 import { ScrollLayoutModule } from '@scroll-layout/scroll-layout.module';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { EyeFormsModule } from '@forms/eye-forms.module';
 const routes: Routes = [
   {
     path: '',
@@ -40,6 +41,7 @@ const routes: Routes = [
     ScrollLayoutModule,
     ListItemsModule,
     HeaderModule,
+    EyeFormsModule
   ],
   declarations: [IssueManagementComponent, SolutionTagComponent, CauseFindingsComponent, CategoryComponent],
 })
