@@ -29,9 +29,8 @@ export class IssueApiService {
   }
 
   delete(id: number) {
-    return this._baseApi.put(endpoint.mainV1, {
-      endpointUrl: `${endpoint}/${id}`,
-    });
+    const url = `${endpoint.mainV1}/${id}`;
+    return this._baseApi.delete(url);
   }
 
 }

@@ -4,20 +4,24 @@ import { RoleType } from '@core/core/api/auth/login/auth.model';
 import { RoleApiService } from '@core/core/api/role/role-api.service';
 import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
+import { EyeFormFieldsType } from '@forms/model/eye-forms.model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HeaderService } from '@page-layout/header/service/header.service';
 import { MenuItem, PrimeIcons } from 'primeng/api';
 
 interface Role {
-  id: number;
-  name: string;
-  description: string;
-  roleType: number;
-  isDefault: number;
   menus: MenuItem[];
+  creationTime: string;
+  description: string;
+  id: number;
+  roleName: string;
+  roleType: RoleType;
 }
 
-
+enum ModalType {
+  Create,
+  Update,
+}
 
 @Component({
   selector: 'app-role-management',
@@ -30,7 +34,8 @@ export class RoleManagementComponent implements OnInit {
   isModalOpen = false;
   roleType = RoleType;
   form!: UntypedFormGroup;
-  model = {};
+  model: any;
+  modalName = 'Default';
   fields: FormlyFieldConfig[] = [];
   itemMenus: MenuItem[] = [
     {
@@ -38,10 +43,11 @@ export class RoleManagementComponent implements OnInit {
       icon: PrimeIcons.USER_EDIT,
       visible: true,
       command: ({ item }) => {
-        // this.onModalOpen(
-        //   this.modalType.Update,
-        //   this.items.filter((x) => x.id === item.id)[0]
-        // );
+        this.onModalOpen(
+          ModalType.Update,
+          item?.state?.item
+        );
+
       },
     },
     {
@@ -49,22 +55,17 @@ export class RoleManagementComponent implements OnInit {
       icon: PrimeIcons.TRASH,
       visible: true,
       command: ({ item }) => {
-        // this.onDelete(this.items.filter((x) => x.id === item.id)[0]);
+        this.onDelete(item?.state?.item);
       },
     },
   ];
-  roleTypes = [
-    'Super',
-    'Admin',
-    'Vendor',
-    'Operation'
-  ];
+  roleTypes = ['SUPER ADMIN', 'ADMIN', 'VENDOR ADMIN', 'OPERATION'];
   constructor(
     private _roleApi: RoleApiService,
     private _swal: EyeSwalService,
     private _header: HeaderService,
-    public claim: LoginUserClaimService,
-  ) { }
+    public claim: LoginUserClaimService
+  ) {}
 
   ngOnInit() {
     this._header.headerName = 'Role';
@@ -82,7 +83,7 @@ export class RoleManagementComponent implements OnInit {
         this.isApiCalling = false;
         this.notFound = false;
         if (res.data.length > 0) {
-          this.items = res.data;
+          this.items = this.onUpdateItem(res.data);
         } else {
           this.notFound = true;
           this.items = [];
@@ -94,33 +95,166 @@ export class RoleManagementComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    // this.isError = false;
-    // if (this.selectedUsers.length === 0) {
-    //   this.isError = true;
-    //   this.errorMessage = 'Please select users.';
-    //   return;
-    // }
-    // if (this.selectedUsers.length > 0) {
-    //   this.isModalOpen = false;
-    //   const userIds: number[] = [];
-    //   this.selectedUsers.forEach((x) => {
-    //     userIds.push(x.id);
-    //   });
-    //   this._vendorApi.save({userIds: userIds}).subscribe((res) => {this.getItems();});
-    // }
+  onUpdateItem(items: any[]): Role[] {
+    return items.map((x) => {
+      const data: any = {
+        ...x,
+      };
+      this.itemMenus.forEach((z) => {
+        switch (z.label) {
+          case 'Delete':
+            z.visible = this.claim.payload.roleType === RoleType.SUPER_ADMIN;
+            break;
+        }
+      });
+      data.menus = this.itemMenus
+        .filter((z) => z.visible)
+        .map((y) => {
+          return {
+            ...y,
+            state: {
+              item: x
+            }
+          };
+        });
+      return data;
+    });
   }
 
   onDelete(item: Role) {
     this._swal
       .confirm({
-        message: `You want to delete the ${item.name}`,
+        message: `You want to delete the role ${item.roleName}`,
       })
       .then((cn: boolean) => {
         this._roleApi.delete(item.id).subscribe((res) => {
           this.items = this.items.filter((x) => x.id !== item.id);
         });
       });
+  }
+
+  onModalOpen(modalType: ModalType, item?: Role) {
+    this.modalName = 'Default';
+    this.form = new UntypedFormGroup({});
+    this.fields = [];
+    this.model = {};
+    if (modalType === ModalType.Create) {
+      this.model = {
+        name: '',
+        description: '',
+        roleType: 2,
+      };
+      this.modalName = 'Create';
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter role name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.DROPDOWN,
+          key: 'roleType',
+          templateOptions: {
+            appendTo: 'body',
+            label: 'Role Type',
+            required: true,
+            values: [
+              {
+                label: 'ADMIN',
+                value: RoleType.ADMIN
+              },
+              {
+                label: 'VENDOR ADMIN',
+                value: RoleType.VENDOR_ADMIN
+              },
+              {
+                label: 'OPERATION',
+                value: RoleType.OPERATION
+              }
+            ] ,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    if (modalType === ModalType.Update) {
+      this.modalName = 'Update';
+      this.model = {
+        id: item?.id,
+        name: item?.roleName,
+        description: item?.description,
+      };
+      this.fields = [
+        {
+          type: EyeFormFieldsType.INPUT,
+          key: 'name',
+          templateOptions: {
+            label: 'Name',
+            placeholder: 'Enter role name',
+            required: true,
+            maxLength: 100,
+          },
+        },
+        {
+          type: EyeFormFieldsType.TEXTAREA,
+          key: 'description',
+          templateOptions: {
+            label: 'Description',
+            placeholder: 'Enter description',
+            maxLength: 300,
+          },
+        },
+      ];
+    }
+    this.isModalOpen = true;
+  }
+
+  onSubmit() {
+    if (this.modalName == 'Create') {
+      this._roleApi
+        .save({
+          Name: this.model.name,
+          Description: this.model.description,
+          RoleType: this.model.roleType
+        })
+        .subscribe((res) => {
+          if (res) {
+            this.getItems();
+          }
+        });
+      this.isModalOpen = false;
+    }
+    if (this.modalName == 'Update') {
+      this._roleApi
+        .update(this.model.id, {
+          Name: this.model.name,
+          Description: this.model.description,
+        })
+        .subscribe((res) => {
+          if (res) {
+            this.items.forEach((x) => {
+              if (x.id === this.model.id) {
+                x.roleName = this.model.name;
+                x.description = this.model.description;
+              }
+            });
+          }
+        });
+      this.isModalOpen = false;
+    }
   }
 
 }

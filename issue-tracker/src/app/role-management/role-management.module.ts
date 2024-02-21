@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { HeaderModule } from '@page-layout/header/header.module';
 import { EyeMenuModule } from '@menu/eye-menu.module';
+import { EyeFormsModule } from '@forms/eye-forms.module';
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +20,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-     RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
     SharedModule,
     ButtonModule,
     RippleModule,
@@ -27,6 +28,7 @@ const routes: Routes = [
     ListItemsModule,
     HeaderModule,
     EyeMenuModule,
+    EyeFormsModule
   ],
   declarations: [RoleManagementComponent]
 })

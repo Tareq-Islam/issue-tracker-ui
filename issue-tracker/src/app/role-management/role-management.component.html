@@ -8,21 +8,25 @@
     </section>
     <section class="grid grid-flow-col gap-2 items-center md:justify-end w-full">
       <div>
-        <button pRipple pButton class="btn" type="button" label="Create" icon="pi pi-plus"></button>
+        <button pRipple pButton class="btn" type="button" label="Create" icon="pi pi-plus" (click)="onModalOpen(0)"></button>
       </div>
     </section>
   </eye-filter-bar>
   <eye-scroll-layout class="min-scrollbar" [height]="'calc(100vh - 88px)'"
     styleClass="px-6 2xl:pr-12 2xl:px-16 py-3 flex justify-between flex-col h-full w-full">
     <eye-items container *ngFor="let item of items; let i=index; trackBy:trackBy"
-      contentClass="px-5 grid-cols-[30%,12%,40%,15%]">
+      contentClass="px-5 grid-cols-[10%,20%,20%,30%,17%]">
+      <eye-item>
+        <span>ID</span>
+        <span class="text-content">{{item?.id}}</span>
+      </eye-item>
       <eye-item>
         <span>Name</span>
-        <span class="text-content">{{item?.name || 'N/A'}}</span>
+        <span class="text-content">{{item?.roleName || 'N/A'}}</span>
       </eye-item>
       <eye-item>
         <span>Type</span>
-        <span class="text-content">{{roleTypes[item.roleType]}}</span>
+        <span class="text-content">{{roleTypes[item.roleType - 1]}}</span>
       </eye-item>
       <eye-item>
         <span>Description</span>
@@ -38,4 +42,13 @@
 </div>
 
 
-
+<eye-modal [isModalOpen]="isModalOpen" (modalClose)="isModalOpen = false">
+  <div modal-header>
+    <span>{{modalName | titlecase}}</span>
+  </div>
+  <div modal-body>
+    <eye-json-form *ngIf="fields.length > 0" [form]="form" [fields]="fields" [model]="model"
+      (formSubmit)="onSubmit()">
+    </eye-json-form>
+  </div>
+</eye-modal>
