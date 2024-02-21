@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { RoleType } from '@core/core/api/auth/login/auth.model';
+import { SiteApiService } from '@core/core/api/site/site-api.service';
+import { EyeSwalService } from '@core/core/provider/message/swal.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
+import { EyeFormFieldsType } from '@forms/model/eye-forms.model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HeaderService } from '@page-layout/header/service/header.service';
 import { MenuItem, PrimeIcons } from 'primeng/api';
 
 interface Site {
   id: number;
-  siteCode: string;
-  zone: string;
-  cluster: string;
+  siteName: string;
   description?: string;
-  menus?: MenuItem[];
+  menus: MenuItem[];
 }
+
+enum ModalType {
+  Create,
+  Update,
+}
+
 
 @Component({
   selector: 'app-site-management',
@@ -24,7 +32,8 @@ isApiCalling = false;
 notFound = false;
 isModalOpen = false;
 form!: UntypedFormGroup;
-model = {};
+model: any;
+modalName = 'Default';
 fields: FormlyFieldConfig[] = [];
 itemMenus: MenuItem[] = [
   {
@@ -32,10 +41,11 @@ itemMenus: MenuItem[] = [
     icon: PrimeIcons.USER_EDIT,
     visible: true,
     command: ({ item }) => {
-      // this.onModalOpen(
-      //   this.modalType.Update,
-      //   this.items.filter((x) => x.id === item.id)[0]
-      // );
+      this.onModalOpen(
+        ModalType.Update,
+        item?.state?.item
+      );
+
     },
   },
   {
@@ -43,13 +53,13 @@ itemMenus: MenuItem[] = [
     icon: PrimeIcons.TRASH,
     visible: true,
     command: ({ item }) => {
-      // this.onDelete(this.items.filter((x) => x.id === item.id)[0]);
+      this.onDelete(item?.state?.item);
     },
   },
 ];
 constructor(
-  // private _vendorApi: VendorApiService,
-  // private _swal: EyeSwalService,
+  private _siteApi: SiteApiService,
+  private _swal: EyeSwalService,
   private _header: HeaderService,
   public claim: LoginUserClaimService,
 ) { }
@@ -64,166 +74,154 @@ trackBy(index: number, item: Site): number {
 }
 
 getItems() {
-  this.items = [{
-    "id": 1,
-    "zone": "Gazipur",
-    "cluster": "Dhaka Outer",
-    "siteCode": "TGSDR70",
-
-},
-{
-    "id": 74,
-    "cluster": "Mymensing",
-    "zone": "Moulovibazar",
-    "siteCode": "NSRPR53",
-},
-{
-    "id": 39,
-    "cluster": "Kustia",
-    "zone": "Chittagong Metro West",
-    "siteCode": "NPSDR42",
-},
-{
-    "id": 31,
-    "cluster": "CTG North",
-    "zone": "NABINAGAR",
-    "siteCode": "GPKPS54",
-},
-{
-    "id": 29,
-    "cluster": "Dhaka Metro",
-    "zone": "NAWABGANJ",
-    "siteCode": "NSMND57",
-},
-{
-    "id": 14,
-    "cluster": "Barisal",
-    "zone": "CTG North",
-    "siteCode": "MYMKT43",
-},
-{
-    "id": 15,
-    "cluster": "Chittagong Metro",
-    "zone": "CTG Metro West",
-    "siteCode": "GPFPSRP002",
-},
-{
-    "id": 16,
-    "cluster": "Chittagong North",
-    "zone": "Moulvibazar",
-    "siteCode": "NOMJDH9",
-},
-{
-    "id": 17,
-    "cluster": "Chittagong South",
-    "zone": "Chauddagram",
-    "siteCode": "DHDEM61",
-},
-{
-    "id": 18,
-    "cluster": "Comilla",
-    "zone": "Patuakhali",
-    "siteCode": "GPKPS54",
-},
-{
-    "id": 19,
-    "cluster": "Dhaka North",
-    "zone": "Dhaka Metro",
-    "siteCode": "GPKPS54",
-},
-{
-    "id": 20,
-    "cluster": "Dhaka South",
-    "zone": "Jessore",
-    "siteCode": "GPKPS54",
-},
-{
-    "id": 21,
-    "cluster": "Khulna",
-    "zone": "Kustia",
-    "siteCode": "GPKPS54",
-},
-{
-    "id": 22,
-    "cluster": "Kushtia",
-    "zone": "Tangail",
-    "siteCode": "GPKPS54",
-},
-{
-    "id": 23,
-    "cluster": "Mymensingh",
-    "zone": "Rajshahi",
-    "siteCode": "GPKPS54",
-},
-{
-  "id": 24,
-  "cluster": "Noakhali",
-  "zone": "Jessore",
-  "siteCode": "GPKPS54",
-},
-{
-  "id": 25,
-  "cluster": "Rajshahi",
-  "zone": "Chauddagram",
-  "siteCode": "GPKPS54",
-},
-{
-  "id": 26,
-  "cluster": "Rangpur",
-  "zone": "Rajshahi",
-  "siteCode": "GPKPS54",
-},
-{
-  "id": 27,
-  "cluster": "Sylhet",
-  "zone": "Dhaka Metro",
-  "siteCode": "GPKPS54",
-}];
-  // this.isApiCalling = true;
-  // this._vendorApi.gets().subscribe({
-  //   next: (res) => {
-  //     this.isApiCalling = false;
-  //     this.notFound = false;
-  //     if (res.data.length > 0) {
-  //       this.items = res.data;
-  //     } else {
-  //       this.notFound = true;
-  //       this.items = [];
-  //     }
-  //   },
-  //   error: (err) => {
-  //     this.isApiCalling = false;
-  //   },
-  // });
+  this.isApiCalling = true;
+  this._siteApi.gets().subscribe({
+    next: (res) => {
+      this.isApiCalling = false;
+      this.notFound = false;
+      if (res.data.length > 0) {
+        this.items = this.onUpdateItem(res.data);
+      } else {
+        this.notFound = true;
+        this.items = [];
+      }
+    },
+    error: (err) => {
+      this.isApiCalling = false;
+    },
+  });
 }
 
-onSubmit() {
-  // this.isError = false;
-  // if (this.selectedUsers.length === 0) {
-  //   this.isError = true;
-  //   this.errorMessage = 'Please select users.';
-  //   return;
-  // }
-  // if (this.selectedUsers.length > 0) {
-  //   this.isModalOpen = false;
-  //   const userIds: number[] = [];
-  //   this.selectedUsers.forEach((x) => {
-  //     userIds.push(x.id);
-  //   });
-  //   this._vendorApi.save({userIds: userIds}).subscribe((res) => {this.getItems();});
-  // }
+onUpdateItem(items: any[]): Site[] {
+  return items.map((x) => {
+    const data: any = {
+      ...x,
+    };
+    this.itemMenus.forEach((z) => {
+      switch (z.label) {
+        case 'Delete':
+          z.visible = this.claim.payload.roleType === RoleType.SUPER_ADMIN;
+          break;
+      }
+    });
+    data.menus = this.itemMenus
+      .filter((z) => z.visible)
+      .map((y) => {
+        return {
+          ...y,
+          state: {
+            item: x
+          }
+        };
+      });
+    return data;
+  });
 }
 
 onDelete(item: Site) {
-  // this._swal
-  //   .confirm({
-  //     message: `You want to unassign the ${item.userName}`,
-  //   })
-  //   .then((cn: boolean) => {
-  //     this._vendorApi.delete(item.id).subscribe((res) => {
-  //       this.items = this.items.filter((x) => x.id !== item.id);
-  //     });
-  //   });
+  this._swal
+    .confirm({
+      message: `You want to delete the site ${item.siteName}`,
+    })
+    .then((cn: boolean) => {
+      this._siteApi.delete(item.id).subscribe((res) => {
+        this.items = this.items.filter((x) => x.id !== item.id);
+      });
+    });
 }
+
+onModalOpen(modalType: ModalType, item?: Site) {
+  this.modalName = 'Default';
+  this.form = new UntypedFormGroup({});
+  this.fields = [];
+  this.model = {};
+  if (modalType === ModalType.Create) {
+    this.model = {
+      name: '',
+      description: '',
+    };
+    this.modalName = 'Create';
+    this.fields = [
+      {
+        type: EyeFormFieldsType.INPUT,
+        key: 'name',
+        templateOptions: {
+          label: 'Name',
+          placeholder: 'Enter site name',
+          required: true,
+          maxLength: 100,
+        },
+      },
+      {
+        type: EyeFormFieldsType.TEXTAREA,
+        key: 'description',
+        templateOptions: {
+          label: 'Description',
+          placeholder: 'Enter description',
+          maxLength: 300,
+        },
+      },
+    ];
+  }
+  if (modalType === ModalType.Update) {
+    this.modalName = 'Update';
+    this.model = {
+      id: item?.id,
+      name: item?.siteName,
+      description: item?.description
+    };
+    this.fields = [
+      {
+        type: EyeFormFieldsType.INPUT,
+        key: 'name',
+        templateOptions: {
+          label: 'Name',
+          placeholder: 'Enter site name',
+          required: true,
+          maxLength: 100,
+        },
+      },
+      {
+        type: EyeFormFieldsType.TEXTAREA,
+        key: 'description',
+        templateOptions: {
+          label: 'Description',
+          placeholder: 'Enter description',
+          maxLength: 300,
+        },
+      },
+    ];
+  }
+  this.isModalOpen = true;
+}
+
+onSubmit() {
+  if (this.modalName == 'Create') {
+    this._siteApi
+      .save({
+        siteName: this.model.name,
+        Description: this.model.description,
+      })
+      .subscribe((res) => {
+        if (res) {
+          this.getItems();
+        }
+      });
+    this.isModalOpen = false;
+  }
+  if (this.modalName == 'Update') {
+      this._siteApi
+        .update(this.model.id, {
+          siteName: this.model.name,
+          Description: this.model.description,
+        })
+        .subscribe((res) => {
+          if (res) {
+            this.getItems();
+          }
+        });
+      this.isModalOpen = false;
+    }
+  }
 
 }
