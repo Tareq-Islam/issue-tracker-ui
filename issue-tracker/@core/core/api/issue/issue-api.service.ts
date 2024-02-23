@@ -5,6 +5,7 @@ import { ApiResponse } from '../common/api-response.model';
 
 const endpoint = {
   mainV1: `api/issue`,
+  status: `status`,
 };
 
 @Injectable({
@@ -14,6 +15,13 @@ export class IssueApiService {
   constructor(private _baseApi: BaseHttpClientService) {}
   gets(): Observable<ApiResponse<any[]>> {
     return this._baseApi.get<any>(endpoint.mainV1, {
+      notification: { error: false },
+    });
+  }
+
+  getStatus(): Observable<ApiResponse<any[]>> {
+    const url = `${endpoint.mainV1}/${endpoint.status}`;
+    return this._baseApi.get<any>(url, {
       notification: { error: false },
     });
   }

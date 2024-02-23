@@ -14,7 +14,7 @@ export class IssueItemComponent{
   @Input() NotFound = false;
   @Input() Items:any[] = [];
   @Input() IsCustomerPanel:boolean = false;
-  status = ['Open', 'Close', 'Suspend', 'Request', 'Reject'];
+  status = ['Open', 'Close', 'Suspend',];
   priority = ['Null', 'Low', 'Medium', 'High'];
 
   constructor(

@@ -1,82 +1,63 @@
 <eye-scroll-layout [height]="'calc(100vh - 124px)'" (isScrolling)="onScrolling()"
   styleClass="px-10 py-3 flex justify-between flex-col h-full w-full">
-  <eye-accordion container *ngFor="let item of Items; let i=index; trackBy:trackBy" [uniqueId]="i"
-    [firstRowStyle]="item.status === 4 ? 'bg-[#9fdaff] bg-opacity-[0.1] hover:bg-opacity-[0.2]':''">
-    <div firstRow
-      class="grid items-center gap-1 grid-cols-[13%,16%,20%,12%,17%,6%,13%]">
-      <eye-item>
-        <span>Issue ID</span>
-        <span class="text-content">{{item.issueId}}</span>
-      </eye-item>
-      <eye-item>
-        <span>Category</span>
-        <span class="text-content">
-          <span class="flex items-center gap-2">
-            {{item.categoryName}}
+  <eye-items container *ngFor="let item of Items; let i=index; trackBy:trackBy"
+  contentClass="px-5 items-center gap-1 grid-cols-[13%,16%,20%,12%,17%,6%,13%]">
+  <eye-item>
+    <span>Issue ID</span>
+    <span class="text-content">{{item.issueId}}</span>
+  </eye-item>
+  <eye-item>
+    <span>Category</span>
+    <span class="text-content">
+      <span class="flex items-center gap-2">
+        {{item.categoryName}}
 
-          </span>
-        </span>
-      </eye-item>
-      <eye-item>
-        <ng-container>
-          <span>Vendor</span>
-          <span class="text-content">{{item.vendorName}}</span>
-        </ng-container>
-      </eye-item>
-      <eye-item>
-        <span>Site Code</span>
-        <span class="text-content">{{item.siteCode || 'No Site'}}</span>
-      </eye-item>
-      <eye-item>
-        <span class="flex flex-wrap gap-2">
-          <div class="inline-block">
-            <span class="status-{{status[item.status - 1] | lowercase}}">Issue
-              {{status[item.status - 1]}}</span>
-          </div>
-          <div *ngIf="item.priority > 0" class="inline-block">
-            <span class="priority-{{priority[item.priority] | lowercase}}">Priority
-              {{priority[item.priority]}}</span>
-          </div>
-        </span>
-      </eye-item>
-
-      <eye-item class="text-right">
-        <ng-container *ngIf="item.unseenNotification > 0">
-          <fa-layers [fixedWidth]="true" class="text-[30px] cursor-pointer" (click)="item.command(item)">
-            <fa-icon [icon]="faComment" class="text-default-100"></fa-icon>
-            <fa-layers-counter content="{{item.unseenNotification}}" [classes]="['change-color']"></fa-layers-counter>
-          </fa-layers>
-        </ng-container>
-      </eye-item>
-      <div class="justify-self-end">
-        <div class="flex justify-between items-center gap-2">
-          <button  pRipple
-            class="bg-gray flex justify-center items-center gap-1 leading-5 btn-action" (click)="item.command(item)">
-            <span class="pi pi-link"></span>
-            <span>Track</span>
-          </button>
-          <eye-item-menu *ngIf="item.menus" [menus]="item.menus"></eye-item-menu>
-        </div>
+      </span>
+    </span>
+  </eye-item>
+  <eye-item>
+    <ng-container>
+      <span>Vendor</span>
+      <span class="text-content">{{item.vendorName}}</span>
+    </ng-container>
+  </eye-item>
+  <eye-item>
+    <span>Site</span>
+    <span class="text-content">{{item.siteName || 'No Site'}}</span>
+  </eye-item>
+  <eye-item>
+    <span class="flex flex-wrap gap-2">
+      <div class="inline-block">
+        <span class="status-{{status[item.status - 1] | lowercase}}">Issue
+          {{status[item.status - 1]}}</span>
       </div>
+      <div *ngIf="item.priority > 0" class="inline-block">
+        <span class="priority-{{priority[item.priority] | lowercase}}">Priority
+          {{priority[item.priority]}}</span>
+      </div>
+    </span>
+  </eye-item>
+
+  <eye-item class="text-right">
+    <ng-container *ngIf="item.unseenNotification > 0">
+      <fa-layers [fixedWidth]="true" class="text-[30px] cursor-pointer" (click)="item.command(item)">
+        <fa-icon [icon]="faComment" class="text-default-100"></fa-icon>
+        <fa-layers-counter content="{{item.unseenNotification}}" [classes]="['change-color']"></fa-layers-counter>
+      </fa-layers>
+    </ng-container>
+  </eye-item>
+  <div class="justify-self-end">
+    <div class="flex justify-between items-center gap-2">
+      <button  pRipple
+        class="bg-gray flex justify-center items-center gap-1 leading-5 btn-action" (click)="item.command(item)">
+        <span class="pi pi-link"></span>
+        <span>Track</span>
+      </button>
+      <eye-item-menu *ngIf="item.menus" [menus]="item.menus"></eye-item-menu>
     </div>
+  </div>
+</eye-items>
 
-    <div secondRow class="grid items-center gap-1 grid-cols-[13%,13%,13%,21%,20%,20%]">
-
-      <eye-item>
-        <span>Zone</span>
-        <span class="text-content">{{item.zoneName || 'No Zone'}}</span>
-      </eye-item>
-      <eye-item>
-        <span>Cluster</span>
-        <span class="text-content">{{item.clusterName || 'No Cluster'}}</span>
-      </eye-item>
-      <eye-item>
-        <span>Remark</span>
-        <span class="text-content" [innerHTML]="contentSecurity(item.remark)"></span>
-      </eye-item>
-    </div>
-
-  </eye-accordion>
   <eye-skeleton container *ngIf="IsApiCalling" [rows]="15"></eye-skeleton>
   <eye-not-found container *ngIf="NotFound"></eye-not-found>
 </eye-scroll-layout>

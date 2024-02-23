@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EyeIssueModule } from 'src/app/common/eye-issue/eye-issue.module';
 import { BadgeModule } from 'primeng/badge';
 import { TrackModule } from './track/track.module';
+import { IssueCreateComponent } from './issue-create/issue-create.component';
 const routes: Routes = [
   {
     path: '',
@@ -39,8 +40,7 @@ const routes: Routes = [
     FontAwesomeModule,
     EyeIssueModule,
     BadgeModule,
-
   ],
-  declarations: [IssuesComponent]
+  declarations: [IssuesComponent, IssueCreateComponent]
 })
 export class IssuesModule { }
