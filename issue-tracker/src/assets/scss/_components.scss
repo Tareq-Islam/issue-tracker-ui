@@ -167,6 +167,11 @@
   @apply bg-red-500;
 }
 
+.priority-critical {
+  @extend .issue-badge;
+  @apply bg-red-500;
+}
+
 .status-blue {
   @extend .issue-badge;
   @apply bg-blue-500;

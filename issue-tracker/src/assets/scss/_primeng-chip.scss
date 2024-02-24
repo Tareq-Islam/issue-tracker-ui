@@ -121,6 +121,14 @@ p-chip .p-chip.issue-priority-high {
   }
 }
 
+p-chip .p-chip.issue-priority-critical {
+  @apply bg-red-500 text-white text-[10px] rounded-[0.3rem] px-[0.3rem] py-[0.2rem] font-semibold;
+
+  .p-chip-text {
+    @apply m-0 leading-snug;
+  }
+}
+
 p-chip .p-chip.issue-public {
   @apply bg-sky-500 text-white text-[10px] rounded-[0.3rem] px-[0.3rem] py-[0.2rem] font-semibold;
 

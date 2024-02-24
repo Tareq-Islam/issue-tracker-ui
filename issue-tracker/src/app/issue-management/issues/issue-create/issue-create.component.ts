@@ -43,7 +43,6 @@ export class IssueCreateComponent implements OnInit {
       categoryId: null,
       siteId: null,
       vendorId: null,
-      status: null,
       priority: null,
       subject: null,
       comment: null,
@@ -119,19 +118,19 @@ export class IssueCreateComponent implements OnInit {
               values: [
                 {
                   label: 'Low',
-                  value: '0',
+                  value: 0,
                 },
                 {
                   label: 'Medium',
-                  value: '1',
+                  value: 1,
                 },
                 {
                   label: 'High',
-                  value: '2',
+                  value: 2,
                 },
                 {
                   label: 'Critical',
-                  value: '3',
+                  value: 3,
                 },
               ],
             },
@@ -165,15 +164,7 @@ export class IssueCreateComponent implements OnInit {
     ];
   }
   onSubmit() {
-    // const submitData = {
-    //   // issueCategoryId: data.issueCategoryId,
-    //   doorId: this.model.doorId.value,
-    //   priority: data.priority,
-    //   remark: data.remark,
-    //   subject:
-    //     typeof data.subject == 'string' ? data.subject : data.subject.value,
-    //   comment: data.comment,
-    // };
-
+    console.log( this.model);
+    this._dialogService.close(this.model);
   }
 }

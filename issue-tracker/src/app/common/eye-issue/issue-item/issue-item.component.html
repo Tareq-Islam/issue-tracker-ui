@@ -4,7 +4,7 @@
   contentClass="px-5 items-center gap-1 grid-cols-[13%,16%,20%,12%,17%,19%]">
   <eye-item>
     <span>Issue ID</span>
-    <span class="text-content">{{item.issueId}}</span>
+    <span class="text-content">{{item.id}}</span>
   </eye-item>
   <eye-item>
     <span>Category</span>
@@ -31,8 +31,8 @@
           {{status[item.status]}}</span>
       </div>
       <div class="inline-block">
-        <span class="priority-{{priority[item.priority] | lowercase}}">Priority
-          {{priority[item.priority]}}</span>
+        <span class="priority-{{priority[item.priorityStatus] | lowercase}}">Priority
+          {{priority[item.priorityStatus]}}</span>
       </div>
     </span>
   </eye-item>
@@ -43,7 +43,7 @@
         <span class="pi pi-link"></span>
         <span>Track</span>
       </button>
-      <eye-item-menu *ngIf="item.menus" [menus]="item.menus"></eye-item-menu>
+      <!-- <eye-item-menu *ngIf="item.menus" [menus]="item.menus"></eye-item-menu> -->
     </div>
   </div>
 </eye-items>

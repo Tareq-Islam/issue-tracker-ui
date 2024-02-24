@@ -1,12 +1,28 @@
 <div>
   <eye-filter-bar styleClass="flex items-center justify-between gap-5 w-full px-8">
-    <span class="p-buttonset btn-group">
-      <button *ngFor="let t of filterMenusForTab" pButton pRipple class="btn" [ngClass]="{'active': tab === t.id}"
-        (click)="t.command()">
-        <span>{{t.name}}</span>
-        <p-badge value="{{t.count}}" styleClass="badge"></p-badge>
-      </button>
-    </span>
+    <section class="flex justify-between">
+      <div class=" flex justify-center">
+        <section class="flex justify-between w-full">
+          <span class="p-buttonset btn-group">
+            <button pButton pRipple class="btn {{tab === issueStatusEnum.All ? 'active' : ''}}" (click)="onFilter(issueStatusEnum.All)">
+              <span>All</span>
+              <p-badge value="{{counts.all }}"
+                styleClass="badge"></p-badge>
+            </button>
+            <button pButton pRipple class="btn {{tab === issueStatusEnum.Open ? 'active' : ''}}"
+            (click)="onFilter(issueStatusEnum.Open)">
+              <span>Open</span>
+              <p-badge value="{{counts.open || 0}}" styleClass="badge"></p-badge>
+            </button>
+            <button pButton pRipple class="btn {{tab === issueStatusEnum.Close ? 'active' : ''}}"
+            (click)="onFilter(issueStatusEnum.Close)">
+              <span>Closed</span>
+              <p-badge value="{{counts.closed || 0}}" styleClass="badge"></p-badge>
+            </button>
+          </span>
+        </section>
+      </div>
+    </section>
     <div class="grid grid-flow-col gap-2">
       <button  pRipple pButton class="btn" type="button"
         label="Create Issue" icon="pi pi-plus" (click)="onIssueCreate()"></button>
