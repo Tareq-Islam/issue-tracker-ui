@@ -7,6 +7,7 @@ import { HttpParams } from '@angular/common/http';
 const endpoint = {
   mainV1: `api/issue`,
   status: `status`,
+  track: `track`
 };
 
 @Injectable({
@@ -25,6 +26,13 @@ export class IssueApiService {
 
   getStatus(): Observable<ApiResponse<{open: number, closed: number}>> {
     const url = `${endpoint.mainV1}/${endpoint.status}`;
+    return this._baseApi.get<any>(url, {
+      notification: { error: false },
+    });
+  }
+
+  getTrack(id: number): Observable<ApiResponse<any[]>> {
+    const url = `${endpoint.mainV1}/${id}/${endpoint.track}`;
     return this._baseApi.get<any>(url, {
       notification: { error: false },
     });

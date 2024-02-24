@@ -1,34 +1,36 @@
-import { LoginUserClaimService } from './../../../../../../@core/core/provider/user-claim/login-user-claim.service';
+import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
 import { HttpParams } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { TrackService } from '../services/tracks.service';
-
+import { RoleType } from '@core/core/api/auth/login/auth.model';
+enum IssueStatusEnum {
+  Open = 0,
+  Close,
+}
+interface Issue {
+  id: number;
+  categoryId: number;
+  categoryName: string;
+  siteId: number;
+  siteName: string;
+  vendorId: number;
+  vendorName: string;
+  status: IssueStatusEnum;
+  priorityStatus: number;
+}
 @Component({
   selector: 'eye-track-header',
   templateUrl: './track-header.component.html',
   styleUrls: ['./track-header.component.scss'],
 })
 export class TrackHeaderComponent {
-  isIssueSuspendModalOpen = false;
+  roleType = RoleType;
   isIssueCloseModalOpen = false;
-  @Input() details: any;
-  @Input() issueId: any;
-  status = ['Open', 'Close'];
+  @Input() issue: any;
+  status = ['Open', 'Closed'];
   priority = ['Low', 'Medium', 'High', 'Critical'];
-  selectedCities:any;
-
-  form = new UntypedFormGroup({});
-  model: any = {};
-  fields: FormlyFieldConfig[] = [];
-  param = new HttpParams();
-
-
   constructor(
-    // private _issueService: AdminIssueApiService,
-    private _track:TrackService,
-    // private _solutionTagService:AdminIssueSolutionTagApiService,
     public claim: LoginUserClaimService
     ) {}
 
@@ -97,18 +99,5 @@ export class TrackHeaderComponent {
     //   }
     // ];
   };
-
-  onSubmitIssueClose(event:any){
-    this.isIssueCloseModalOpen = false;
-    const data = {
-      comment:event.comment,
-      solutionTagIds:event.solutionTagIds
-    };
-    // this._issueService.closeIssue(this.issueId,data).subscribe(
-    //   res => {
-    //     this._track.getUpdateIssueTrackingEvent.emit({IssueId:this.model.issueId});
-    //   }
-    // );
-  }
 
 }

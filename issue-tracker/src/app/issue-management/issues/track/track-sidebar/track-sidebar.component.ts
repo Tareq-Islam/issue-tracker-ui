@@ -26,7 +26,7 @@ export class TrackSidebarComponent implements OnInit {
   isAddAssigneeModalOpen = false;
   isSolutionTagModal = false;
   @Input() details: any;
-  @Input() issueId: any;
+  @Input() issue: any;
 
   faInfoCircle = faInfoCircle;
   priority = ['Low', 'Medium', 'High', 'Critical'];
@@ -59,7 +59,7 @@ export class TrackSidebarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userId = 1;
+    this.userId = this._claim.payload.userId;
 
   }
 
@@ -84,7 +84,7 @@ export class TrackSidebarComponent implements OnInit {
 
     this.model = {
       cause: this.details.causeDetails ? this.details.causeDetails : '',
-      issueId: this.issueId,
+      issueId: this.issue.id,
       causeIds: _causePointsIds,
     };
     // this.fields = [
@@ -217,7 +217,7 @@ export class TrackSidebarComponent implements OnInit {
         userIds.push(x.userId);
       });
       const _data = {
-        issueId: this.issueId,
+        issueId: this.issue.id,
         userId: userIds,
       };
 
@@ -319,7 +319,7 @@ export class TrackSidebarComponent implements OnInit {
     }
 
     this.model = {
-      issueId: this.issueId,
+      issueId: this.issue.id,
       solutionTagIds: _solutionTagId,
     };
     // this.fields = [

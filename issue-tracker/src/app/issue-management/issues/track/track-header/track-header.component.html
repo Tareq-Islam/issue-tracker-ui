@@ -1,32 +1,21 @@
 <div class="flex justify-between content-center">
   <div class="grid grid-flow-col">
     <span class="text-sm font-medium text-gray-500">
-      {{details?.categoryName}}
+      {{issue?.categoryName}}
       <small title="Issue Priority" [style.marginLeft.px]="5"
-        class="priority-{{priority[details?.priority] | lowercase}}">
-        {{priority[details?.priority]}}
+        class="priority-{{priority[issue?.priorityStatus] | lowercase}}">
+        Priority {{priority[issue?.priorityStatus]}}
       </small>
     </span>
   </div>
   <div class="grid grid-flow-col gap-2">
     <div class="issue-current-status">
-      <span class="status-{{status[details?.status] | lowercase}}">Issue {{status[details?.status]}}</span>
+      <span class="status-{{status[issue?.status] | lowercase}}">Issue {{status[issue?.status]}}</span>
     </div>
-    <button *ngIf="(details?.status === 1 || details?.status === 3)" pRipple class="btn btn-issue-close" (click)="onIssueClose()">
+    <button *ngIf="issue?.status === 0 && (claim.payload.roleType === roleType.SUPER_ADMIN || claim.payload.roleType === roleType.ADMIN)" pRipple class="btn btn-issue-close" (click)="onIssueClose()">
       <span class="pi pi-lock"></span>
       <span>Close Issue</span>
     </button>
 
   </div>
 </div>
-
-
-<eye-modal *ngIf="isIssueCloseModalOpen" [isModalOpen]="isIssueCloseModalOpen" (modalClose)="isIssueCloseModalOpen = false">
-  <div modal-header>
-    <span class="text-[18px]">Close Issue</span>
-  </div>
-  <div modal-body class="p-2 font-[14px]">
-    <eye-json-form [bodyHeight]="'calc(100vh - 333px)'" [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}" (formSubmit)="onSubmitIssueClose($event)"></eye-json-form>
-  </div>
-</eye-modal>
-

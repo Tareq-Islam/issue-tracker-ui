@@ -24,7 +24,7 @@
       </div>
     </section>
     <div class="grid grid-flow-col gap-2">
-      <button  pRipple pButton class="btn" type="button"
+      <button  pRipple pButton class="btn" type="button" *ngIf="claim.payload.roleType === roleType.SUPER_ADMIN || claim.payload.roleType === roleType.ADMIN"
         label="Create Issue" icon="pi pi-plus" (click)="onIssueCreate()"></button>
     </div>
   </eye-filter-bar>

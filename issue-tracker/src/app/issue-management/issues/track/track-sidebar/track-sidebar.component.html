@@ -5,14 +5,12 @@
       <h3 class="text-[15px] text-gray-400">Cause Findings</h3>
       <button
         class="bg-[#16a085] hover:bg-green-500 text-white text-[11px] px-2 rounded p-0" (click)="onAddCauseFinding()">
-        {{details?.causeDetails ? 'Update' : 'Add'}}
+        {{details?.causes.length !== 0 ? 'Update' : 'Add'}}
       </button>
     </div>
     <div>
       <div>
-        <span class="block text-[14px] leading-[8px] font-[400]" *ngIf="details?.causeDetails"
-          [innerHTML]="contentSecurity(details?.causeDetails)"></span>
-        <div *ngIf="details?.causeDetails === null"
+        <div *ngIf="details?.causes.length === 0"
           class="flex justify-end items-center gap-[11px] p-[5px] rounded-[3px] bg-[#ccc1] border border-[#ccc4]">
           <fa-icon class="text-base text-gray-400" [icon]="faInfoCircle"></fa-icon>
           <span class="italic text-[13px] leading-[1.2] font-[400]">
@@ -20,8 +18,8 @@
           </span>
         </div>
       </div>
-      <div *ngIf="details?.causePoints.length > 0" class="mt-[5px]">
-        <ul class="list-disc pl-7 text-[13px] font-[300]" *ngFor="let item of details?.causePoints">
+      <div *ngIf="details?.causes.length > 0" class="mt-[5px]">
+        <ul class="list-disc pl-7 text-[13px] font-[300]" *ngFor="let item of details?.causes">
           <li>{{item?.cause}}</li>
         </ul>
       </div>
@@ -46,23 +44,22 @@
         </eye-popover>
       </h3>
       <button
-        *ngIf="(details?.status === 1 || details?.status === 3)"
+        *ngIf="(details?.status === 0)"
         pRipple class="bg-[#16a085] hover:bg-green-500 text-white text-[11px] px-2 rounded p-0"
         (click)="onAddAssignee()">Add</button>
     </div>
     <div>
       <ul>
         <li *ngFor="let item of details?.assignees"
-          class="group flex justify-between align-middle hover:bg-gray-50 p-1">
+          class="group flex justify-between align-middle hover:bg-gray-50 px-1">
           <div>
-            <strong class="text-[14px] block leading-[0.5]">
-              {{item?.userName}} {{item?.isAuthor ? '(Author)':''}}
+            <strong class="text-[14px] leading-[0.5]">
+              {{item?.userName}} {{ item?.assigneeType === 0 ? '(Author)' : ''}}
             </strong>
-            <span>{{item?.orgName}}</span>
           </div>
-          <div *ngIf="userId !== item.userId && (details?.status === 1 || details?.status === 3)"
+          <div *ngIf="userId !== item.userId && (details?.status === 0) && item?.assigneeType !== 0"
             class="hidden group-hover:flex">
-            <div *ngIf="!item?.isAuthor" class="flex justify-center items-center mr-3">
+            <div class="flex justify-center items-center mr-3">
               <button
                 class="leading-0"><span class="pi pi-minus-circle text-red-400 hover:shadow-sm hover:text-red-600"
                   (click)="deleteAssigne(item)"></span></button>
@@ -73,49 +70,33 @@
     </div>
   </div>
 
-  <div *ngIf="details?.customerName" class="w-full border-t border-t-[#eee] p-[5px]">
-    <h3 class="text-[15px] text-gray-400">Customer</h3>
+  <div *ngIf="details?.vendorName" class="w-full border-t border-t-[#eee] p-[5px]">
+    <h3 class="text-[15px] text-gray-400">Vendor</h3>
     <div>
       <ul>
         <li class="leading-[1.2] text-[13px]">
           <strong>
-            {{details?.customerName}}
+            {{details?.vendorName}}
           </strong>
         </li>
       </ul>
     </div>
   </div>
 
-  <div *ngIf="details?.doorName" class="w-full border-t border-t-[#eee]">
-    <h3 class="text-[15px] text-gray-400">Door</h3>
+  <div *ngIf="details?.siteName" class="w-full border-t border-t-[#eee]">
+    <h3 class="text-[15px] text-gray-400">Site</h3>
     <div class="leading-[0.8]" style="padding-top: 0;">
       <ul>
-        <li class="leading-[0.8] text-[14px]">
+        <li class="leading-[0.8] text-[13px]">
           <strong>
-            {{details?.doorName}}
+            {{details?.siteName}}
           </strong>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="w-full border-t border-t-[#eee] issue-creator">
-    <h3 class="text-[15px] text-gray-400">Issue Creator</h3>
-    <div class="assigness-list" style="padding-top: 0;">
-      <ul>
-        <li>
-          <strong class="block leading-[0.8]">
-            {{details?.issueCreatorUserName}}
-          </strong>
-          <span class="text-[13px]">
-            {{details?.issueCreationTime | date: 'medium'}}
-          </span>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div *ngIf="details?.solutionTags.length > 0" class="w-full border-t border-t-[#eee] issue-solution-tag">
+  <div *ngIf="details?.solutions.length > 0" class="w-full border-t border-t-[#eee] issue-solution-tag">
     <div class="flex justify-between items-center p-[5px]">
       <h3 class="text-[15px] text-gray-400">Solution Tag</h3>
       <button  pRipple
@@ -123,22 +104,9 @@
         (click)="onSolutionTagUpdate()">Update</button>
     </div>
     <div>
-      <ul class="list-disc pl-7" *ngFor="let item of details?.solutionTags">
+      <ul class="list-disc pl-7" *ngFor="let item of details?.solutions">
         <li class="text-[13px] leading-[1.2]">
-          {{item?.solutionTagName}}
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="w-full border-t border-t-[#eee]" *ngIf="details?.remark">
-    <h3 class="text-[15px] text-gray-400">Note</h3>
-    <div class="assigness-list">
-      <ul>
-        <li>
-          <p class="issue-remark">
-            <span [innerHTML]="contentSecurity(details?.remark)"></span>
-          </p>
+          {{item?.name}}
         </li>
       </ul>
     </div>

@@ -1,6 +1,6 @@
-<div>
+<div class="w-[70vw]">
   <div class="px-5 py-1 border-t border-b border-gray-200">
-    <eye-track-header  [issueId]="issue.issueId" [details]="issueDetails"></eye-track-header>
+    <eye-track-header  [issue]="issue"></eye-track-header>
   </div>
 
   <div class="grid grid-cols-[65%,35%] xl:grid-cols-[65%,35%] 2xl:grid-cols-[75%,25%]">
@@ -14,20 +14,9 @@
     <div>
       <eye-scroll-layout class="min-scrollbar" [height]="'75vh'" style="height: 75vh;" styleClass="pr-2">
         <div container>
-          <eye-track-sidebar [issueId]="issue.issueId" [details]="issueDetails"></eye-track-sidebar>
+          <eye-track-sidebar [issue]="issue" [details]="issueTrackingDetails"></eye-track-sidebar>
         </div>
       </eye-scroll-layout>
     </div>
   </div>
 </div>
-
-
-<!--Comment Edit Modal-->
-<eye-modal *ngIf="isCommentEditModalOpen" [isModalOpen]="isCommentEditModalOpen"  (modalClose)="isCommentEditModalOpen = false">
-  <div modal-header>
-    <span class="text-[18px]">Edit Comment</span>
-  </div>
-  <div modal-body class="p-2 font-[14px]">
-    <eye-json-form [form]="form" [fields]="fields" [model]="model" [footer]="{isReset:false, isFooter:true}" (formSubmit)="onLastCommentEditSubmit($event)"></eye-json-form>
-  </div>
-</eye-modal>

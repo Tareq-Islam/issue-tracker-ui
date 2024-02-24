@@ -1,20 +1,9 @@
-<div class="m-0 mb-[12px] {{options.isNew ? 'bg-[#27ae6011]':''}} relative rounded-[5px] p-0 px-[10px] border border-[#eee] after:absolute after:left-[15px] after:bottom-[-13px] after:h-[8px] after:border-l-2 after:border-l-[#f1f1f1]">
+<div class="m-0 mb-[12px] relative rounded-[5px] p-0 px-[10px] border border-[#eee] after:absolute after:left-[15px] after:bottom-[-13px] after:h-[8px] after:border-l-2 after:border-l-[#f1f1f1]">
   <div class="flex items-center gap-2 w-full">
     <div class="flex justify-center items-center p-0 py-[10px]">
-      <span *ngIf="options.logType === 3" class="pi pi-tag"></span>
-      <fa-icon class="text-xs" *ngIf="options.logType === 4" [icon]="faHandshake"></fa-icon>
-      <fa-icon class="text-xs" *ngIf="options.logType === 2" [icon]="faBullhorn"></fa-icon>
+      <fa-icon class="text-xs"  [icon]="faHandshake"></fa-icon>
     </div>
-    <div *ngIf="options.logType !== 2"
-      class="flex justify-between items-center w-full p-0 py-[8px] m-0 mr-[5px] ml-[31px]">
-      <div>
-        <span [innerHTML]="contentSecurity(options.subject)"></span>
-      </div>
-      <div class="leading-[1]">
-        <span class="text-[#aaa] text-xs">{{options.creationTime | date: 'medium'}}</span>
-      </div>
-    </div>
-    <div *ngIf="options.logType === 2" class="w-full p-0 py-[8px] m-0 mr-[5px] ml-[31px]">
+    <div class="w-full p-0 py-[8px] m-0 mr-[5px] ml-[31px]">
       <div class="w-full flex justify-between">
         <div>
           <div>
@@ -24,30 +13,11 @@
             <span>{{options.creationTime | date: 'medium'}}</span>
           </div>
         </div>
-        <div>
-          <eye-issue-status-icons [comment]="options" (click)="onStatusDetails(options)"></eye-issue-status-icons>
-        </div>
       </div>
 
       <div class="flex justify-between m-0 mr-[5px]">
-        <span [innerHTML]="contentSecurity(options.comment)"></span>
-
-        <div *ngIf="options.seenAssignees.length > 0">
-          <eye-popover [appendTo]="'body'" #pop>
-            <ng-template>
-              <ul class="m-2" *ngFor="let d of options.seenAssignees;">
-                <li class="capitalize">{{d}}</li>
-              </ul>
-            </ng-template>
-          </eye-popover>
-          <button class="text-[#aaa] text-[12px]" type="text" (mouseenter)="pop.toggle($event)" (mouseleave)="pop.toggle($event)"><fa-icon [icon]="faCheck"></fa-icon> Seen</button>
-        </div>
+        <span [innerHTML]="contentSecurity(options.commentText)"></span>
       </div>
     </div>
   </div>
 </div>
-
-<!--Door Status Modal -->
-<eye-issue-door-status [currentStatus]="currentStatus" [commentUserName]="commentUserName" [isStatusDetailsModalOpen]="isStatusDetailsModalOpen" (modalClose)="isStatusDetailsModalOpen = $event" ></eye-issue-door-status>
-
-

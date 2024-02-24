@@ -11,6 +11,7 @@ import { TrackComponent } from './track/track.component';
 import { IssueApiService } from '@core/core/api/issue/issue-api.service';
 import { IssueCreateComponent } from './issue-create/issue-create.component';
 import { HttpParams } from '@angular/common/http';
+import { RoleType } from '@core/core/api/auth/login/auth.model';
 
 export enum IssuePriorityEnum {
   Low,
@@ -32,7 +33,7 @@ export interface Issue {
   siteName: string;
   vendorId: number;
   vendorName: string;
-  status: IssueStatusEnum;
+  status: number;
   priorityStatus: number;
 }
 interface IssueForGlobalExtension extends Issue {
@@ -45,6 +46,7 @@ interface IssueForGlobalExtension extends Issue {
   styleUrls: ['./issues.component.scss'],
 })
 export class IssuesComponent implements OnInit {
+  roleType = RoleType;
   faComment = faComment;
   isChangePriorityModalOpen = false;
   isEditModal = false;
@@ -116,12 +118,12 @@ export class IssuesComponent implements OnInit {
 
   onIssueTrack(issue: any) {
     const ref = this._dialogService.open(TrackComponent, {
-      header: `ISSUE ID - #${issue.issueId}`,
+      header: `ISSUE ID - #${issue.id}`,
       closeOnEscape: false,
       data: {
         issue: issue,
       },
-      styleClass: 'w-[80vw]',
+      styleClass: 'w-[800px]',
       contentStyle: {
         padding: 0,
         'border-bottom-right-radius': '0.375rem',
@@ -132,19 +134,6 @@ export class IssuesComponent implements OnInit {
 
 
     });
-  }
-
-  onDeleteIssue(issue: Issue) {
-    this._swal
-      .confirm({
-        message: `You want to delete issue no - ${issue.id}`,
-      })
-      .then((cn: boolean) => {
-        // this._issueService.deleteIssue(issue.issueId).subscribe((res) => {
-        //   this.items = this.items.filter((x) => x.issueId != issue.issueId);
-        //   this.getFilterCount();
-        // });
-      });
   }
 
   onFilter(status: IssueStatusEnum) {
