@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TrackService } from '../services/tracks.service';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HttpParams } from '@angular/common/http';
@@ -30,7 +29,7 @@ export class TrackSidebarComponent implements OnInit {
   @Input() issueId: any;
 
   faInfoCircle = faInfoCircle;
-  priority = ['Null', 'Low', 'Medium', 'High'];
+  priority = ['Low', 'Medium', 'High', 'Critical'];
   userId = 0;
   assignessTooltip = `Assignee refers user who involves in a issue. All assignee will get email notification about that issue.
      If you want someone to involve or let someone notify then please add assignee.`;

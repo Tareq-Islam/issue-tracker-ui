@@ -15,14 +15,13 @@ export class TrackHeaderComponent {
   isIssueCloseModalOpen = false;
   @Input() details: any;
   @Input() issueId: any;
-  status = ['Open', 'Close', 'Suspend', 'Request', 'Reject'];
-  priority = ['Null', 'Low', 'Medium', 'High'];
+  status = ['Open', 'Close'];
+  priority = ['Low', 'Medium', 'High', 'Critical'];
   selectedCities:any;
 
   form = new UntypedFormGroup({});
   model: any = {};
   fields: FormlyFieldConfig[] = [];
-
   param = new HttpParams();
 
 
@@ -33,40 +32,6 @@ export class TrackHeaderComponent {
     public claim: LoginUserClaimService
     ) {}
 
-
-  onIssueSuspend() {
-    this.isIssueSuspendModalOpen = true;
-    this.form = new UntypedFormGroup({});
-    this.model = {
-      comment: '',
-      issueId: this.issueId,
-    };
-    this.fields = [
-      {
-        type: 'editor',
-        key: 'comment',
-        templateOptions: {
-          label: 'Reason for suspension',
-          headerTemplate: true,
-          style: { height: '128px' },
-          maxLength: 2000,
-          required: true,
-        },
-      },
-    ];
-  }
-
-  onSuspendSubmit(event: any) {
-    this.isIssueSuspendModalOpen = false;
-    const data = {
-      comment: event.comment
-    };
-    // this._issueService.suspendIssue(this.model.issueId, data).subscribe(
-    //     res =>{
-    //       this._track.getUpdateIssueTrackingEvent.emit({IssueId:this.model.issueId});
-    //     }
-    // );
-  }
 
   async onIssueClose(){
     this.isIssueCloseModalOpen = true;

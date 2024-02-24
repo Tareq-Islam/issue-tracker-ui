@@ -54,8 +54,8 @@ export class IssuesComponent implements OnInit {
   model: any = {};
   fields: FormlyFieldConfig[] = [];
   isSearching = false;
-  status = ['Open', 'Close', 'Suspend'];
-  priority = ['Low', 'Medium', 'High'];
+  status = ['Open', 'Close'];
+  priority = ['Low', 'Medium', 'High', 'Critical'];
   filterMenus: OptionsSelector[] = [];
   filterMenusForTab: any[] = [];
   tab = 1;
@@ -138,13 +138,10 @@ export class IssuesComponent implements OnInit {
   }
 
   async getFilterCount() {
-    const { all, close, open, reject, request, suspend } = {
+    const { all, close, open, } = {
       all: 100,
       close: 10,
       open: 20,
-      reject: 10,
-      request: 20,
-      suspend: 20,
     };
 
     this.filterMenus = [
@@ -170,14 +167,6 @@ export class IssuesComponent implements OnInit {
         visable: true,
         command: (event) => {
           this.onFilter(IssueStatusEnum.Close);
-        },
-      },
-      {
-        id: 4,
-        name: `Suspend (${suspend})`,
-        visable: true,
-        command: (event) => {
-          this.onFilter(IssueStatusEnum.Suspend);
         },
       },
     ];
@@ -211,16 +200,6 @@ export class IssuesComponent implements OnInit {
         command: (event: any) => {
           this.tab = this.filterMenusForTab[2].id;
           this.onFilter(IssueStatusEnum.Close);
-        },
-      },
-      {
-        id: 4,
-        name: `Suspend`,
-        count: suspend,
-        visable: true,
-        command: (event: any) => {
-          this.tab = this.filterMenusForTab[3].id;
-          this.onFilter(IssueStatusEnum.Suspend);
         },
       },
 

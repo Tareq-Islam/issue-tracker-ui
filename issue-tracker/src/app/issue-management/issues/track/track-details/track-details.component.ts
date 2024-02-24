@@ -4,7 +4,6 @@ import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { TrackService } from '../services/tracks.service';
 import { LoginUserClaimService } from '@core/core/provider/user-claim/login-user-claim.service';
-import { EyeFile } from '@core/utils/file/EyeFile';
 
 @Component({
   selector: 'eye-track-details',
@@ -111,38 +110,11 @@ export class TrackDetailsComponent implements OnInit {
     comment: any;
     files: any;
   }) {
-    const Large_Media_Size = 1000;
-    const Medium_Media_Size = 600;
-    const Thum_Media_Size = 150;
-
-    // Image Convert base64 string
-    const images = [];
-    for (let index = 0; index < data.files.length; index++) {
-      const element: any = data.files[index];
-      const newImage = await this.convertToObject(element, {
-        large: Large_Media_Size,
-        thum: Thum_Media_Size,
-      });
-      images.push(newImage);
-    }
-    const file = await Promise.all(
-      images.map((x) => {
-        return this.convertBlobToBase64Object(x);
-      })
-    );
-    const objectNameChange: any = file.map((x) => {
-      return {
-        thumbnail: x.thum,
-        large: x.large,
-      };
-    });
-
     const submitData = {
       issueId: this.model.issueId,
       subject:
         typeof data.subject == 'string' ? data.subject : data.subject.value,
       comment: data.comment,
-      files: objectNameChange,
     };
 
     // this._issueTrackerApiService
@@ -158,41 +130,5 @@ export class TrackDetailsComponent implements OnInit {
     //   });
   }
 
-  async convertToObject(
-    file: File,
-    size: { large: number; thum: number }
-  ): Promise<{ large: Blob; thum: Blob }> {
-    const eyeFile = new EyeFile();
-    const File_SIZE_MIN = 200 * 1024;
-    const l = await eyeFile.imageCompress({
-      file,
-      options: {
-        width: size.large,
-        minFileSizeForQuality: File_SIZE_MIN,
-        quality: 0.8,
-      },
-    });
-    const thum = await eyeFile.imageCompress({
-      file,
-      options: {
-        width: size.thum,
-        minFileSizeForQuality: File_SIZE_MIN,
-        quality: 0.8,
-      },
-    });
-    return { large: l, thum: thum };
-  }
 
-  async convertBlobToBase64Object(object: {
-    large: Blob;
-    thum: Blob;
-  }): Promise<{ large: string; thum: string }> {
-    const eyeFile = new EyeFile();
-    const large = await eyeFile.convertBlobToBase64(object.large);
-    const thum = await eyeFile.convertBlobToBase64(object.thum);
-    return {
-      large,
-      thum,
-    };
-  }
 }

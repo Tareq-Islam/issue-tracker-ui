@@ -13,9 +13,8 @@ export class IssueItemComponent{
   @Input() IsApiCalling = false;
   @Input() NotFound = false;
   @Input() Items:any[] = [];
-  @Input() IsCustomerPanel:boolean = false;
-  status = ['Open', 'Close', 'Suspend',];
-  priority = ['Null', 'Low', 'Medium', 'High'];
+  status = ['Open', 'Close'];
+  priority = ['Low', 'Medium', 'High', 'Critical'];
 
   constructor(
     private _domSanitizer:DomSanitizer
