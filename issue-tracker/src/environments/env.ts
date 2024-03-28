@@ -1,6 +1,6 @@
 const base = {
   ip: 'http://192.168.0.119:5000',
-  local: 'http://localhost:5000',
+  local: 'http://localhost:32773',
   live: 'http://issuetrackerapi.wajeha.xyz',
 };
 export const environment = {
